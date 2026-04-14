@@ -1,5 +1,5 @@
 {
-  "name": "@ouroboros-consulting/agentic-design",
+  "name": "@ouroboros-consulting/ouroboros-design",
   "version": "1.0.0",
   "description": "Accessible, elegant design system for OUROBOROS Consulting",
   "main": "scss/index.scss",
@@ -19,6 +19,6 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/OUROBOROS-Consulting/agentic-design"
+    "url": "https://github.com/OUROBOROS-Consulting/ouroboros-design"
   }
 }
