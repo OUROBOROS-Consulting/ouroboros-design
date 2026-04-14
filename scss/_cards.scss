@@ -208,7 +208,7 @@ $-inner:  calc(#{$-arc} - #{$-border});
 
 .related-grid {
   display:               grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
   gap:                   1.5px;
   align-items:           stretch;
 }
@@ -236,7 +236,7 @@ $-inner:  calc(#{$-arc} - #{$-border});
 
 .values-grid {
   display:               grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
   gap:                   1.5px;
 
   @media (max-width: 768px) {
@@ -246,7 +246,7 @@ $-inner:  calc(#{$-arc} - #{$-border});
 
 .specialties-grid {
   display:               grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
   gap:                   1.5px;
 
   @media (max-width: 768px) {
