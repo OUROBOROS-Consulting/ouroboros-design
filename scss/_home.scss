@@ -25,7 +25,7 @@
 }
 
 .hero-eyebrow {
-  @include label-caps(0.68rem);
+  @include label-caps(1.68rem);
 }
 
 .hero-name {
@@ -152,7 +152,7 @@
 // ──|| STATS ||─────────────────────────────────────────────────────────────
 .stats-grid {
   display:               grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
   gap:                   1px;
   background:            var(--border);
   margin-top:            3rem;
