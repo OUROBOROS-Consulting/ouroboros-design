@@ -1,25 +1,25 @@
 // ── Footer ───────────────────────────────────────────────────────────────────
 footer {
-  padding:         1.4rem 10vw;
-  display:         flex;
+  padding: 1.4rem 10vw;
+  display: flex;
   justify-content: space-between;
-  align-items:     center;
-  flex-wrap:       wrap;
-  gap:             1rem;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
   @include scallop-elevated;
   background-color: rgba(20, 20, 20, 0.92);
   backdrop-filter: blur(12px);
-  border-bottom:   1px solid var(--border);
+  border-bottom: 1px solid var(--border);
 }
 
 .footer-copy {
   font-size: 0.78rem;
-  color:     var(--subdued);
+  color: var(--subdued);
 }
 
 .footer-links {
   display: flex;
-  gap:     1.5px;
+  gap: 1.5px;
   flex-wrap: wrap;
 
   .card--formula {
@@ -31,16 +31,16 @@ footer {
   }
 
   a {
-    color:          var(--subdued);
+    color: var(--subdued);
     text-decoration: none;
-    transition:     color 0.3s;
+    transition: color 0.3s;
     display: flex;
     align-items: center;
     gap: 0.75rem;
     font-size: 0.85rem;
 
     .footer-label {
-      font-size:      var(--label-size);
+      font-size: var(--label-size);
       letter-spacing: 0.12em;
       text-transform: uppercase;
     }
@@ -49,7 +49,9 @@ footer {
       font-size: 2rem;
     }
 
-    &:hover { color: var(--gold); }
+    &:hover {
+      color: var(--gold);
+    }
   }
 }
 
@@ -79,8 +81,8 @@ footer {
 // ── Responsive ───────────────────────────────────────────────────────────────
 @media (max-width: 768px) {
   footer {
-    padding:        3rem 6vw;
+    padding: 3rem 6vw;
     flex-direction: column;
-    align-items:    flex-start;
+    align-items: flex-start;
   }
 }

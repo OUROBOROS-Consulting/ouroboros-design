@@ -1,14 +1,14 @@
 // ── Hero ──────────────────────────────────────────────────────────────────────
 #hero {
-  min-height:       100vh;
-  padding:          10rem 10vw 6rem;
-  display:          grid;
+  min-height: 100vh;
+  padding: 10rem 10vw 6rem;
+  display: grid;
   grid-template-columns: 1fr auto;
-  grid-template-rows:    1fr auto;
-  align-items:      center;
-  gap:              0 6rem;
-  position:         relative;
-  z-index:          0;
+  grid-template-rows: 1fr auto;
+  align-items: center;
+  gap: 0 6rem;
+  position: relative;
+  z-index: 0;
   background: midnightblue;
   background-size: 300px 300px;
   background-position: 0 0;
@@ -17,9 +17,9 @@
 
 
 .hero-text {
-  display:        flex;
+  display: flex;
   flex-direction: column;
-  gap:            1.5rem;
+  gap: 1.5rem;
 }
 
 .hero-eyebrow {
@@ -27,22 +27,24 @@
 }
 
 .hero-name {
-  font-family:    Papyrus, cursive;
-  font-size:     clamp(3.5rem, 10vw, 8rem);
-  font-weight:   500;
-  line-height:   0.95;
+  font-family: Papyrus, cursive;
+  font-size: clamp(3.5rem, 10vw, 8rem);
+  font-weight: 500;
+  line-height: 0.95;
   letter-spacing: -0.01em;
-  color:         var(--text);
+  color: var(--text);
 }
 
 .hero-tagline {
-  font-size:   1.05rem;
-  color:       var(--subdued);
+  font-size: 1.05rem;
+  color: var(--subdued);
   line-height: 1.85;
-  max-width:   520px;
+  max-width: 520px;
 
   // Strip default margins from markdownify's <p> wrapper
-  p { margin: 0; }
+  p {
+    margin: 0;
+  }
 }
 
 .hero-cta {
@@ -51,35 +53,36 @@
 
 // ── Hero Emblem (logo) ───────────────────────────────────────────────────────
 .hero-emblem {
-  align-self:  center;
-  width:       clamp(200px, 20vw, 340px);
+  align-self: center;
+  width: clamp(200px, 20vw, 340px);
   flex-shrink: 0;
-  filter:      drop-shadow(0 0 12px rgba(201, 168, 76, 0.16));
+  filter: drop-shadow(0 0 12px rgba(201, 168, 76, 0.16));
 
   img {
     display: block;
-    width:   100%;
-    height:  auto;
+    width: 100%;
+    height: auto;
   }
 }
 
 @keyframes emblemGlow {
-  0%, 100% {
+
+  0%,
+  100% {
     filter:
-      drop-shadow(0 0  6px rgba(74, 107, 95, 0.30))
-      drop-shadow(0 0 20px rgba(74, 107, 95, 0.12))
-      drop-shadow(0 0  4px rgba(201, 168, 76, 0.18));
+      drop-shadow(0 0 6px rgba(74, 107, 95, 0.30)) drop-shadow(0 0 20px rgba(74, 107, 95, 0.12)) drop-shadow(0 0 4px rgba(201, 168, 76, 0.18));
   }
+
   50% {
     filter:
-      drop-shadow(0 0 10px rgba(74, 107, 95, 0.45))
-      drop-shadow(0 0 32px rgba(74, 107, 95, 0.20))
-      drop-shadow(0 0  6px rgba(201, 168, 76, 0.28));
+      drop-shadow(0 0 10px rgba(74, 107, 95, 0.45)) drop-shadow(0 0 32px rgba(74, 107, 95, 0.20)) drop-shadow(0 0 6px rgba(201, 168, 76, 0.28));
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-emblem { animation: none; }
+  .hero-emblem {
+    animation: none;
+  }
 }
 
 // ── Hero portrait ─────────────────────────────────────────────────────────────
@@ -87,10 +90,10 @@
   align-self: center;
 
   img {
-    display:      block;
-    width:        clamp(220px, 22vw, 380px);
+    display: block;
+    width: clamp(220px, 22vw, 380px);
     aspect-ratio: 3 / 4;
-    object-fit:   cover;
+    object-fit: cover;
   }
 }
 
@@ -100,94 +103,140 @@
 // Vertical tile (14×24px): 90° CW rotation via (x,y)→(y, 24−x)
 // CSS geometry properties require SVG 2 (Chrome 88+, Firefox 72+, Safari 15.4+).
 .hero-ornate-svg {
-  position:       absolute;
-  inset:          0;
-  width:          100%;
-  height:         100%;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   pointer-events: none;
-  z-index:        1;
-  opacity:        0.26;
-  filter:         none;
-  animation:      none;
+  z-index: 1;
+  opacity: 0.26;
+  filter: none;
+  animation: none;
 }
 
 @keyframes ornateGlow {
-  0%, 100% {
+
+  0%,
+  100% {
     opacity: 0.7;
     filter:
-      drop-shadow(0 0 4px rgba(255, 255, 255, 0.55))
-      drop-shadow(0 0 14px rgba(255, 255, 255, 0.20));
+      drop-shadow(0 0 4px rgba(255, 255, 255, 0.55)) drop-shadow(0 0 14px rgba(255, 255, 255, 0.20));
   }
+
   50% {
     opacity: 0.88;
     filter:
-      drop-shadow(0 0 7px rgba(255, 255, 255, 0.75))
-      drop-shadow(0 0 22px rgba(255, 255, 255, 0.35));
+      drop-shadow(0 0 7px rgba(255, 255, 255, 0.75)) drop-shadow(0 0 22px rgba(255, 255, 255, 0.35));
   }
 }
 
 .hob-strip {
-  &--top    { x: 0;                 y: 0;                 width: 100%; height: 14px; }
-  &--bottom { x: 0;                 y: calc(100% - 14px); width: 100%; height: 14px; }
-  &--right  { x: calc(100% - 14px); y: 0;                 width: 14px; height: 100%; }
-  &--left   { x: 0;                 y: 0;                 width: 14px; height: 100%; }
+  &--top {
+    x: 0;
+    y: 0;
+    width: 100%;
+    height: 14px;
+  }
+
+  &--bottom {
+    x: 0;
+    y: calc(100% - 14px);
+    width: 100%;
+    height: 14px;
+  }
+
+  &--right {
+    x: calc(100% - 14px);
+    y: 0;
+    width: 14px;
+    height: 100%;
+  }
+
+  &--left {
+    x: 0;
+    y: 0;
+    width: 14px;
+    height: 100%;
+  }
 }
 
 .hob-corner {
-  fill:   var(--text);
-  width:  14px;
+  fill: var(--text);
+  width: 14px;
   height: 14px;
-  &--tl { x: 0;                 y: 0;                 }
-  &--tr { x: calc(100% - 14px); y: 0;                 }
-  &--bl { x: 0;                 y: calc(100% - 14px); }
-  &--br { x: calc(100% - 14px); y: calc(100% - 14px); }
+
+  &--tl {
+    x: 0;
+    y: 0;
+  }
+
+  &--tr {
+    x: calc(100% - 14px);
+    y: 0;
+  }
+
+  &--bl {
+    x: 0;
+    y: calc(100% - 14px);
+  }
+
+  &--br {
+    x: calc(100% - 14px);
+    y: calc(100% - 14px);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-ornate-svg { animation: none; }
+  .hero-ornate-svg {
+    animation: none;
+  }
 }
 
 // ──|| STATS ||─────────────────────────────────────────────────────────────
 .stats-grid {
-  display:               grid;
+  display: grid;
   grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
-  gap:                   1px;
-  background:            var(--border);
-  margin-top:            3rem;
+  gap: 1px;
+  background: var(--border);
+  margin-top: 3rem;
 }
+
 .stat {
   background-color: var(--bg1);
   @include scallop-standard;
-  padding:        2.5rem 2rem;
-  display:        flex;
+  padding: 2.5rem 2rem;
+  display: flex;
   flex-direction: column;
-  gap:            0.5rem;
+  gap: 0.5rem;
 }
+
 .stat-value {
   font-family: $font-serif;
-  font-size:   clamp(2.2rem, 4vw, 3.2rem);
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
   font-weight: 400;
-  color:       var(--gold);
+  color: var(--gold);
   line-height: 1;
 }
+
 #values .card--formula__interior i {
-  font-size:   clamp(2.2rem, 4vw, 3.2rem);
-  color:       var(--gold);
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  color: var(--gold);
   line-height: 1;
 }
+
 .stat-label {
   @include label-caps(0.72rem, 0.18em);
 }
 
 // ── Scroll hint ───────────────────────────────────────────────────────────────
 .scroll-hint {
-  grid-column:    1 / -1;
-  display:        flex;
+  grid-column: 1 / -1;
+  display: flex;
   flex-direction: column;
-  align-items:    center;
-  gap:            0.5rem;
-  padding-top:    3rem;
-  align-self:     end;
+  align-items: center;
+  gap: 0.5rem;
+  padding-top: 3rem;
+  align-self: end;
 
   span {
     @include label-caps(0.6rem, 0.25em);
@@ -196,22 +245,22 @@
 }
 
 .scroll-line {
-  width:            1px;
-  height:           48px;
-  background:       var(--gold);
-  opacity:          0.4;
-  animation:        scrollPulse 2s ease-in-out infinite;
+  width: 1px;
+  height: 48px;
+  background: var(--gold);
+  opacity: 0.4;
+  animation: scrollPulse 2s ease-in-out infinite;
 }
 
 // ── Shared section chrome ─────────────────────────────────────────────────────
 // Used by #values, #services, #work, #testimonials
 .work-header,
 .testimonials-header {
-  display:         flex;
+  display: flex;
   justify-content: space-between;
-  align-items:     flex-end;
-  padding-bottom:  2.5rem;
-  margin-bottom:   3rem;
+  align-items: flex-end;
+  padding-bottom: 2.5rem;
+  margin-bottom: 3rem;
 
   &::after {
     content: '';
@@ -223,11 +272,11 @@
 
 .work-heading,
 .testimonials-heading {
-  font-family:   $font-serif;
-  font-size:     clamp(2rem, 4vw, 3rem);
-  font-weight:   400;
-  line-height:   1.15;
-  margin-top:    0.6rem;
+  font-family: $font-serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 400;
+  line-height: 1.15;
+  margin-top: 0.6rem;
 }
 
 .work-count,
@@ -251,28 +300,33 @@
 // .testimonials-grid is defined in _cards.scss as repeat(2, 1fr).
 // .cards is the home-specific variant with a border-collapse gap effect.
 .cards {
-  display:               grid;
+  display: grid;
   grid-template-columns: repeat(auto-fill, minmax(500px, 2fr));
-  gap:                   1px; // border-collapse effect
-  background:            var(--border);
+  gap: 1px; // border-collapse effect
+  background: var(--border);
 }
 
 // ── Card ──────────────────────────────────────────────────────────────────────
 .card {
   background: var(--bg1);
-  padding:    2rem 2rem 2.5rem;
-  display:    flex;
+  padding: 2rem 2rem 2.5rem;
+  display: flex;
   flex-direction: column;
-  gap:        0.75rem;
+  gap: 0.75rem;
   transition: background 0.3s;
 
-  &:hover { background: var(--bg2); }
+  &:hover {
+    background: var(--bg2);
+  }
 
   // Values and testimonials cards use bg2 as base, so invert hover
   #values &,
   #testimonials & {
     background: var(--bg2);
-    &:hover { background: var(--bg3); }
+
+    &:hover {
+      background: var(--bg3);
+    }
   }
 }
 
@@ -280,59 +334,67 @@
   @include label-caps(0.65rem, 0.2em);
 
   // Strip margins from markdownify
-  p { margin: 0; }
+  p {
+    margin: 0;
+  }
 }
 
 .card-title {
-  font-family:   $font-serif;
-  font-size:     clamp(1.1rem, 2vw, 1.4rem);
-  font-weight:   400;
-  line-height:   1.3;
-  color:         var(--text);
+  font-family: $font-serif;
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  font-weight: 400;
+  line-height: 1.3;
+  color: var(--text);
 }
 
 .card-desc {
-  font-size:   0.88rem;
-  color:       var(--subdued);
+  font-size: 0.88rem;
+  color: var(--subdued);
   line-height: 1.85;
-  flex-grow:   1; // pushes card-link to bottom
+  flex-grow: 1; // pushes card-link to bottom
 
   // Strip margins from markdownify
-  p { margin: 0; }
+  p {
+    margin: 0;
+  }
 }
 
 .card-link {
-  display:         inline-block;
-  margin-top:      auto;
-  font-size:       0.75rem;
-  letter-spacing:  0.12em;
-  text-transform:  uppercase;
-  color:           var(--gold);
+  display: inline-block;
+  margin-top: auto;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold);
   text-decoration: none;
-  transition:      opacity 0.2s;
+  transition: opacity 0.2s;
 
-  &:hover { opacity: 0.7; }
+  &:hover {
+    opacity: 0.7;
+  }
 }
 
 // ── Blockquote inside testimonial / values cards ───────────────────────────────
 // Scoped to .card so it doesn't affect .post-body blockquote
 .card blockquote {
-  border:     none;
+  border: none;
   background: none;
-  padding:    0;
-  margin:     0;
+  padding: 0;
+  margin: 0;
 
-  p { margin: 0; }
+  p {
+    margin: 0;
+  }
 
   cite {
-    display:        block;
-    margin-top:     1rem;
-    font-family:    $font-sans;
-    font-size:      0.72rem;
+    display: block;
+    margin-top: 1rem;
+    font-family: $font-sans;
+    font-size: 0.72rem;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color:          var(--gold);
-    font-style:     normal;
+    color: var(--gold);
+    font-style: normal;
   }
 }
 
@@ -340,8 +402,8 @@
 @media (max-width: 768px) {
   #hero {
     grid-template-columns: 1fr;
-    padding:               8rem 6vw 4rem;
-    gap:                   3rem 0;
+    padding: 8rem 6vw 4rem;
+    gap: 3rem 0;
   }
 
   .hero-portrait,
@@ -364,8 +426,8 @@
   .work-header,
   .testimonials-header {
     flex-direction: column;
-    align-items:    flex-start;
-    gap:            0.5rem;
+    align-items: flex-start;
+    gap: 0.5rem;
   }
 
   .cards,
@@ -381,43 +443,43 @@
 }
 
 .carousel-track {
-  display:    flex;
-  width:      100%; // explicit — prevents Safari shrink-wrap
+  display: flex;
+  width: 100%; // explicit — prevents Safari shrink-wrap
   transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .carousel-slide {
-  flex:      0 0 100%; // don't grow, don't shrink, always exactly 1 slide wide
-  min-width: 0;        // override browser default min-width: auto on flex items
+  flex: 0 0 100%; // don't grow, don't shrink, always exactly 1 slide wide
+  min-width: 0; // override browser default min-width: auto on flex items
 
   // Give the chamfered card breathing room and constrain its width
   .card--formula {
     max-width: 860px;
-    margin:    0 auto;
+    margin: 0 auto;
   }
 }
 
 .carousel-controls {
-  display:     flex;
+  display: flex;
   align-items: center;
-  gap:         1rem;
+  gap: 1rem;
 }
 
 .carousel-btn {
-  background:  transparent;
-  border:      1px solid var(--gold);
-  color:       var(--gold);
-  width:       2.4rem;
-  height:      2.4rem;
-  cursor:      pointer;
-  font-size:   1rem;
+  background: transparent;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  width: 2.4rem;
+  height: 2.4rem;
+  cursor: pointer;
+  font-size: 1rem;
   line-height: 1;
-  transition:  background 0.2s, color 0.2s;
+  transition: background 0.2s, color 0.2s;
   flex-shrink: 0;
 
   &:hover {
     background: var(--gold);
-    color:      var(--bg1);
+    color: var(--bg1);
   }
 }
 
@@ -428,21 +490,21 @@
 }
 
 .carousel-dots {
-  display:         flex;
+  display: flex;
   justify-content: center;
-  gap:             0.6rem;
-  margin-top:      2rem;
+  gap: 0.6rem;
+  margin-top: 2rem;
 }
 
 .carousel-dot {
-  width:        24px;
-  height:       24px;
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
-  background:   var(--border);
-  border:       1px solid var(--gold-dim);
-  cursor:       pointer;
-  padding:      0;
-  transition:   background 0.25s;
+  background: var(--border);
+  border: 1px solid var(--gold-dim);
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.25s;
 
   &.active {
     background: var(--gold);

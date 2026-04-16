@@ -1,17 +1,17 @@
 // ── Nav ──────────────────────────────────────────────────────────────────────
 nav {
-  position:        fixed;
-  top:             0;
-  width:           100%;
-  z-index:         100;
-  padding:         1.4rem 3rem;
-  display:         flex;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+  padding: 1.4rem 3rem;
+  display: flex;
   justify-content: space-between;
-  align-items:     center;
+  align-items: center;
   @include scallop-elevated;
   background-color: rgba(20, 20, 20, 0.92);
   backdrop-filter: blur(12px);
-  border-bottom:   1px solid var(--border);
+  border-bottom: 1px solid var(--border);
 
   &::after {
     content: '';
@@ -30,44 +30,44 @@ nav {
 }
 
 .nav-logo {
-  display:         flex;
-  align-items:     center;
-  gap:             0.8rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
   text-decoration: none;
-  flex-shrink:     0;
+  flex-shrink: 0;
 }
 
 .nav-logo-mark {
-  height:      72px;
-  width:       auto;
+  height: 72px;
+  width: auto;
   flex-shrink: 0;
-  background:  transparent;
-  display:     block;
+  background: transparent;
+  display: block;
   // filter:      drop-shadow(0 0 5px rgba(200,168,78,0.55));
 }
 
 .nav-logo-text {
-  font-family:    Papyrus, cursive;
-  font-size:      1.7rem;
+  font-family: Papyrus, cursive;
+  font-size: 1.7rem;
   letter-spacing: 0.06em;
-  color:          var(--bright);
-  line-height:    1.1;
-  display:        inline-flex;
+  color: var(--bright);
+  line-height: 1.1;
+  display: inline-flex;
   flex-direction: column;
-  align-items:    flex-start;
+  align-items: flex-start;
 }
 
 .nav-logo-sub {
-  display:        block;
-  font-size:      0.75em;
+  display: block;
+  font-size: 0.75em;
   letter-spacing: 0.12em;
-  opacity:        0.75;
-  margin-top:     0.15rem;
+  opacity: 0.75;
+  margin-top: 0.15rem;
 }
 
 .nav-links {
   display: flex;
-  gap:     1.2rem;
+  gap: 1.2rem;
   font-family: $font-sans;
 
   a,
@@ -76,56 +76,62 @@ nav {
   }
 
   a {
-    color:          var(--subdued);
+    color: var(--subdued);
     text-decoration: none;
-    font-size:      var(--label-size);
+    font-size: var(--label-size);
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    transition:     color 0.3s;
-    display:        inline-flex;
-    align-items:    center;
-    gap:            0.4rem;
+    transition: color 0.3s;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
 
     i {
       font-size: 0.9rem;
-      width:     1.1rem;
+      width: 1.1rem;
       text-align: center;
     }
 
-    &:hover { color: var(--gold-border); }
+    &:hover {
+      color: var(--gold-border);
+    }
   }
 
   .nav-contact a {
     color: var(--bright);
     font-weight: 600;
 
-    &:hover { color: var(--gold); }
+    &:hover {
+      color: var(--gold);
+    }
   }
 }
 
 // ── Dropdowns ─────────────────────────────────────────────────────────────────
 .nav-dropdown-toggle {
-  background:     transparent;
-  border:         none;
-  color:          var(--muted);
-  font-family:    $font-sans;
-  font-size:      var(--label-size);
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  font-family: $font-sans;
+  font-size: var(--label-size);
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  cursor:         pointer;
-  transition:     color 0.3s;
-  padding:        0;
-  display:        inline-flex;
-  align-items:    center;
-  gap:            0.4rem;
+  cursor: pointer;
+  transition: color 0.3s;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
 
   i {
     font-size: 0.95rem;
-    width:     1.2rem;
+    width: 1.2rem;
     text-align: center;
   }
 
-  &:hover { color: var(--gold); }
+  &:hover {
+    color: var(--gold);
+  }
 }
 
 .nav-dropdown {
@@ -133,53 +139,56 @@ nav {
 
   &:hover .nav-dropdown-menu,
   &:focus-within .nav-dropdown-menu {
-    opacity:        1;
+    opacity: 1;
     pointer-events: auto;
-    transform:      translateY(0);
+    transform: translateY(0);
   }
 }
 
 .nav-dropdown-menu {
-  position:       absolute;
-  top:            calc(100% + 6px);
-  left:           50%;                    // center anchor
-  transform:      translateX(-50%) translateY(-6px);  // shift left by half its own width
-  min-width:      160px;
-  z-index:        100;
-  opacity:        0;
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 50%; // center anchor
+  transform: translateX(-50%) translateY(-6px); // shift left by half its own width
+  min-width: 160px;
+  z-index: 100;
+  opacity: 0;
   pointer-events: none;
-  transition:     opacity 0.2s, transform 0.2s;
-  display:        flex;
+  transition: opacity 0.2s, transform 0.2s;
+  display: flex;
   flex-direction: column;
-  gap:            1px;
+  gap: 1px;
 
   a {
-    display:         block;
-    padding:         0.2rem 0.4rem;       // tighter than before
-    font-size:       0.72rem;
-    letter-spacing:  0.1em;
-    text-transform:  uppercase;
-    color:           var(--muted);
+    display: block;
+    padding: 0.2rem 0.4rem; // tighter than before
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
     text-decoration: none;
-    transition:      color 0.2s;
+    transition: color 0.2s;
 
-    &:hover { color: var(--gold); }
+    &:hover {
+      color: var(--gold);
+    }
   }
 }
 
 @keyframes dropdown-card-in {
   from {
-    opacity:   0;
+    opacity: 0;
     transform: translateY(-4px);
   }
+
   to {
-    opacity:   1;
+    opacity: 1;
     transform: translateY(0);
   }
 }
 
 .nav-dropdown-menu .card--formula {
-  opacity: 0;  // hidden by default
+  opacity: 0; // hidden by default
 }
 
 // When the menu is visible, trigger the stagger
@@ -187,110 +196,157 @@ nav {
 .nav-dropdown:focus-within .nav-dropdown-menu .card--formula {
   animation: dropdown-card-in 0.15s ease forwards;
 
-  &:nth-child(1) { animation-delay: 0.00s; }
-  &:nth-child(2) { animation-delay: 0.05s; }
-  &:nth-child(3) { animation-delay: 0.10s; }
-  &:nth-child(4) { animation-delay: 0.15s; }
-  &:nth-child(5) { animation-delay: 0.20s; }
-  &:nth-child(6) { animation-delay: 0.25s; }
-  &:nth-child(7) { animation-delay: 0.30s; }
-  &:nth-child(8) { animation-delay: 0.35s; }
+  &:nth-child(1) {
+    animation-delay: 0.00s;
+  }
+
+  &:nth-child(2) {
+    animation-delay: 0.05s;
+  }
+
+  &:nth-child(3) {
+    animation-delay: 0.10s;
+  }
+
+  &:nth-child(4) {
+    animation-delay: 0.15s;
+  }
+
+  &:nth-child(5) {
+    animation-delay: 0.20s;
+  }
+
+  &:nth-child(6) {
+    animation-delay: 0.25s;
+  }
+
+  &:nth-child(7) {
+    animation-delay: 0.30s;
+  }
+
+  &:nth-child(8) {
+    animation-delay: 0.35s;
+  }
 }
 
 // ── Accordion button (mobile only, hidden on desktop) ────────────────────────
-.nav-accordion-btn { display: none; }
+.nav-accordion-btn {
+  display: none;
+}
 
 // ── Hamburger toggle (hidden on desktop) ──────────────────────────────────────
 .nav-toggle {
-  display:        none;
+  display: none;
   flex-direction: column;
-  gap:            5px;
-  background:     transparent;
-  border:         none;
-  cursor:         pointer;
-  padding:        4px;
-  flex-shrink:    0;
+  gap: 5px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  flex-shrink: 0;
 
   span {
-    display:    block;
-    width:      22px;
-    height:     2px;
+    display: block;
+    width: 22px;
+    height: 2px;
     background: var(--gold);
     transition: transform 0.25s, opacity 0.25s;
   }
 
   // Animate to × when open
   &[aria-expanded="true"] {
-    span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-    span:nth-child(2) { opacity: 0; }
-    span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    span:nth-child(2) {
+      opacity: 0;
+    }
+
+    span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
   }
 }
 
 // ── Responsive ───────────────────────────────────────────────────────────────
 @media (max-width: 768px) {
   nav {
-    padding:     1rem 1.25rem;
-    flex-wrap:   wrap;      // lets .nav-links drop to a second row
+    padding: 1rem 1.25rem;
+    flex-wrap: wrap; // lets .nav-links drop to a second row
     align-items: center;
   }
 
-  .nav-logo-mark { height: 38px; width: auto; }
-  .nav-logo-text { font-size: 1.2rem; }
-  .nav-logo-sub  { display: none; } // hide "Consulting" on small screens
+  .nav-logo-mark {
+    height: 38px;
+    width: auto;
+  }
+
+  .nav-logo-text {
+    font-size: 1.2rem;
+  }
+
+  .nav-logo-sub {
+    display: none;
+  }
+
+  // hide "Consulting" on small screens
 
   .nav-toggle {
     display: flex; // show hamburger
   }
 
   .nav-links {
-    display:        none;
-    width:          100%;
+    display: none;
+    width: 100%;
     flex-direction: column;
-    gap:            0;
-    padding:        1rem 0 1rem;
-    border-top:     1px solid var(--border);
-    margin-top:     0.75rem;
+    gap: 0;
+    padding: 1rem 0 1rem;
+    border-top: 1px solid var(--border);
+    margin-top: 0.75rem;
 
-    &.open { display: flex; }
+    &.open {
+      display: flex;
+    }
 
     // Strip chamfer and gold border — flat list on mobile
     .card--formula {
       background: transparent;
-      padding:    0;
-      clip-path:  none;
+      padding: 0;
+      clip-path: none;
     }
 
     .card--formula__interior {
-      background:    transparent;
-      padding:       0.6rem 0;
-      clip-path:     none;
+      background: transparent;
+      padding: 0.6rem 0;
+      clip-path: none;
       border-bottom: 1px solid var(--border);
     }
 
     // Links and buttons full-width, larger tap target
-    a, .nav-dropdown-toggle {
+    a,
+    .nav-dropdown-toggle {
       font-size: 0.85rem;
-      width:     100%;
-      display:   block;
+      width: 100%;
+      display: block;
     }
   }
 
   // Mobile dropdowns: hidden by default, expand on .open
   .nav-dropdown-menu {
-    position:       static;
-    opacity:        0;
-    max-height:     0;
-    overflow:       hidden;
+    position: static;
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
     pointer-events: none;
-    transform:      none;
-    padding-left:   1rem;
-    transition:     opacity 0.2s, max-height 0.28s ease;
+    transform: none;
+    padding-left: 1rem;
+    transition: opacity 0.2s, max-height 0.28s ease;
   }
 
   .nav-dropdown.open .nav-dropdown-menu {
-    opacity:        1;
-    max-height:     600px;
+    opacity: 1;
+    max-height: 600px;
     pointer-events: auto;
   }
 
@@ -302,34 +358,39 @@ nav {
 
   // Accordion chevron button (mobile only)
   .nav-accordion-btn {
-    display:          flex;
-    align-items:      center;
-    justify-content:  center;
-    background:       transparent;
-    border:           none;
-    cursor:           pointer;
-    padding:          0.25rem 0.5rem;
-    color:            var(--muted);
-    flex-shrink:      0;
-    transition:       color 0.2s, transform 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0.25rem 0.5rem;
+    color: var(--muted);
+    flex-shrink: 0;
+    transition: color 0.2s, transform 0.2s;
 
     i {
-      font-size:  0.75rem;
+      font-size: 0.75rem;
       transition: transform 0.25s ease;
     }
 
-    &:hover { color: var(--gold); }
+    &:hover {
+      color: var(--gold);
+    }
   }
 
   .nav-dropdown.open .nav-accordion-btn {
     color: var(--gold-border);
-    i { transform: rotate(180deg); }
+
+    i {
+      transform: rotate(180deg);
+    }
   }
 
   // Parent row: link + chevron side by side
   .card--formula__interior {
-    display:         flex;
-    align-items:     center;
+    display: flex;
+    align-items: center;
     justify-content: space-between;
   }
 }
