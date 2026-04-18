@@ -37,7 +37,7 @@ All colors defined as CSS custom properties. Scallop texture + elevation levels 
 --subdued: #B0AAA0
 --muted: #999999
 
---steel: #324cde  // secondary accent
+--steel: #7B8FA1  // secondary accent
 --amethyst: #967ABB
 --sage: #6A8E7F
 --teal: #4a6b5f
@@ -84,6 +84,7 @@ Three levels apply scallop texture + background:
 - **Lora** — Serif for body/headings
 - **Inter** — Sans for UI/labels
 - **JetBrains Mono** — Monospace for code
+- **Cormorant SC** — Small-caps display font for nav logo wordmark (`family=Cormorant+SC:wght@400;600;700`)
 
 ## License
 

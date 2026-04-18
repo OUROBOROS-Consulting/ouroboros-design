@@ -2,6 +2,7 @@
 $font-serif: 'Lora', Georgia, serif;
 $font-sans: 'Inter', 'DejaVu Sans', system-ui, sans-serif;
 $font-mono: 'JetBrains Mono', monospace;
+$font-cormorant: 'Cormorant SC', 'Cormorant Garamond', Georgia, serif;
 
 // ── Reset ─────────────────────────────────────────────────────────────────────
 *,
@@ -14,11 +15,11 @@ $font-mono: 'JetBrains Mono', monospace;
 
 // ── CSS custom properties — Ouroboros v5 ──────────────────────────────────────
 :root {
-  --label-size: 1.3rem;
+  --label-size: 1.0rem;
 
   // Surfaces
   --bg1: #141414;
-  --bg: #181a1b; // alias — remove after full migration
+  --bg-hero: #1e213e; // dark navy — homepage + service hero background
   --bg2: #1E1E1E;
   --bg3: #252525;
   --border: #333333;
@@ -57,8 +58,8 @@ $font-mono: 'JetBrains Mono', monospace;
   --teal-dim: rgba(74, 107, 95, 0.35);
   --teal-ghost: rgba(74, 107, 95, 0.12);
 
-  // Legacy aliases
-  --ruby: #ba6868;
+  // Semantic aliases — active use only
+  --ruby: #ba6868;   // timeline error/alert states (_timeline.scss)
   --sapphire: var(--steel);
   --emerald: var(--sage);
 
@@ -172,8 +173,8 @@ body::after {
       transparent 0%,
       rgba(8, 8, 8, 0.35) 100%),
     radial-gradient(600px circle at var(--cx, -9999px) var(--cy, -9999px),
-      rgba(74, 107, 95, 0.07) 0%,
-      rgba(74, 107, 95, 0.035) 35%,
+      rgba(201, 168, 76, 0.06) 0%,
+      rgba(201, 168, 76, 0.03) 35%,
       transparent 100%);
 }
 
