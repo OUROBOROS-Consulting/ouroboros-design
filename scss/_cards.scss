@@ -5,40 +5,31 @@ $-inner: calc(#{$-arc} - #{$-border});
 // ── Cards grid ───────────────────────────────────────────────────────────────
 .cards {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
-  gap: 1.5px;
+  grid-template-columns: repeat(auto-fill, minmax(500px, 2fr));
+  gap: 1px; // border-collapse effect
+  background: var(--border);
 }
 
 // ── Card component ───────────────────────────────────────────────────────────
 .card {
-  @include elevation-standard;
-  padding: 2.5rem;
-  border: 1px solid var(--border);
-  position: relative;
-  overflow: hidden;
-  transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
-
-  // Gold underline reveal on hover
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background: var(--gold-border);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.4s;
-  }
+  background: var(--bg1);
+  padding: 2rem 2rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  transition: background 0.3s;
 
   &:hover {
-    border-color: var(--gold);
-    transform: translateY(-4px);
-    box-shadow: 0 8px 24px var(--shadow), 0 0 20px var(--gold-ghost);
+    background: var(--bg2);
+  }
 
-    &::after {
-      transform: scaleX(1);
+  // Values and testimonials cards use bg2 as base, so invert hover
+  #values &,
+  #testimonials & {
+    background: var(--bg2);
+
+    &:hover {
+      background: var(--bg3);
     }
   }
 }
@@ -106,45 +97,69 @@ $-inner: calc(#{$-arc} - #{$-border});
 }
 
 .card-tag {
-  font-size: 0.78rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 1rem;
+  @include label-caps(0.65rem, 0.2em);
+
+  // Strip margins from markdownify
+  p {
+    margin: 0;
+  }
 }
 
 .card-title {
   font-family: $font-serif;
-  font-size: 1.3rem;
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
   font-weight: 400;
-  margin-bottom: 0.8rem;
   line-height: 1.3;
+  color: var(--text);
 }
 
 .card-desc {
+  font-size: 0.88rem;
   color: var(--subdued);
-  font-size: 0.93rem;
   line-height: 1.85;
+  flex-grow: 1; // pushes card-link to bottom
+
+  // Strip margins from markdownify
+  p {
+    margin: 0;
+  }
 }
 
 .card-link {
   display: inline-block;
-  margin-top: 1.5rem;
-  font-size: 0.78rem;
-  letter-spacing: 0.15em;
+  margin-top: auto;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--gold);
   text-decoration: none;
-  transition: letter-spacing 0.3s;
+  transition: opacity 0.2s;
 
   &:hover {
-    letter-spacing: 0.22em;
+    opacity: 0.7;
+  }
+}
+
+// Scoped to .card so it doesn't affect .post-body blockquote
+.card blockquote {
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+
+  p {
+    margin: 0;
   }
 
-  &--soon {
-    color: var(--muted);
-    font-style: italic;
-    letter-spacing: 0.1em;
+  cite {
+    display: block;
+    margin-top: 1rem;
+    font-family: $font-sans;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-style: normal;
   }
 }
 
@@ -347,11 +362,10 @@ $-inner: calc(#{$-arc} - #{$-border});
   }
 }
 
-// In _cards.scss or your CV stylesheet
-.cv-cards {
-  display: flex;
-  flex-direction: column;
-  gap: 3px; // keep this small so cards feel grouped
-  margin-bottom: 4rem; // ← space after each section's card stack
-  border-left: 1px solid var(--border);
+@media (max-width: 768px) {
+  .cards,
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+  }
 }
+

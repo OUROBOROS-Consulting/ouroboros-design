@@ -2,11 +2,19 @@
   "name": "@ouroboros-consulting/ouroboros-design",
   "version": "1.0.0",
   "description": "Accessible, elegant design system for OUROBOROS Consulting",
-  "main": "scss/index.scss",
+  "main": "dist/ouroboros.css",
+  "exports": {
+    ".": "./dist/ouroboros.css",
+    "./scss": "./scss/index.scss"
+  },
   "files": [
+    "dist/",
     "scss/"
   ],
   "scripts": {
+    "build": "sass scss/index.scss dist/ouroboros.css --style=compressed",
+    "build:dev": "sass scss/index.scss dist/ouroboros.css --style=expanded",
+    "prepublishOnly": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -20,5 +28,8 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/OUROBOROS-Consulting/ouroboros-design"
+  },
+  "devDependencies": {
+    "sass": "^1.77.0"
   }
 }

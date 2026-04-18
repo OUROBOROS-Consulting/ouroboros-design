@@ -1,3 +1,9 @@
+// ── Font family choices (single source of truth) ─────────────────────────────
+$font-serif:     'Lora', Georgia, serif;
+$font-sans:      'Inter', 'DejaVu Sans', system-ui, sans-serif;
+$font-mono:      'JetBrains Mono', monospace;
+$font-cormorant: 'Cormorant SC', 'Cormorant Garamond', Georgia, serif;
+
 // ── label-caps mixin ──────────────────────────────────────────────────────────
 // Single definition of the gold small-caps label pattern used across the site.
 // Use: @include label-caps;                    → default 0.7rem / 0.3em

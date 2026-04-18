@@ -135,7 +135,7 @@
 }
 
 // ── Axis marker ───────────────────────────────────────────────────────────────
-.dot {
+.tl-dot {
   position: relative;
   z-index: 2;
   flex-shrink: 0;
@@ -301,14 +301,14 @@
 }
 
 // ── Interval bands ────────────────────────────────────────────────────────────
-.interval-track {
+.tl-interval-track {
   grid-column: 2;
   position: relative;
   display: flex;
   justify-content: center;
 }
 
-.interval-band {
+.tl-interval-band {
   width: 10px;
   opacity: 0.45;
   position: relative;
