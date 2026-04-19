@@ -179,6 +179,7 @@ nav {
 // ── Nav card ──────────────────────────────────────────────────────────────────
 // Separate from .card--formula — style here without affecting formula boxes
 .nav-card {
+  border: 1px solid var(--gold-dim);
   padding: $-border;
   position: relative;
   @include chamfer($-arc);
