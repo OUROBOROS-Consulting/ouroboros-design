@@ -179,7 +179,7 @@ nav {
 // ── Nav card ──────────────────────────────────────────────────────────────────
 // Separate from .card--formula — style here without affecting formula boxes
 .nav-card {
-  border: 1px solid var(--gold-dim);
+  background: var(--gold-border); // outer shell = visible chamfer edge
   padding: $-border;
   position: relative;
   @include chamfer($-arc);
@@ -188,6 +188,7 @@ nav {
   height: 100%;
 
   &__interior {
+    background: var(--bg1);
     padding: 0.6rem 0.8rem;
     @include chamfer($-inner);
     display: flex;
