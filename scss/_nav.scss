@@ -179,10 +179,16 @@ nav {
 // ── Nav card ──────────────────────────────────────────────────────────────────
 // Separate from .card--formula — style here without affecting formula boxes
 .nav-card {
+  padding: $-border;
+  position: relative;
+  @include chamfer($-arc);
   display: flex;
   flex-direction: column;
+  height: 100%;
 
   &__interior {
+    padding: 0.6rem 0.8rem;
+    @include chamfer($-inner);
     display: flex;
     flex-direction: column;
     flex: 1;
