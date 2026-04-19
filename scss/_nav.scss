@@ -176,6 +176,19 @@ nav {
   }
 }
 
+// ── Nav card ──────────────────────────────────────────────────────────────────
+// Separate from .card--formula — style here without affecting formula boxes
+.nav-card {
+  display: flex;
+  flex-direction: column;
+
+  &__interior {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+}
+
 @keyframes dropdown-card-in {
   from {
     opacity: 0;
@@ -188,13 +201,13 @@ nav {
   }
 }
 
-.nav-dropdown-menu .card--formula {
+.nav-dropdown-menu .nav-card {
   opacity: 0; // hidden by default
 }
 
 // When the menu is visible, trigger the stagger
-.nav-dropdown:hover .nav-dropdown-menu .card--formula,
-.nav-dropdown:focus-within .nav-dropdown-menu .card--formula {
+.nav-dropdown:hover .nav-dropdown-menu .nav-card,
+.nav-dropdown:focus-within .nav-dropdown-menu .nav-card {
   animation: dropdown-card-in 0.15s ease forwards;
 
   &:nth-child(1) {
@@ -310,14 +323,14 @@ nav {
       display: flex;
     }
 
-    // Strip chamfer and gold border — flat list on mobile
-    .card--formula {
+    // Strip nav-card styles — flat list on mobile
+    .nav-card {
       background: transparent;
       padding: 0;
       clip-path: none;
     }
 
-    .card--formula__interior {
+    .nav-card__interior {
       background: transparent;
       padding: 0.6rem 0;
       clip-path: none;
@@ -352,7 +365,7 @@ nav {
   }
 
   // Stagger animation not needed on mobile
-  .nav-dropdown-menu .card--formula {
+  .nav-dropdown-menu .nav-card {
     opacity: 1;
     animation: none !important;
   }
@@ -389,7 +402,7 @@ nav {
   }
 
   // Parent row: link + chevron side by side
-  .card--formula__interior {
+  .nav-card__interior {
     display: flex;
     align-items: center;
     justify-content: space-between;
