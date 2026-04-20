@@ -3,10 +3,9 @@
   min-height: 100vh;
   padding: 10rem 10vw 6rem;
   display: grid;
-  grid-template-columns: 1fr auto;
-  grid-template-rows: 1fr auto;
-  align-items: center;
-  gap: 0 6rem;
+  grid-template-rows: auto 1fr auto;
+  align-content: center;
+  gap: 3.5rem 0;
   position: relative;
   z-index: 0;
   background-color: var(--bg-hero);
@@ -15,6 +14,13 @@
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='48'%3E%3Cpolygon points='28,2 52,15 52,41 28,54 4,41 4,15' fill='none' stroke='%23C9A84C' stroke-width='0.4' stroke-opacity='0.07'/%3E%3Cpolygon points='0,15 0,41 -24,28' fill='none' stroke='%23C9A84C' stroke-width='0.4' stroke-opacity='0.07'/%3E%3Cpolygon points='56,15 56,41 80,28' fill='none' stroke='%23C9A84C' stroke-width='0.4' stroke-opacity='0.07'/%3E%3C/svg%3E");
   background-size: 100% 100%, 56px 48px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.hero-identity {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 4rem;
 }
 
 
@@ -29,7 +35,6 @@
 }
 
 .hero-name {
-  text-align: right;
   font-family: $font-serif;
   font-size: clamp(3.5rem, 10vw, 8rem);
   font-weight: 500;
@@ -51,7 +56,7 @@
 }
 
 .hero-cta {
-  margin-top: 0.5rem;
+  margin-top: 0;
 }
 
 // ── Hero Emblem (logo) ───────────────────────────────────────────────────────
@@ -353,14 +358,16 @@
 // ── Responsive ────────────────────────────────────────────────────────────────
 @media (max-width: 768px) {
   #hero {
-    grid-template-columns: 1fr;
     padding: 8rem 6vw 4rem;
-    gap: 3rem 0;
+    gap: 2rem 0;
   }
 
-  .hero-portrait,
   .hero-emblem {
-    display: none; // hide portrait/emblem on mobile to avoid crowding
+    display: none;
+  }
+
+  .hero-identity {
+    justify-content: flex-start;
   }
 
   .hero-name {
