@@ -179,10 +179,97 @@
   line-height: 1;
 }
 
-#values .card--formula__interior i {
-  font-size: clamp(2.2rem, 4vw, 3.2rem);
-  color: var(--gold);
-  line-height: 1;
+// ── Values flip cards ─────────────────────────────────────────────────────────
+#values .values-grid {
+  grid-auto-rows: 260px;
+}
+
+.values-card {
+  perspective: 900px;
+  cursor: pointer;
+
+  &__inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.55s cubic-bezier(0.4, 0.2, 0.2, 1);
+  }
+
+  @media (hover: hover) {
+    &:hover &__inner {
+      transform: rotateY(180deg);
+    }
+  }
+
+  @media (hover: none) {
+    &.is-flipped &__inner {
+      transform: rotateY(180deg);
+    }
+  }
+
+  &__front,
+  &__back {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    background: var(--gold-border);
+    padding: $-border;
+    @include chamfer($-arc);
+  }
+
+  &__back {
+    transform: rotateY(180deg);
+  }
+
+  &__surface {
+    height: 100%;
+    box-sizing: border-box;
+    padding: 1.5rem 1.6rem;
+    @include chamfer($-inner);
+    @include elevation-standard;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__front &__surface {
+    align-items: center;
+    justify-content: center;
+    gap: 1.1rem;
+    text-align: center;
+  }
+
+  &__back &__surface {
+    justify-content: center;
+    overflow-y: auto;
+  }
+
+  &__icon {
+    font-size: clamp(2rem, 3.5vw, 2.8rem);
+    color: var(--gold);
+    line-height: 1;
+  }
+
+  &__name {
+    font-family: $font-serif;
+    font-size: clamp(1.1rem, 2vw, 1.35rem);
+    font-weight: 400;
+    color: var(--text);
+    line-height: 1.2;
+
+    p { margin: 0; }
+  }
+
+  &__desc {
+    font-family: $font-sans;
+    font-size: 0.875rem;
+    line-height: 1.8;
+    color: var(--subdued);
+    margin: 0;
+
+    p { margin: 0; }
+  }
 }
 
 .stat-label {
