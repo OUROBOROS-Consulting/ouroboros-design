@@ -104,7 +104,7 @@ body {
 }
 
 @mixin scallop-standard($accent: 'C9A84C') {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16'%3E%3Cpath d='M0 16 Q4 10 8 6 Q12 10 16 16' fill='none' stroke='%23#{$accent}' stroke-width='0.6' stroke-opacity='0.18'/%3E%3Cpath d='M-8 8 Q-4 2 0 -2 Q4 2 8 8' fill='none' stroke='%23#{$accent}' stroke-width='0.8' stroke-opacity='0.18'/%3E%3Cpath d='M8 8 Q12 2 16 -2 Q20 2 24 8' fill='none' stroke='%23#{$accent}' stroke-width='0.6' stroke-opacity='0.18'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16'%3E%3Cpath d='M0 16 Q4 10 8 6 Q12 10 16 16' fill='none' stroke='%23#{$accent}' stroke-width='0.4' stroke-opacity='0.18'/%3E%3Cpath d='M-8 8 Q-4 2 0 -2 Q4 2 8 8' fill='none' stroke='%23#{$accent}' stroke-width='0.4' stroke-opacity='0.18'/%3E%3Cpath d='M8 8 Q12 2 16 -2 Q20 2 24 8' fill='none' stroke='%23#{$accent}' stroke-width='0.4' stroke-opacity='0.18'/%3E%3C/svg%3E");
   background-size: 16px 16px;
 }
 
@@ -126,6 +126,7 @@ body {
   @include scallop-standard;
 }
 
+// #TODO: refactor
 @mixin elevation-elevated {
   background-color: var(--bg2);
   background-image:
@@ -191,7 +192,7 @@ body::after {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  font-size: 0.8rem;
+  font-size: 1.5rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--gold);
