@@ -62,7 +62,7 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-bottom: 1rem;
+  margin-bottom: 0.2rem;
 }
 
 .fw-tag {
@@ -75,8 +75,8 @@
   font-style: italic;
   font-size: 3.5rem;
   line-height: 1;
-  color: var(--gold);
-  opacity: 0.05;
+  color: var(--gold-border);
+  opacity: 0.5;
   user-select: none;
   pointer-events: none;
 }
@@ -87,14 +87,14 @@
   font-weight: 400;
   line-height: 1.3;
   color: var(--text);
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.05rem;
 }
 
 .fw-rule {
   height: 1px;
   border: none;
   background: linear-gradient(90deg, var(--gold) 0%, transparent 60%);
-  margin-bottom: 1rem;
+  margin-bottom: 0.2rem;
   opacity: 0.4;
   transition: opacity 0.2s;
 }
