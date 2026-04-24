@@ -369,3 +369,57 @@ $-inner: calc(#{$-arc} - #{$-border});
   }
 }
 
+@media (prefers-color-scheme: light) {
+  // ── Surfaces + base text inheritance ────────────────────────────────────────
+  .card,
+  .related-card,
+  .bib-card { color: #141414; }  // override near-white body default
+
+  .card {
+    background: #F5F2ED;
+
+    &:hover { background: #ECEAE5; }
+
+    #values &,
+    #testimonials & {
+      background: #ECEAE5;
+
+      &:hover { background: #E2E0DA; }
+    }
+  }
+
+  .card--formula__interior {
+    background-color: #F5F2ED;
+    background-image:
+      linear-gradient(180deg, #ECEAE5 0%, transparent 40%),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16'%3E%3Cpath d='M0 16 Q4 10 8 6 Q12 10 16 16' fill='none' stroke='%23C9A84C' stroke-width='0.8' stroke-opacity='0.18'/%3E%3Cpath d='M-8 8 Q-4 2 0 -2 Q4 2 8 8' fill='none' stroke='%23C9A84C' stroke-width='0.8' stroke-opacity='0.18'/%3E%3Cpath d='M8 8 Q12 2 16 -2 Q20 2 24 8' fill='none' stroke='%23C9A84C' stroke-width='0.8' stroke-opacity='0.18'/%3E%3C/svg%3E");
+  }
+
+  .bib-card::after { background: #ECEAE5; }
+
+  // ── Body text — AAA on all card bgs ─────────────────────────────────────────
+  .card-title,
+  .bib-title,
+  .rc-title  { color: #141414; }   // 15:1 on #F5F2ED
+
+  .card-desc { color: #4A4540; }   // 7.3:1 on #F5F2ED
+
+  // ── Muted text — AA on all card bgs (5.9:1 on hover bg) ────────────────────
+  .bib-venue,
+  .rc-date   { color: #545050; }
+
+  .rc-tag-chip {
+    color: #545050;
+    border-color: #C8C5BF;
+  }
+
+  // ── Gold text → dark amber #6B5000 — AA on all card bgs (6:1 on #F5F2ED) ──
+  .card-tag,
+  .card-link,
+  .bib-byline,
+  .bib-link,
+  .card blockquote cite { color: #6B5000; }
+
+  .related-card .rc-tag { color: #6B5000; }
+}
+
