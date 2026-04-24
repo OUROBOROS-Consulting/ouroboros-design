@@ -98,7 +98,7 @@ nav {
     }
   }
 
-  .nav-contact a {
+  .nav-button a {
     color: var(--bright);
     font-weight: 600;
 
@@ -177,6 +177,11 @@ nav {
   }
 }
 
+// ── Hexagon clip-path ────────────────────────────────────────────────────────
+@mixin hexagon($inset: 0) {
+  clip-path: polygon(50% #{$inset}, calc(93.3% - #{$inset}) calc(25% + #{$inset}), calc(93.3% - #{$inset}) calc(75% - #{$inset}), 50% calc(100% - #{$inset}), calc(6.7% + #{$inset}) calc(75% - #{$inset}), calc(6.7% + #{$inset}) calc(25% + #{$inset}));
+}
+
 // ── Nav card ──────────────────────────────────────────────────────────────────
 // Separate from .card--formula — style here without affecting formula boxes
 .nav-card {
@@ -195,6 +200,41 @@ nav {
     display: flex;
     flex-direction: column;
     flex: 1;
+  }
+}
+
+// ── Button card hexagon variant ──────────────────────────────────────────────
+.nav-button .nav-card {
+  @include hexagon($-arc);
+  min-width: 70px;
+  min-height: 70px;
+
+  &__interior {
+    @include hexagon($-inner);
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--bright);
+
+      i {
+        font-size: 2rem;
+        color: var(--bright);
+      }
+
+      &:hover {
+        color: var(--gold);
+
+        i {
+          color: var(--gold);
+        }
+      }
+    }
   }
 }
 
