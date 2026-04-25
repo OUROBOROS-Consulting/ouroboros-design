@@ -344,6 +344,27 @@
   padding-bottom: 0.4rem;
 }
 
+// ── Services cards: icon + text side-by-side ─────────────────────────────────
+#services .card--formula__interior {
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 1.2rem;
+}
+
+.svc-card-icon {
+  font-size: 5rem;
+  color: var(--sage);
+  flex-shrink: 0;
+  padding-top: 0.1rem;
+  filter: drop-shadow(0 0 8px rgba(106, 142, 127, 0.4));
+}
+
+.svc-card-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
 // ── Section spacing ───────────────────────────────────────────────────────────
 #about,
 #values,
