@@ -210,25 +210,27 @@ nav {
 // ── Button card hexagon variant ──────────────────────────────────────────────
 .nav-button .nav-card {
   @include hexagon($-arc);
-  min-width: 70px;
-  min-height: 70px;
+  min-width: 62px;
+  min-height: 62px;
+  background: rgba(201, 168, 76, 0.18); // ghost outline only
 
   &__interior {
     @include hexagon($-inner);
-    padding: 1rem;
+    padding: 0.85rem;
     display: flex;
     align-items: center;
     justify-content: center;
+    background: var(--bg1);
 
     a {
       display: flex;
       align-items: center;
       justify-content: center;
-      color: var(--bright);
+      color: var(--muted);
 
       i {
-        font-size: 2rem;
-        color: var(--bright);
+        font-size: 1.5rem;
+        color: var(--muted);
       }
 
       &:hover {
