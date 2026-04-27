@@ -356,7 +356,7 @@
 #services .card--formula__interior {
   flex-direction: row;
   align-items: flex-start;
-  gap: 1.2rem;
+  gap: 2rem;
 }
 
 .svc-card-icon {
@@ -364,6 +364,8 @@
   color: var(--sage);
   flex-shrink: 0;
   padding-top: 0.1rem;
+  padding-right: 2rem;
+  border-right: 1px solid var(--border);
   filter: drop-shadow(0 0 8px rgba(106, 142, 127, 0.4));
 }
 
