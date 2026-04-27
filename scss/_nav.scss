@@ -71,6 +71,10 @@ nav {
   gap: 1.0rem;
   font-family: $font-sans;
 
+  > .nav-dropdown {
+    width: 110px;
+  }
+
   a,
   .nav-dropdown-toggle {
     font-family: $font-sans;

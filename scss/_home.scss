@@ -49,9 +49,16 @@
   line-height: 1.85;
   max-width: 520px;
 
-  // Strip default margins from markdownify's <p> wrapper
   p {
     margin: 0;
+  }
+
+  p:first-child {
+    font-size: clamp(1.15rem, 2.2vw, 1.35rem);
+    color: var(--text);
+    line-height: 1.45;
+    font-style: italic;
+    margin-bottom: 0.75rem;
   }
 }
 
@@ -258,7 +265,8 @@
 
   &__icon {
     font-size: clamp(6rem, 3.5vw, 2.8rem);
-    color: var(--gold);
+    color: var(--subdued);
+    opacity: 0.6;
     line-height: 1;
   }
 
