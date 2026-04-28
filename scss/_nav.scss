@@ -210,9 +210,9 @@ nav {
 // ── Button card hexagon variant ──────────────────────────────────────────────
 .nav-button .nav-card {
   @include hexagon($-arc);
-  min-width: 62px;
-  min-height: 62px;
-  background: rgba(201, 168, 76, 0.18); // ghost outline only
+  min-width: 60px;
+  min-height: 70px;
+  background: rgba(201, 168, 76, 0.55);
 
   &__interior {
     @include hexagon($-inner);
