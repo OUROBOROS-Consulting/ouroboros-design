@@ -73,7 +73,7 @@
   a {
     color: var(--gold);
     text-decoration: underline;
-    text-decoration-color: rgba(201, 168, 76, 0.35);
+    text-decoration-color: var(--gold-dim);
     transition: text-decoration-color 0.2s;
 
     &:hover {
@@ -176,7 +176,7 @@
   }
 
   &:hover {
-    border-left-color: rgba(201, 168, 76, 0.4);
+    border-left-color: var(--gold-dim);
     &::before { background: var(--gold); }
 
     .news-title a { color: var(--gold); }
@@ -263,7 +263,7 @@
 
   &[data-category="Accountability"] {
     color: var(--gold);
-    border-color: rgba(201, 168, 76, 0.35);
+    border-color: var(--gold-dim);
   }
 
   &[data-category="Institutional Betrayal"] {
