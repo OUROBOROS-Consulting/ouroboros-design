@@ -1,0 +1,43 @@
+name: Build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    name: Compile SCSS
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build CSS
+        run: npm run build
+
+      - name: Report output size
+        run: |
+          SIZE=$(wc -c < dist/ouroboros.css)
+          SIZE_KB=$(echo "scale=1; $SIZE / 1024" | bc)
+          echo "### Build successful" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| File | Size |" >> $GITHUB_STEP_SUMMARY
+          echo "|------|------|" >> $GITHUB_STEP_SUMMARY
+          echo "| \`dist/ouroboros.css\` | ${SIZE_KB} KB |" >> $GITHUB_STEP_SUMMARY
+
+      - name: Upload compiled CSS
+        uses: actions/upload-artifact@v4
+        with:
+          name: ouroboros-css-${{ github.sha }}
+          path: dist/ouroboros.css
+          retention-days: 7
