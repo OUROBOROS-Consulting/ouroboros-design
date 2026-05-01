@@ -1,12 +1,14 @@
-name: Build
+name: Build & Preview
 
 on:
   push:
     branches: [main]
   pull_request:
     branches: [main]
+    types: [opened, synchronize, reopened, closed]
 
 jobs:
+  # ── 1. Always: compile the SCSS ───────────────────────────────────────────────
   build:
     name: Compile SCSS
     runs-on: ubuntu-latest
@@ -27,8 +29,7 @@ jobs:
 
       - name: Report output size
         run: |
-          SIZE=$(wc -c < dist/ouroboros.css)
-          SIZE_KB=$(echo "scale=1; $SIZE / 1024" | bc)
+          SIZE_KB=$(echo "scale=1; $(wc -c < dist/ouroboros.css) / 1024" | bc)
           echo "### Build successful" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "| File | Size |" >> $GITHUB_STEP_SUMMARY
@@ -41,3 +42,114 @@ jobs:
           name: ouroboros-css-${{ github.sha }}
           path: dist/ouroboros.css
           retention-days: 7
+
+  # ── 2. PRs only: build website with PR's CSS and deploy a preview ─────────────
+  preview:
+    name: Deploy website preview
+    runs-on: ubuntu-latest
+    needs: build
+    if: >
+      github.event_name == 'pull_request' &&
+      github.event.action != 'closed'
+    permissions:
+      contents: write
+      pull-requests: write
+    environment:
+      name: pr-preview
+      url: https://ouroboros-consulting.github.io/ouroboros-design/preview/pr-${{ github.event.pull_request.number }}/
+
+    steps:
+      - name: Checkout CSS package
+        uses: actions/checkout@v4
+        with:
+          path: design
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: design/package-lock.json
+
+      - name: Build CSS and pack
+        run: |
+          cd design
+          npm ci
+          npm run build
+          npm pack
+          echo "TARBALL=$(ls ouroboros-consulting-ouroboros-design-*.tgz)" >> $GITHUB_ENV
+
+      - name: Checkout website repo
+        uses: actions/checkout@v4
+        with:
+          repository: OUROBOROS-Consulting/OUROBOROS.github.io
+          token: ${{ secrets.WEBSITE_PAT }}
+          path: website
+
+      - name: Install website deps with PR CSS
+        run: |
+          cd website
+          npm install ../design/${{ env.TARBALL }}
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: 'latest'
+
+      - name: Build Hugo site
+        run: |
+          cd website
+          hugo --minify \
+            --baseURL "https://ouroboros-consulting.github.io/ouroboros-design/preview/pr-${{ github.event.pull_request.number }}/"
+
+      - name: Deploy preview to gh-pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          personal_token: ${{ secrets.WEBSITE_PAT }}
+          publish_dir: website/public
+          destination_dir: preview/pr-${{ github.event.pull_request.number }}
+          keep_files: true
+          commit_message: "deploy: preview for PR #${{ github.event.pull_request.number }} (${{ github.sha }})"
+
+      - name: Post preview link to PR
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const pr = context.payload.pull_request.number;
+            const sha = context.sha.slice(0, 7);
+            const url = `https://ouroboros-consulting.github.io/ouroboros-design/preview/pr-${pr}/`;
+            await github.rest.issues.createComment({
+              ...context.repo,
+              issue_number: pr,
+              body: [
+                '### Preview deployed',
+                '',
+                `[→ View website with this PR's CSS](${url})`,
+                '',
+                `_Built from ${sha}_`,
+              ].join('\n'),
+            });
+
+  # ── 3. PR closed: clean up preview ───────────────────────────────────────────
+  cleanup:
+    name: Remove preview
+    runs-on: ubuntu-latest
+    if: >
+      github.event_name == 'pull_request' &&
+      github.event.action == 'closed'
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+          token: ${{ secrets.WEBSITE_PAT }}
+
+      - name: Delete preview directory and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git rm -rf "preview/pr-${{ github.event.pull_request.number }}" || true
+          git diff --staged --quiet && exit 0
+          git commit -m "chore: remove preview for PR #${{ github.event.pull_request.number }}"
+          git push
