@@ -19,7 +19,7 @@
 }
 
 .year-badge {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: $font-mono;
   font-size: 1rem;
   color: var(--bg1);
   background: var(--gold);
@@ -51,7 +51,7 @@
 }
 
 .month-pip {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: $font-mono;
   font-size: 0.58rem;
   color: var(--muted);
   background: var(--bg1);
@@ -237,7 +237,7 @@
 }
 
 .event-date {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: $font-mono;
   font-size: 0.65rem;
   color: var(--gold);
   letter-spacing: 0.05em;
