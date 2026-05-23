@@ -612,10 +612,9 @@ nav {
 }
 
 .nav-sec-child-card {
-  opacity: 0;
   display: block;
   text-decoration: none;
-  background: rgba(177, 147, 93, 0.1);
+  background: var(--border);
   padding: 2px;
   clip-path: polygon(
     4px 0%, calc(100% - 4px) 0%, 100% 4px,
