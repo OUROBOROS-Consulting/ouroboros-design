@@ -1,18 +1,27 @@
-// ── Nav ──────────────────────────────────────────────────────────────────────
-nav {
+// ── Nav shell (fixed container for both nav rows) ────────────────────────────
+.nav-shell {
   position: fixed;
   top: 0;
-  width: 100%;
+  left: 0;
+  right: 0;
   z-index: 100;
-  padding: 0.2rem 3rem;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+}
+
+// ── Nav ──────────────────────────────────────────────────────────────────────
+nav {
+  position: relative;
+  width: 100%;
+  padding: 0 2rem;
+  display: flex;
+  justify-content: flex-start;
+  gap: 0.75rem;
   align-items: center;
   @include scallop-elevated;
   background-color: rgba(20, 20, 20, 0.92);
   backdrop-filter: blur(12px);
-  // border-bottom: 2px solid var(--border);
-  border: 2px solid var(--gold-border);
+  border: 1px solid rgba(177, 147, 93, 0.22);
 
   &::after {
     content: '';
@@ -26,20 +35,20 @@ nav {
     background-position: center bottom;
     background-size: 22px 14px;
     pointer-events: none;
-    opacity: 0.81;
+    opacity: 0.22;
   }
 }
 
 .nav-logo {
   display: flex;
   align-items: center;
-  gap: 0.8rem;
+  gap: 0.55rem;
   text-decoration: none;
   flex-shrink: 0;
 }
 
 .nav-logo-mark {
-  height: 70px;
+  height: 44px;
   width: auto;
   flex-shrink: 0;
   background: transparent;
@@ -48,7 +57,7 @@ nav {
 
 .nav-logo-text {
   font-family: $font-cormorant;
-  font-size: 2rem;
+  font-size: 1.45rem;
   font-weight: 600;
   letter-spacing: 0.08em;
   color: var(--bright);
@@ -60,7 +69,7 @@ nav {
 
 .nav-logo-sub {
   display: block;
-  font-size: 1.0rem;
+  font-size: 0.65rem;
   letter-spacing: 0.12em;
   opacity: 0.75;
   margin-top: 0.15rem;
@@ -69,6 +78,7 @@ nav {
 .nav-links {
   display: flex;
   gap: 1.0rem;
+  margin-left: auto;
   font-family: $font-sans;
 
   > .nav-dropdown {
@@ -92,8 +102,7 @@ nav {
     gap: 0.5rem;
 
     i {
-      font-size: 2.0rem;
-      // width: 1.1rem;
+      font-size: 1.35rem;
       text-align: center;
     }
 
@@ -130,8 +139,7 @@ nav {
   gap: 0.35rem;
 
   i {
-    font-size: 1.4rem;
-    // width: 1.2rem;
+    font-size: 1.05rem;
     text-align: center;
   }
 
@@ -153,9 +161,9 @@ nav {
 
 .nav-dropdown-menu {
   position: absolute;
-  top: calc(100% + 2px);
-  left: 50%; // center anchor
-  transform: translateX(-75%) translateY(-2px); // shift left by half its own width
+  top: calc(100% + 4px);
+  left: 50%;
+  transform: translateX(-75%) translateY(-2px);
   min-width: 160px;
   z-index: 100;
   opacity: 0;
@@ -164,19 +172,24 @@ nav {
   display: flex;
   flex-direction: column;
   gap: 1px;
+  background: rgba(15, 15, 15, 0.97);
+  border: 1px solid rgba(177, 147, 93, 0.18);
+  backdrop-filter: blur(16px);
+  padding: 0.2rem 0;
 
   a {
     display: block;
-    padding: 0.2rem 0.4rem; // tighter than before
-    font-size: 0.72rem;
+    padding: 0.3rem 0.85rem;
+    font-size: 0.7rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--muted);
     text-decoration: none;
-    transition: color 0.2s;
+    transition: color 0.2s, background 0.2s;
 
     &:hover {
       color: var(--gold);
+      background: rgba(177, 147, 93, 0.06);
     }
   }
 }
@@ -207,16 +220,16 @@ nav {
   }
 }
 
-// ── Button card hexagon variant ──────────────────────────────────────────────
+// ── Button card chamfer variant (matches footer socials) ─────────────────────
 .nav-button .nav-card {
-  @include hexagon($-arc);
-  min-width: 60px;
-  min-height: 70px;
-  background: rgba(201, 168, 76, 0.55);
+  @include chamfer($-arc);
+  background: var(--gold-border);
+  padding: $-border;
+  transition: background 0.2s ease;
 
   &__interior {
-    @include hexagon($-inner);
-    padding: 0.85rem;
+    @include chamfer($-inner);
+    padding: 0.61rem 0.72rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -225,22 +238,43 @@ nav {
     a {
       display: flex;
       align-items: center;
-      justify-content: center;
+      gap: 0;
       color: var(--muted);
+      transition: color 0.2s ease, gap 0.25s ease;
 
       i {
-        font-size: 1.5rem;
+        font-size: 1.54rem;
         color: var(--muted);
-      }
-
-      &:hover {
-        color: var(--gold);
-
-        i {
-          color: var(--gold);
-        }
+        transition: color 0.2s ease;
+        flex-shrink: 0;
       }
     }
+  }
+
+  .nav-btn-label {
+    font-family: $font-sans;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 0;
+    opacity: 0;
+    transition: max-width 0.28s ease, opacity 0.18s ease;
+  }
+}
+
+.nav-button:hover .nav-card {
+  &__interior a {
+    gap: 0.45rem;
+    color: var(--gold);
+
+    i { color: var(--gold); }
+  }
+
+  .nav-btn-label {
+    max-width: 5rem;
+    opacity: 1;
   }
 }
 
@@ -257,7 +291,17 @@ nav {
 }
 
 .nav-dropdown-menu .nav-card {
-  opacity: 0; // hidden by default
+  opacity: 0;
+  background: rgba(177, 147, 93, 0.14);
+  // inherits chamfer geometry and 3px border padding from .nav-card base
+
+  &__interior {
+    padding: 0.2rem 0.75rem;
+
+    a {
+      padding: 0;
+    }
+  }
 }
 
 // When the menu is visible, trigger the stagger
@@ -341,18 +385,18 @@ nav {
 // ── Responsive ───────────────────────────────────────────────────────────────
 @media (max-width: 768px) {
   nav {
-    padding: 1rem 1.25rem;
-    flex-wrap: wrap; // lets .nav-links drop to a second row
+    padding: 0.55rem 1rem;
+    flex-wrap: wrap;
     align-items: center;
   }
 
   .nav-logo-mark {
-    height: 38px;
+    height: 28px;
     width: auto;
   }
 
   .nav-logo-text {
-    font-size: 1.2rem;
+    font-size: 0.95rem;
   }
 
   .nav-logo-sub {
@@ -439,7 +483,7 @@ nav {
     transition: color 0.2s, transform 0.2s;
 
     i {
-      font-size: 2rem;
+      font-size: 1.2rem;
       transition: transform 0.25s ease;
     }
 
@@ -462,4 +506,160 @@ nav {
     align-items: center;
     justify-content: space-between;
   }
+}
+
+// ── Secondary nav (tab strip below primary nav) ──────────────────
+.nav-secondary {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 5px 1.5rem;
+  border-bottom: 1px solid var(--border);
+  background: rgba(14, 14, 14, 0.96);
+  backdrop-filter: blur(8px);
+  gap: 3px;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+}
+
+.nav-sec-card {
+  background: var(--border);
+  padding: 2px;
+  clip-path: polygon(
+    4px 0%, calc(100% - 4px) 0%, 100% 4px,
+    100% calc(100% - 4px), calc(100% - 4px) 100%,
+    4px 100%, 0% calc(100% - 4px), 0% 4px
+  );
+  display: flex;
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: background 0.15s;
+  text-decoration: none;
+
+  &:hover { background: var(--subdued); }
+  &.active { background: var(--gold-border); }
+}
+
+.nav-sec-item {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--subdued);
+  padding: 0.45rem 1rem;
+  white-space: nowrap;
+  background: #0e0e0e;
+  clip-path: polygon(
+    2px 0%, calc(100% - 2px) 0%, 100% 2px,
+    100% calc(100% - 2px), calc(100% - 2px) 100%,
+    2px 100%, 0% calc(100% - 2px), 0% 2px
+  );
+  transition: color 0.15s, background 0.15s;
+
+  .nav-sec-card:hover & { color: var(--text); background: var(--bg2); }
+  .nav-sec-card.active & { color: var(--gold); background: var(--bg2); }
+}
+
+// ── Secondary nav dropdowns ───────────────────────────────────────────────────
+.nav-sec-dropdown {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+
+  &:hover .nav-sec-dropdown-menu,
+  &:focus-within .nav-sec-dropdown-menu {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
+  &:hover .nav-sec-chevron,
+  &:focus-within .nav-sec-chevron {
+    transform: rotate(180deg);
+  }
+}
+
+.nav-sec-chevron {
+  font-size: 0.5rem;
+  margin-left: 0.3rem;
+  transition: transform 0.2s ease;
+  opacity: 0.55;
+  vertical-align: middle;
+}
+
+.nav-sec-dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 200;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-4px);
+  transition: opacity 0.18s ease, transform 0.18s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding: 0.25rem 0;
+  background: rgba(14, 14, 14, 0.97);
+  border: 1px solid rgba(177, 147, 93, 0.18);
+  border-top: none;
+  backdrop-filter: blur(16px);
+  min-width: 160px;
+}
+
+.nav-sec-child-card {
+  opacity: 0;
+  display: block;
+  text-decoration: none;
+  background: rgba(177, 147, 93, 0.1);
+  padding: 2px;
+  clip-path: polygon(
+    4px 0%, calc(100% - 4px) 0%, 100% 4px,
+    100% calc(100% - 4px), calc(100% - 4px) 100%,
+    4px 100%, 0% calc(100% - 4px), 0% 4px
+  );
+  transition: background 0.15s;
+
+  &:hover { background: var(--subdued); }
+  &.active { background: var(--gold-border); }
+}
+
+.nav-sec-child-item {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--subdued);
+  padding: 0.4rem 1rem;
+  white-space: nowrap;
+  background: #0e0e0e;
+  clip-path: polygon(
+    2px 0%, calc(100% - 2px) 0%, 100% 2px,
+    100% calc(100% - 2px), calc(100% - 2px) 100%,
+    2px 100%, 0% calc(100% - 2px), 0% 2px
+  );
+  transition: color 0.15s, background 0.15s;
+
+  .nav-sec-child-card:hover & { color: var(--text); background: var(--bg2); }
+  .nav-sec-child-card.active & { color: var(--gold); background: var(--bg2); }
+}
+
+// Stagger animation for child entries
+.nav-sec-dropdown:hover .nav-sec-dropdown-menu .nav-sec-child-card,
+.nav-sec-dropdown:focus-within .nav-sec-dropdown-menu .nav-sec-child-card {
+  animation: dropdown-card-in 0.15s ease forwards;
+
+  &:nth-child(1) { animation-delay: 0.00s; }
+  &:nth-child(2) { animation-delay: 0.01s; }
+  &:nth-child(3) { animation-delay: 0.02s; }
+  &:nth-child(4) { animation-delay: 0.03s; }
+  &:nth-child(5) { animation-delay: 0.04s; }
+  &:nth-child(6) { animation-delay: 0.05s; }
+  &:nth-child(7) { animation-delay: 0.06s; }
+  &:nth-child(8) { animation-delay: 0.07s; }
 }
