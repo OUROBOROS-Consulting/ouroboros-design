@@ -64,6 +64,10 @@
 
 .hero-cta {
   margin-top: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
 }
 
 // ── Hero Emblem (logo) ───────────────────────────────────────────────────────
