@@ -1,9 +1,9 @@
 // ── Nav shell (fixed container for both nav rows) ────────────────────────────
 .nav-shell {
   position: fixed;
-  top: 10;
-  left: 50;
-  right: 50;
+  top: 0;
+  left: 0;
+  right: 0;
   z-index: 100;
   display: flex;
   flex-direction: column;
@@ -48,7 +48,7 @@ nav {
 }
 
 .nav-logo-mark {
-  height: 44px;
+  height: 80px;
   width: auto;
   flex-shrink: 0;
   background: transparent;
@@ -57,7 +57,7 @@ nav {
 
 .nav-logo-text {
   font-family: $font-cormorant;
-  font-size: 1.45rem;
+  font-size: 3.00rem;
   font-weight: 600;
   letter-spacing: 0.08em;
   color: var(--bright);
@@ -69,7 +69,7 @@ nav {
 
 .nav-logo-sub {
   display: block;
-  font-size: 0.65rem;
+  font-size: 1.0rem;
   letter-spacing: 0.12em;
   opacity: 0.75;
   margin-top: 0.15rem;
@@ -121,13 +121,21 @@ nav {
   }
 }
 
-// ── Utility button group (right-aligned) ──────────────────────────────────────
-.nav-utils {
-  margin-left: auto;
+// ── Centered button group ─────────────────────────────────────────────────────
+.nav-buttons {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 0.75rem;
+
+  @media (max-width: 768px) {
+    position: static;
+    margin-left: auto;
+    transform: none;
+  }
 }
 
 // ── Dropdowns ─────────────────────────────────────────────────────────────────
@@ -278,7 +286,9 @@ nav {
     gap: 0.45rem;
     color: var(--gold);
 
-    i { color: var(--gold); }
+    i {
+      color: var(--gold);
+    }
   }
 
   .nav-btn-label {
@@ -536,19 +546,22 @@ nav {
 .nav-sec-card {
   background: var(--border);
   padding: 2px;
-  clip-path: polygon(
-    4px 0%, calc(100% - 4px) 0%, 100% 4px,
-    100% calc(100% - 4px), calc(100% - 4px) 100%,
-    4px 100%, 0% calc(100% - 4px), 0% 4px
-  );
+  clip-path: polygon(4px 0%, calc(100% - 4px) 0%, 100% 4px,
+      100% calc(100% - 4px), calc(100% - 4px) 100%,
+      4px 100%, 0% calc(100% - 4px), 0% 4px);
   display: flex;
   flex-shrink: 0;
   cursor: pointer;
   transition: background 0.15s;
   text-decoration: none;
 
-  &:hover { background: var(--subdued); }
-  &.active { background: var(--gold-border); }
+  &:hover {
+    background: var(--subdued);
+  }
+
+  &.active {
+    background: var(--gold-border);
+  }
 }
 
 .nav-sec-item {
@@ -561,15 +574,20 @@ nav {
   padding: 0.45rem 1rem;
   white-space: nowrap;
   background: #0e0e0e;
-  clip-path: polygon(
-    2px 0%, calc(100% - 2px) 0%, 100% 2px,
-    100% calc(100% - 2px), calc(100% - 2px) 100%,
-    2px 100%, 0% calc(100% - 2px), 0% 2px
-  );
+  clip-path: polygon(2px 0%, calc(100% - 2px) 0%, 100% 2px,
+      100% calc(100% - 2px), calc(100% - 2px) 100%,
+      2px 100%, 0% calc(100% - 2px), 0% 2px);
   transition: color 0.15s, background 0.15s;
 
-  .nav-sec-card:hover & { color: var(--text); background: var(--bg2); }
-  .nav-sec-card.active & { color: var(--gold); background: var(--bg2); }
+  .nav-sec-card:hover & {
+    color: var(--text);
+    background: var(--bg2);
+  }
+
+  .nav-sec-card.active & {
+    color: var(--gold);
+    background: var(--bg2);
+  }
 }
 
 // ── Secondary nav dropdowns ───────────────────────────────────────────────────
@@ -625,15 +643,18 @@ nav {
   text-decoration: none;
   background: var(--border);
   padding: 2px;
-  clip-path: polygon(
-    4px 0%, calc(100% - 4px) 0%, 100% 4px,
-    100% calc(100% - 4px), calc(100% - 4px) 100%,
-    4px 100%, 0% calc(100% - 4px), 0% 4px
-  );
+  clip-path: polygon(4px 0%, calc(100% - 4px) 0%, 100% 4px,
+      100% calc(100% - 4px), calc(100% - 4px) 100%,
+      4px 100%, 0% calc(100% - 4px), 0% 4px);
   transition: background 0.15s;
 
-  &:hover { background: var(--subdued); }
-  &.active { background: var(--gold-border); }
+  &:hover {
+    background: var(--subdued);
+  }
+
+  &.active {
+    background: var(--gold-border);
+  }
 }
 
 .nav-sec-child-item {
@@ -646,15 +667,20 @@ nav {
   padding: 0.4rem 1rem;
   white-space: nowrap;
   background: #0e0e0e;
-  clip-path: polygon(
-    2px 0%, calc(100% - 2px) 0%, 100% 2px,
-    100% calc(100% - 2px), calc(100% - 2px) 100%,
-    2px 100%, 0% calc(100% - 2px), 0% 2px
-  );
+  clip-path: polygon(2px 0%, calc(100% - 2px) 0%, 100% 2px,
+      100% calc(100% - 2px), calc(100% - 2px) 100%,
+      2px 100%, 0% calc(100% - 2px), 0% 2px);
   transition: color 0.15s, background 0.15s;
 
-  .nav-sec-child-card:hover & { color: var(--text); background: var(--bg2); }
-  .nav-sec-child-card.active & { color: var(--gold); background: var(--bg2); }
+  .nav-sec-child-card:hover & {
+    color: var(--text);
+    background: var(--bg2);
+  }
+
+  .nav-sec-child-card.active & {
+    color: var(--gold);
+    background: var(--bg2);
+  }
 }
 
 // Stagger animation for child entries
@@ -662,28 +688,63 @@ nav {
 .nav-sec-dropdown:focus-within .nav-sec-dropdown-menu .nav-sec-child-card {
   animation: dropdown-card-in 0.15s ease forwards;
 
-  &:nth-child(1) { animation-delay: 0.00s; }
-  &:nth-child(2) { animation-delay: 0.01s; }
-  &:nth-child(3) { animation-delay: 0.02s; }
-  &:nth-child(4) { animation-delay: 0.03s; }
-  &:nth-child(5) { animation-delay: 0.04s; }
-  &:nth-child(6) { animation-delay: 0.05s; }
-  &:nth-child(7) { animation-delay: 0.06s; }
-  &:nth-child(8) { animation-delay: 0.07s; }
-}
+  &:nth-child(1) {
+    animation-delay: 0.00s;
+  }
 
-// ── Search ────────────────────────────────────────────────────────────────────
-.nav-search-wrap {
-  position: relative;
+  &:nth-child(2) {
+    animation-delay: 0.01s;
+  }
 
-  .nav-card__interior {
-    flex-direction: row;
-    align-items: center;
-    gap: 0.45rem;
+  &:nth-child(3) {
+    animation-delay: 0.02s;
+  }
+
+  &:nth-child(4) {
+    animation-delay: 0.03s;
+  }
+
+  &:nth-child(5) {
+    animation-delay: 0.04s;
+  }
+
+  &:nth-child(6) {
+    animation-delay: 0.05s;
+  }
+
+  &:nth-child(7) {
+    animation-delay: 0.06s;
+  }
+
+  &:nth-child(8) {
+    animation-delay: 0.07s;
   }
 }
 
-.nav-search__toggle {
+// Input and icon sit side-by-side, so the card height matches other nav buttons.
+.nav-search-wrap .nav-card__interior {
+  flex-direction: row;
+  align-items: center;
+}
+
+// ── Search (right-anchored; input grows leftward) ────────────────────────────
+.nav-search-wrap {
+  position: absolute;
+  right: 2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  overflow: visible;
+
+  @media (max-width: 768px) {
+    position: static;
+    right: auto;
+    top: auto;
+    transform: none;
+    margin-left: 0.5rem;
+  }
+}
+
+.nav-search__submit {
   background: none;
   border: none;
   cursor: pointer;
@@ -692,14 +753,19 @@ nav {
   align-items: center;
   padding: 0;
   transition: color 0.2s ease;
-  flex-shrink: 0;
 
-  i { font-size: 1.54rem; }
+  i {
+    font-size: 1.54rem;
+  }
 
-  &:hover { color: var(--gold); }
+  &:hover {
+    color: var(--gold);
+  }
 }
 
 .nav-search__input {
+  box-sizing: border-box; // width: 0 collapses padding too
+  min-width: 0;
   font-family: $font-sans;
   font-size: 0.72rem;
   letter-spacing: 0.12em;
@@ -710,130 +776,113 @@ nav {
   @include chamfer($-inner);
   outline: none;
   padding: 0.25rem 0.5rem;
-  max-width: 0;
+  width: 0;
   opacity: 0;
-  overflow: hidden;
-  transition: max-width 0.28s ease, opacity 0.18s ease;
+  transition: width 0.28s ease, opacity 0.18s ease;
 
-  &::placeholder { color: var(--muted); }
-  &:focus { border-color: rgba(177, 147, 93, 0.55); }
-}
-
-.nav-search-close {
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: var(--muted);
-  font-size: 1rem;
-  line-height: 1;
-  padding: 0;
-  display: none;
-  transition: color 0.2s ease;
-  flex-shrink: 0;
-
-  &:hover { color: var(--gold); }
-}
-
-.nav-menu.search-open {
-  .nav-search__input {
-    max-width: 220px;
-    opacity: 1;
-  }
-
-  .nav-search-close { display: block; }
-
-  // Suppress hover label on the search button itself when input is open
-  .nav-search-wrap .nav-btn-label {
-    max-width: 0;
-    opacity: 0;
-  }
-}
-
-#search-results {
-  position: absolute;
-  top: calc(100% + 12px);
-  right: 0;
-  min-width: 280px;
-  max-width: 360px;
-  z-index: 200;
-  display: none;
-  flex-direction: column;
-  gap: 1px;
-  background: rgba(15, 15, 15, 0.97);
-  border: 1px solid rgba(177, 147, 93, 0.18);
-  backdrop-filter: blur(16px);
-  padding: 0.25rem 0;
-
-  &.has-results { display: flex; }
-
-  .nav-card {
-    opacity: 0;
-    background: rgba(177, 147, 93, 0.14);
-    animation: dropdown-card-in 0.15s ease forwards;
-    text-decoration: none;
-
-    &:nth-child(1) { animation-delay: 0.00s; }
-    &:nth-child(2) { animation-delay: 0.02s; }
-    &:nth-child(3) { animation-delay: 0.04s; }
-    &:nth-child(4) { animation-delay: 0.06s; }
-    &:nth-child(5) { animation-delay: 0.08s; }
-  }
-
-  // Override: result card interiors stack vertically (parent .nav-search-wrap sets row)
-  .nav-card__interior {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.15rem;
-    padding: 0.4rem 0.75rem;
-    transition: background 0.15s;
-  }
-
-  .nav-card:hover .nav-card__interior,
-  .nav-card:focus-visible .nav-card__interior,
-  .nav-card[aria-selected="true"] .nav-card__interior {
-    background: rgba(177, 147, 93, 0.08);
-  }
-
-  .search-result__type {
-    font-family: $font-sans;
-    font-size: 0.6rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--gold);
-  }
-
-  .search-result__title {
-    font-family: $font-sans;
-    font-size: 0.75rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--text);
-  }
-
-  .search-result__desc {
-    font-family: $font-sans;
-    font-size: 0.65rem;
+  &::placeholder {
     color: var(--muted);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 100%;
   }
 
-  .search-result--empty .nav-card__interior { cursor: default; }
+  &:focus {
+    border-color: rgba(177, 147, 93, 0.55);
+  }
+}
+
+.nav-search-wrap:hover .nav-search__input,
+.nav-search-wrap:focus-within .nav-search__input {
+  width: 210px;
+  opacity: 1;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  #search-results .nav-card { animation: none; opacity: 1; }
+  .nav-search__input {
+    transition: none;
+  }
 }
 
 @media (max-width: 768px) {
-  .nav-menu.search-open .nav-search__input { max-width: 140px; }
 
-  #search-results {
-    position: fixed;
-    left: 0;
-    right: 0;
-    max-width: none;
+  .nav-search-wrap:hover .nav-search__input,
+  .nav-search-wrap:focus-within .nav-search__input {
+    width: 130px;
   }
+}
+
+// ── Search Results Page ───────────────────────────────────────────────────────
+.search-page {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 4rem 1.5rem 6rem;
+
+  h1 {
+    font-family: $font-serif;
+    font-size: 2rem;
+    font-weight: 400;
+    color: var(--text);
+    margin-bottom: 2.5rem;
+    letter-spacing: 0.04em;
+  }
+}
+
+#search-results-page {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.search-page-result {
+  display: block;
+  text-decoration: none;
+  @include elevation-standard;
+
+  &:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 2px;
+  }
+}
+
+.search-page-result__interior {
+  padding: 1rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  transition: background 0.15s;
+
+  .search-page-result:hover &,
+  .search-page-result:focus-visible & {
+    background: rgba(177, 147, 93, 0.06);
+  }
+}
+
+.search-result__type {
+  font-family: $font-sans;
+  font-size: 0.6rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.search-result__title {
+  font-family: $font-sans;
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text);
+}
+
+.search-result__desc {
+  font-family: $font-sans;
+  font-size: 0.72rem;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.search-empty {
+  font-family: $font-sans;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 2rem 0;
 }
