@@ -1,6 +1,6 @@
 // ── Service Hero ──────────────────────────────────────────────────────────────
 .svc-hero {
-  padding: 8rem 10vw 5rem;
+  padding: var(--nav-h) 10vw 5rem;
   border-bottom: 2px solid var(--border);
   position: relative;
   @include elevation-standard;

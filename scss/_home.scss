@@ -1,7 +1,7 @@
 // ── Hero ──────────────────────────────────────────────────────────────────────
 #hero {
   min-height: 100vh;
-  padding: 10rem 10vw 6rem;
+  padding: var(--nav-h) 10vw 6rem;
   display: grid;
   grid-template-rows: auto 1fr auto;
   align-content: center;

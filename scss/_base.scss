@@ -9,6 +9,7 @@
 
 // ── CSS custom properties — Ouroboros v5 ──────────────────────────────────────
 :root {
+  --nav-h: 5rem; // desktop: primary (~96px) + secondary (~44px) nav-shell
   --label-size: 1.0rem;
 
   // Surfaces
@@ -85,9 +86,14 @@
   }
 }
 
+@media (max-width: 768px) {
+  :root { --nav-h: 3.5rem; } // mobile: secondary nav hidden, primary nav ~56px
+}
+
 // ── Base ──────────────────────────────────────────────────────────────────────
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: var(--nav-h);
 }
 
 body {
@@ -238,7 +244,7 @@ body::after {
 // ── 404 Error page ────────────────────────────────────────────────────────────
 .error-page {
   min-height: 70vh;
-  padding: 10rem 10vw 8rem;
+  padding: var(--nav-h) 10vw 8rem;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
