@@ -118,8 +118,13 @@ footer {
 @media (max-width: 768px) {
   footer {
     padding: 1rem 5vw;
-    flex-direction: column;
-    align-items: flex-start;
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+
+  .footer-copy {
+    text-align: center;
+    justify-self: center;
   }
 }
 
