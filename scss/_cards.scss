@@ -167,23 +167,53 @@ $-inner: calc(#{$-arc} - #{$-border});
 // Slightly narrower minmax and anchor-based, otherwise inherits .card
 .related-card {
   @extend .card;
-  @include chamfer($-arc);
+  position: relative;
+  isolation: isolate;
   padding: 2rem;
   text-decoration: none;
   display: block;
+  background: transparent;
+  transition: transform 0.2s;
+
+  // Gold border layer (full size, chamfered)
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--gold-border);
+    @include chamfer($-arc);
+    z-index: -1;
+    transition: background 0.2s;
+  }
+
+  // Fill layer (inset by border width, chamfered)
+  &::after {
+    content: '';
+    position: absolute;
+    inset: #{$-border};
+    background: var(--bg1);
+    @include chamfer($-inner);
+    z-index: -1;
+    transition: background 0.2s;
+  }
+
+  &:hover {
+    background: transparent;
+    transform: translateY(-2px);
+
+    &::before { background: var(--gold); }
+    &::after  { background: var(--bg2); }
+  }
 
   &--soon {
     cursor: default;
     opacity: 0.6;
 
     &:hover {
-      border-color: var(--border);
       transform: none;
-      box-shadow: none;
 
-      &::after {
-        transform: scaleX(0);
-      }
+      &::before { background: var(--gold-border); }
+      &::after  { background: var(--bg1); }
     }
   }
 
@@ -234,9 +264,6 @@ $-inner: calc(#{$-arc} - #{$-border});
   align-items: stretch;
 }
 
-.resources-grid .related-card {
-  border-color: var(--gold-border);
-}
 
 .related-grid > .related-card,
 .cards > .card,

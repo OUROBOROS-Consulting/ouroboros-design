@@ -1,0 +1,142 @@
+// ── Page TOC Sidebar ──────────────────────────────────────────────────────────
+// Shared grid wrapper + sticky sidebar used by essays, foundation, and
+// mission layouts. Two variants handle the different content widths.
+
+.page-toc-wrap {
+  display: grid;
+  gap: 0 3rem;
+  align-items: start;
+
+  // ── Service / mission variant: wide prose, matches .svc-body centering ──
+  &--svc {
+    grid-template-columns: 1fr 200px;
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 0 5vw;
+
+    // Wrapper now owns the horizontal padding; strip it from the inner .svc-body
+    .svc-body {
+      padding-left: 0;
+      padding-right: 0;
+      max-width: none;
+      margin-left: 0;
+      margin-right: 0;
+    }
+  }
+
+  // ── Essay variant: narrow 680px reading column ──
+  &--essay {
+    grid-template-columns: minmax(0, 1fr) 200px;
+    max-width: 1060px;
+    margin: 0 auto;
+    padding: 0 10vw;
+
+    // Wrapper now owns horizontal spacing; strip _essay.scss's 10vw padding
+    > .post-body {
+      max-width: 680px;
+      margin: 0;
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+}
+
+// ── Sidebar panel ─────────────────────────────────────────────────────────────
+.page-toc {
+  position: sticky;
+  top: var(--nav-h);
+  max-height: calc(100svh - var(--nav-h) - 2rem);
+  overflow-y: auto;
+  padding-top: 3.5rem; // visual alignment with first content block
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+
+  &::-webkit-scrollbar {
+    width: 3px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 2px;
+  }
+}
+
+// ── "Contents" label ──────────────────────────────────────────────────────────
+.toc-label {
+  @include label-caps(0.56rem, 0.24em);
+  color: var(--muted);
+  margin-bottom: 0.8rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid var(--border);
+
+  &::before {
+    content: '⬡';
+    display: block;
+    color: var(--teal);
+    font-size: 0.82rem;
+    letter-spacing: normal;
+    text-transform: none;
+    margin-bottom: 0.3rem;
+    opacity: 0.55;
+  }
+}
+
+// ── Navigation list ───────────────────────────────────────────────────────────
+.toc-nav {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.toc-item {
+  > a {
+    display: block;
+    font-family: $font-sans;
+    font-size: 0.68rem;
+    line-height: 1.5;
+    color: var(--muted);
+    text-decoration: none;
+    padding: 0.26rem 0 0.26rem 0.7rem;
+    border-left: 1px solid transparent;
+    transition: color 0.18s ease, border-color 0.18s ease;
+
+    &:hover {
+      color: var(--subdued);
+      border-left-color: var(--border);
+    }
+  }
+
+  &.is-active > a {
+    color: var(--gold);
+    border-left-color: var(--gold);
+  }
+
+  // h3 items — indented, smaller
+  &.toc-h3 > a {
+    padding-left: 1.25rem;
+    font-size: 0.62rem;
+    opacity: 0.78;
+  }
+}
+
+// ── Responsive ────────────────────────────────────────────────────────────────
+@media (max-width: 1100px) {
+  .page-toc-wrap--svc,
+  .page-toc-wrap--essay {
+    grid-template-columns: 1fr;
+  }
+
+  .page-toc {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .page-toc-wrap--svc {
+    padding: 0 6vw;
+  }
+
+  .page-toc-wrap--essay {
+    padding: 0 6vw;
+  }
+}
