@@ -1,9 +1,9 @@
 // ── Nav shell (fixed container for both nav rows) ────────────────────────────
 .nav-shell {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  top: 10;
+  left: 50;
+  right: 50;
   z-index: 100;
   display: flex;
   flex-direction: column;
@@ -744,8 +744,8 @@ nav {
 
   // Suppress hover label on the search button itself when input is open
   .nav-search-wrap .nav-btn-label {
-    max-width: 0 !important;
-    opacity: 0 !important;
+    max-width: 0;
+    opacity: 0;
   }
 }
 
@@ -789,6 +789,7 @@ nav {
   }
 
   .nav-card:hover .nav-card__interior,
+  .nav-card:focus-visible .nav-card__interior,
   .nav-card[aria-selected="true"] .nav-card__interior {
     background: rgba(177, 147, 93, 0.08);
   }
@@ -820,6 +821,10 @@ nav {
   }
 
   .search-result--empty .nav-card__interior { cursor: default; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #search-results .nav-card { animation: none; opacity: 1; }
 }
 
 @media (max-width: 768px) {
