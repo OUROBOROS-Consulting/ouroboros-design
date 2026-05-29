@@ -3,7 +3,7 @@
   width: 100%;
   max-height: 560px;
   overflow: hidden;
-  margin-top: 4.5rem; // clear the fixed nav
+  margin-top: var(--nav-h); // clear the fixed nav + optional title banner
 
   img {
     width: 100%;

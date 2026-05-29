@@ -2,7 +2,7 @@
 .post-header {
   max-width: 680px;
   margin: 0 auto;
-  padding: 10rem 10vw 3.5rem;
+  padding: var(--nav-h) 10vw 3.5rem;
 }
 
 // Uses mixin — was duplicating .section-label with a slightly smaller size

@@ -95,6 +95,16 @@
   // mobile: secondary nav hidden, primary nav ~56px
 }
 
+// Pages with the page-title banner inside the nav-shell bump --nav-h
+// so that top-clearing rules on essay / linkedin / error layouts remain correct.
+body.has-title-banner {
+  --nav-h: 16.5rem; // 13rem base + ~3.5rem banner
+
+  @media (max-width: 768px) {
+    --nav-h: 3.5rem; // banner hidden on mobile
+  }
+}
+
 // ── Base ──────────────────────────────────────────────────────────────────────
 html {
   scroll-behavior: smooth;
