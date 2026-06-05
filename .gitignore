@@ -1,8 +1,11 @@
+.claude
+.github
+dist/
+docs/
 node_modules/
 npm-debug.log
 .DS_Store
 .env
-dist/
 build/
 *.css
 *.map
