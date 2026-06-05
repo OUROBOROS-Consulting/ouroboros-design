@@ -261,6 +261,10 @@ $-inner: calc(#{$-arc} - #{$-border});
   grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
   gap: 1.5px;
   align-items: stretch;
+
+  @media (max-width: 420px) {
+    grid-template-columns: 1fr;
+  }
 }
 
 
@@ -286,7 +290,11 @@ $-inner: calc(#{$-arc} - #{$-border});
   grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
   gap: 1.5px;
 
-  @media (max-width: 768px) {
+  @media (max-width: 949px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 600px) {
     grid-template-columns: 1fr;
   }
 }
