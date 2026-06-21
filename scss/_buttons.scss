@@ -48,7 +48,7 @@
 
   &:hover,
   &:focus {
-    background: rgba(201, 168, 76, 0.1);
+    background: var(--gold-ghost);
     border-color: var(--gold);
   }
 }
