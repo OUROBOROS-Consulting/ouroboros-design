@@ -1,6 +1,16 @@
 // @OUROBOROS-Consulting/agentic-design
 // Accessible, elegant design system for OUROBOROS Consulting
 
+// ── Naming convention ────────────────────────────────────────────────
+//  <prefix>-<element>          svc-hero, nav-card, post-body
+//  <prefix>-<element>--mod     svc-hero--single, nav-card--active
+//
+//  Prefix = page/layout namespace (svc, nav, hero, post, values, etc.)
+//  No new __ BEM elements. Existing card--formula__interior is legacy.
+//  Modifiers: --double-dash only.
+//  All classes: lowercase kebab. No camelCase, no underscores.
+// ────────────────────────────────────────────────────────────────────
+
 // Typography scale for prose
 @forward "typography";
 
