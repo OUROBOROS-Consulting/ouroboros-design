@@ -365,6 +365,18 @@
   }
 }
 
+// ── Section modifier variants ─────────────────────────────────────────────────
+.svc-section--cta {
+  text-align: center;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+.svc-section--stacked {
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
 // ── CTA section ───────────────────────────────────────────────────────────────
 .svc-cta-body {
   font-size: 0.93rem;

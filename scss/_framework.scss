@@ -108,3 +108,43 @@
   color: var(--subdued);
   margin: 0;
 }
+
+// ── Foundation links nav (mission.html footer nav) ────────────────────────────
+.foundation-links {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+
+  a {
+    color: var(--gold);
+    text-decoration: none;
+    font-size: 0.9rem;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+// ── Exit bar parts (dashboard layout) ────────────────────────────────────────
+.exit-bar__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 1rem;
+  background: #8b1a1a;
+  color: #fff;
+  border: 1px solid #c94a4a;
+  border-radius: 3px;
+  font-size: 0.85rem;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.exit-bar__label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}

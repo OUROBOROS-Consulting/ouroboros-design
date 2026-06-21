@@ -578,6 +578,14 @@ body.has-banner nav {
   text-align: right;
 }
 
+// ── Testimonials context label ────────────────────────────────────────────────
+.testimonials-context {
+  font-size: 0.9rem;
+  color: var(--subdued);
+  font-style: italic;
+  margin-top: 0.5rem;
+}
+
 // ── Who This Is For (homepage audience section) ────────────────────────
 #audience {
   padding: 4rem 2rem;

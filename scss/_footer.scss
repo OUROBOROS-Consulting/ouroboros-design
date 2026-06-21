@@ -139,6 +139,27 @@ footer {
   margin-bottom: 0.5rem;
 }
 
+// ── Footer social icon links ──────────────────────────────────────────────────
+.footer-social {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--subdued);
+  font-size: 1.25rem;
+  transition: color 0.15s ease;
+
+  &:hover {
+    color: var(--gold);
+  }
+}
+
+.footer-label {
+  font-size: 0.75rem;
+  color: var(--muted);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
 // ── Disclaimer bar ────────────────────────────────────────────────────────────
 .disclaimer-bar {
   background: var(--bg1);
