@@ -200,6 +200,9 @@
 
 // ── Values flip cards ─────────────────────────────────────────────────────────
 #values .values-grid {
+  grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+  gap: 1.25rem;
+  margin-top: 2rem;
   grid-auto-rows: 260px;
 
   // 8 cards in 3-col grid: last row lands on col1+col2, breaking symmetry.
