@@ -1,0 +1,215 @@
+@use "typography" as *;
+@use "base" as *;
+@use "chamfer" as *;
+
+// ── Accordion button (mobile only, hidden on desktop) ────────────────────────
+.nav-accordion-btn {
+  display: none;
+}
+
+// ── Dropdown stagger animation (shared with secondary nav child entries) ──────
+@keyframes dropdown-card-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// ── Secondary nav (tab strip below primary nav) ──────────────────
+.nav-secondary {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 5px 1.5rem;
+  border-bottom: 1px solid var(--border);
+  background: rgba(14, 14, 14, 0.96);
+  backdrop-filter: blur(8px);
+  gap: 3px;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+}
+
+.nav-sec-card {
+  background: var(--border);
+  padding: 2px;
+  clip-path: polygon(4px 0%, calc(100% - 4px) 0%, 100% 4px,
+      100% calc(100% - 4px), calc(100% - 4px) 100%,
+      4px 100%, 0% calc(100% - 4px), 0% 4px);
+  display: flex;
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: background 0.15s;
+  text-decoration: none;
+
+  &:hover {
+    background: var(--subdued);
+  }
+
+  &.active {
+    background: var(--gold-border);
+  }
+}
+
+.nav-sec-item {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--subdued);
+  padding: 0.45rem 1rem;
+  white-space: nowrap;
+  background: #0e0e0e;
+  clip-path: polygon(2px 0%, calc(100% - 2px) 0%, 100% 2px,
+      100% calc(100% - 2px), calc(100% - 2px) 100%,
+      2px 100%, 0% calc(100% - 2px), 0% 2px);
+  transition: color 0.15s, background 0.15s;
+
+  .nav-sec-card:hover & {
+    color: var(--text);
+    background: var(--bg2);
+  }
+
+  .nav-sec-card.active & {
+    color: var(--gold);
+    background: var(--bg2);
+  }
+}
+
+// ── Secondary nav dropdowns ───────────────────────────────────────────────────
+.nav-sec-dropdown {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+
+  &:hover .nav-sec-dropdown-menu,
+  &:focus-within .nav-sec-dropdown-menu {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
+  &:hover .nav-sec-chevron,
+  &:focus-within .nav-sec-chevron {
+    transform: rotate(180deg);
+  }
+}
+
+.nav-sec-chevron {
+  font-size: 0.5rem;
+  margin-left: 0.3rem;
+  transition: transform 0.2s ease;
+  opacity: 0.55;
+  vertical-align: middle;
+}
+
+.nav-sec-dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 200;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-4px);
+  transition: opacity 0.18s ease, transform 0.18s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding: 0.25rem 0;
+  background: rgba(14, 14, 14, 0.97);
+  border: 1px solid rgba(177, 147, 93, 0.18);
+  border-top: none;
+  backdrop-filter: blur(16px);
+  min-width: 160px;
+}
+
+.nav-sec-child-card {
+  display: block;
+  text-decoration: none;
+  background: var(--border);
+  padding: 2px;
+  clip-path: polygon(4px 0%, calc(100% - 4px) 0%, 100% 4px,
+      100% calc(100% - 4px), calc(100% - 4px) 100%,
+      4px 100%, 0% calc(100% - 4px), 0% 4px);
+  transition: background 0.15s;
+
+  &:hover {
+    background: var(--subdued);
+  }
+
+  &.active {
+    background: var(--gold-border);
+  }
+}
+
+.nav-sec-child-item {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--subdued);
+  padding: 0.4rem 1rem;
+  white-space: nowrap;
+  background: #0e0e0e;
+  clip-path: polygon(2px 0%, calc(100% - 2px) 0%, 100% 2px,
+      100% calc(100% - 2px), calc(100% - 2px) 100%,
+      2px 100%, 0% calc(100% - 2px), 0% 2px);
+  transition: color 0.15s, background 0.15s;
+
+  .nav-sec-child-card:hover & {
+    color: var(--text);
+    background: var(--bg2);
+  }
+
+  .nav-sec-child-card.active & {
+    color: var(--gold);
+    background: var(--bg2);
+  }
+}
+
+// Stagger animation for child entries
+.nav-sec-dropdown:hover .nav-sec-dropdown-menu .nav-sec-child-card,
+.nav-sec-dropdown:focus-within .nav-sec-dropdown-menu .nav-sec-child-card {
+  animation: dropdown-card-in 0.15s ease forwards;
+
+  &:nth-child(1) {
+    animation-delay: 0.00s;
+  }
+
+  &:nth-child(2) {
+    animation-delay: 0.01s;
+  }
+
+  &:nth-child(3) {
+    animation-delay: 0.02s;
+  }
+
+  &:nth-child(4) {
+    animation-delay: 0.03s;
+  }
+
+  &:nth-child(5) {
+    animation-delay: 0.04s;
+  }
+
+  &:nth-child(6) {
+    animation-delay: 0.05s;
+  }
+
+  &:nth-child(7) {
+    animation-delay: 0.06s;
+  }
+
+  &:nth-child(8) {
+    animation-delay: 0.07s;
+  }
+}
