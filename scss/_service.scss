@@ -53,7 +53,7 @@
   min-width: 280px;
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.07);
-  padding: 2.5rem 2.5rem 2rem;
+  padding: 2.5rem;
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.10);
 }
 
@@ -106,7 +106,7 @@
   gap: 1rem;
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 1.5rem 1.5rem 1.2rem;
+  padding: 1.5rem;
   min-width: 260px;
 }
 
@@ -177,6 +177,10 @@
 }
 
 .svc-section-label {
+  background: rgba(0, 0, 0, 0.28);
+  border-right: 1px solid rgba(255, 255, 255, 0.06);
+  padding-right: 1.5rem;
+
   p {
     @include label-caps(0.95rem, 0.15em);
     position: sticky;
@@ -194,6 +198,25 @@
       margin-bottom: 0.45rem;
       opacity: 0.85;
     }
+  }
+}
+
+// ── Stacked section variant ───────────────────────────────────────────────────
+// Full-width header band above content grid — used on scholarly resources page.
+// bg2 on the section body lifts the field; bg1 on the label drops the header
+// back to page-level, creating a visibly darker band over the elevated content.
+.svc-section--stacked {
+  grid-template-columns: 1fr;
+  background: var(--bg2);
+
+  .svc-section-label {
+    background: var(--bg1);
+    margin: -3.5rem -5vw 2.5rem;
+    padding: 2.5rem 5vw 1.75rem;
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+
+    p { position: static; }
   }
 }
 
@@ -328,7 +351,7 @@
 
 // ── Pull quote (foundation / case study pages) ───────────────────────────────
 .pull-quote {
-  padding: 3.5rem 0 4rem;
+  padding: 3.5rem 0;
   position: relative;
 
   // Oversized watermark quotation mark — teal, partially transparent,
@@ -435,8 +458,22 @@
     padding: 2.5rem 0;
   }
 
+  .svc-section-label {
+    margin-left: -6vw;
+    margin-right: -6vw;
+    padding-left: 6vw;
+    padding-right: 6vw;
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
   .svc-section-label p {
     position: static;
+  }
+
+  .svc-section--stacked .svc-section-label {
+    margin: -2.5rem -6vw 2rem;
+    padding: 2rem 6vw 1.5rem;
   }
 
   .svc-hero-inner {
