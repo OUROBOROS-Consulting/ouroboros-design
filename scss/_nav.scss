@@ -1,3 +1,6 @@
+@use "typography" as *;
+@use "base" as *;
+@use "chamfer" as *;
 // ── Nav shell (fixed container for both nav rows) ────────────────────────────
 .nav-shell {
   position: fixed;
@@ -221,9 +224,9 @@ nav {
 // Separate from .card--formula — style here without affecting formula boxes
 .nav-card {
   background: var(--gold-border); // outer shell = visible chamfer edge
-  padding: $-border;
+  padding: $chamfer-border;
   position: relative;
-  @include chamfer($-arc);
+  @include chamfer($chamfer-arc);
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -231,7 +234,7 @@ nav {
   &__interior {
     background: var(--bg1);
     padding: 0.5rem 0.5rem;
-    @include chamfer($-inner);
+    @include chamfer($chamfer-inner);
     display: flex;
     flex-direction: column;
     flex: 1;
@@ -240,13 +243,13 @@ nav {
 
 // ── Button card chamfer variant (matches footer socials) ─────────────────────
 .nav-button .nav-card {
-  @include chamfer($-arc);
+  @include chamfer($chamfer-arc);
   background: var(--gold-border);
-  padding: $-border;
+  padding: $chamfer-border;
   transition: background 0.2s ease;
 
   &__interior {
-    @include chamfer($-inner);
+    @include chamfer($chamfer-inner);
     padding: 0.61rem 0.72rem;
     display: flex;
     align-items: center;
@@ -808,7 +811,7 @@ nav {
   background: var(--bg1);
   border: 1px solid rgba(177, 147, 93, 0.22);
   color: var(--text);
-  @include chamfer($-inner);
+  @include chamfer($chamfer-inner);
   outline: none;
   padding: 0.25rem 0.5rem;
   width: 0;

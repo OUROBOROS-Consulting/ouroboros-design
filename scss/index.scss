@@ -1,29 +1,29 @@
 // @OUROBOROS-Consulting/agentic-design
 // Accessible, elegant design system for OUROBOROS Consulting
 
-// Typography scale for prose (font vars must load before base uses $font-serif)
-@import "typography";
+// Typography scale for prose
+@forward "typography";
 
 // Foundation: design tokens, reset, mixins, body texture
-@import "base";
+@forward "base";
 
 // Component styles
-@import "buttons";
-@import "cards";
-@import "nav";
-@import "footer";
+@forward "buttons";
+@forward "cards";
+@forward "nav";
+@forward "footer";
 
 // Layout & page-specific styles
-@import "home";
-@import "service";
-@import "essay";
-@import "sidebar";
-@import "cv";
-@import "linkedin";
-@import "timeline";
-@import "floorplan";
-@import "framework";
-@import "announcements";
+@forward "home";
+@forward "service";
+@forward "essay";
+@forward "sidebar";
+@forward "cv";
+@forward "linkedin";
+@forward "timeline";
+@forward "floorplan";
+@forward "framework";
+@forward "announcements";
 
 // Design system reference (optional, for documentation)
-@import "design-system";
+@forward "design-system";

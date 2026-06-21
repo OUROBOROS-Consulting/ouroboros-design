@@ -1,3 +1,5 @@
+@use "typography" as *;
+@use "base" as *;
 // ── Service Hero ──────────────────────────────────────────────────────────────
 .svc-hero {
   padding: var(--nav-h) 10vw 5rem;

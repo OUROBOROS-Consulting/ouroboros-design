@@ -1,3 +1,6 @@
+@use "typography" as *;
+@use "base" as *;
+@use "chamfer" as *;
 // ── Hero ──────────────────────────────────────────────────────────────────────
 #hero {
   min-height: 100vh;
@@ -239,8 +242,8 @@
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
     background: var(--gold-border);
-    padding: $-border;
-    @include chamfer($-arc);
+    padding: $chamfer-border;
+    @include chamfer($chamfer-arc);
   }
 
   &__back {
@@ -251,7 +254,7 @@
     height: 100%;
     box-sizing: border-box;
     padding: 1.5rem 1.6rem;
-    @include chamfer($-inner);
+    @include chamfer($chamfer-inner);
     @include elevation-standard;
     display: flex;
     flex-direction: column;

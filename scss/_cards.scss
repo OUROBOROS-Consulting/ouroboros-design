@@ -1,6 +1,5 @@
-$-arc: 11px; // 3mm ≈ 11px at 96 dpi — chamfer depth
-$-border: 3px; // effective border thickness
-$-inner: calc(#{$-arc} - #{$-border});
+@use "typography" as *;
+@use "chamfer" as *;
 
 // ── Cards grid ───────────────────────────────────────────────────────────────
 .cards {
@@ -40,23 +39,12 @@ $-inner: calc(#{$-arc} - #{$-border});
 // clip-path does not support stroke, so the border is painted as a background
 // layer and the interior sits on top with a matching but slightly smaller clip.
 
-@mixin chamfer($a) {
-  clip-path: polygon(#{$a} 0%,
-    calc(100% - #{$a}) 0%,
-    100% #{$a},
-    100% calc(100% - #{$a}),
-    calc(100% - #{$a}) 100%,
-    #{$a} 100%,
-    0% calc(100% - #{$a}),
-    0% #{$a});
-}
-
 .card--formula {
   // Outer shell — gold fill acts as the visible border
   background: var(--gold-border);
-  padding: $-border;
+  padding: $chamfer-border;
   position: relative;
-  @include chamfer($-arc);
+  @include chamfer($chamfer-arc);
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -69,7 +57,7 @@ $-inner: calc(#{$-arc} - #{$-border});
     left: 1.4rem;
     transform: translateY(-100%);
     background: var(--bg3);
-    border: $-border solid var(--gold);
+    border: $chamfer-border solid var(--gold);
     border-bottom: none;
     color: var(--gold);
     font-weight: 700;
@@ -88,7 +76,7 @@ $-inner: calc(#{$-arc} - #{$-border});
       url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16'%3E%3Cpath d='M0 16 Q4 10 8 6 Q12 10 16 16' fill='none' stroke='%23C9A84C' stroke-width='0.8' stroke-opacity='0.17'/%3E%3Cpath d='M-8 8 Q-4 2 0 -2 Q4 2 8 8' fill='none' stroke='%23C9A84C' stroke-width='0.8' stroke-opacity='0.17'/%3E%3Cpath d='M8 8 Q12 2 16 -2 Q20 2 24 8' fill='none' stroke='%23C9A84C' stroke-width='0.8' stroke-opacity='0.17'/%3E%3C/svg%3E");
     background-size: 14px 14px;
     padding: 1.2rem 1.4rem;
-    @include chamfer($-inner);
+    @include chamfer($chamfer-inner);
     display: flex;
     flex-direction: column;
     flex: 1;
@@ -180,7 +168,7 @@ $-inner: calc(#{$-arc} - #{$-border});
     position: absolute;
     inset: 0;
     background: var(--gold-border);
-    @include chamfer($-arc);
+    @include chamfer($chamfer-arc);
     z-index: -1;
     transition: background 0.2s;
   }
@@ -189,9 +177,9 @@ $-inner: calc(#{$-arc} - #{$-border});
   &::after {
     content: '';
     position: absolute;
-    inset: #{$-border};
+    inset: #{$chamfer-border};
     background: var(--bg2);
-    @include chamfer($-inner);
+    @include chamfer($chamfer-inner);
     z-index: -1;
     transition: background 0.2s;
   }
@@ -321,8 +309,8 @@ $-inner: calc(#{$-arc} - #{$-border});
 
 // ── Reference cards (bibtex + data_source resource lists) ────────────────────
 // Two-layer chamfer via pseudo-elements (mirrors .card--formula technique):
-//   ::before — gold fill at full size, chamfer($-arc)   → the visible border
-//   ::after  — bg2 fill inset by $-border, chamfer($-inner) → the card surface
+//   ::before — gold fill at full size, chamfer($chamfer-arc)   → the visible border
+//   ::after  — bg2 fill inset by $chamfer-border, chamfer($chamfer-inner) → the card surface
 // Both sit at z-index:-1 within an isolated stacking context so text floats above.
 .bib-card {
   position: relative;
@@ -336,7 +324,7 @@ $-inner: calc(#{$-arc} - #{$-border});
     position: absolute;
     inset: 0;
     background: var(--gold-border);
-    @include chamfer($-arc);
+    @include chamfer($chamfer-arc);
     z-index: -1;
   }
 
@@ -344,9 +332,9 @@ $-inner: calc(#{$-arc} - #{$-border});
   &::after {
     content: '';
     position: absolute;
-    inset: #{$-border};
+    inset: #{$chamfer-border};
     background: var(--bg2);
-    @include chamfer($-inner);
+    @include chamfer($chamfer-inner);
     z-index: -1;
   }
 
