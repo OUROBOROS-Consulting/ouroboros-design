@@ -559,3 +559,60 @@
 body.has-banner nav {
   top: 36px;
 }
+
+// ── Hero typography ────────────────────────────────────────────────────
+.hero-name {
+  font-family: "EB Garamond", Georgia, serif;
+}
+
+#hero .hero-name-sub {
+  display: block;
+  font-size: 0.5em;
+  letter-spacing: 0.25em;
+  font-weight: 400;
+  color: var(--subdued);
+  text-transform: uppercase;
+}
+
+#hero .hero-text {
+  text-align: right;
+}
+
+// ── Who This Is For (homepage audience section) ────────────────────────
+#audience {
+  padding: 4rem 2rem;
+  max-width: 1100px;
+  margin: 0 auto;
+
+  @media (max-width: 768px) {
+    padding: 4rem 6vw;
+  }
+
+  .audience-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.25rem;
+    margin-top: 2rem;
+  }
+
+  .audience-card {
+    padding: 1.5rem;
+    border: 1px solid var(--border);
+    background: var(--bg2);
+    border-radius: 2px;
+
+    h3 {
+      font-family: Lora, serif;
+      font-size: 1.1rem;
+      color: var(--gold);
+      margin: 0 0 0.5rem;
+    }
+
+    p {
+      color: var(--subdued);
+      font-size: 0.95rem;
+      line-height: 1.55;
+      margin: 0;
+    }
+  }
+}

@@ -213,3 +213,46 @@
     animation-delay: 0.07s;
   }
 }
+
+// ── Mobile hamburger toggle ─────────────────────────────────────────────
+.nav-hamburger {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: 1px solid var(--gold);
+  border-radius: 3px;
+  color: var(--text);
+  padding: 0.4rem 0.65rem;
+  cursor: pointer;
+  font-size: 1rem;
+  line-height: 1;
+  transition: background 0.15s ease, color 0.15s ease;
+
+  &:hover,
+  &:focus {
+    background: rgba(201, 168, 76, 0.15);
+    color: var(--gold);
+    outline: 2px solid var(--gold);
+    outline-offset: 2px;
+  }
+}
+
+@media (max-width: 768px) {
+  .nav-hamburger {
+    display: flex;
+  }
+
+  #nav-secondary-menu {
+    display: none !important;
+
+    &.nav-secondary--open {
+      display: flex !important;
+      flex-direction: column;
+      background: var(--bg1);
+      border-bottom: 1px solid var(--border);
+      padding: 0.25rem 0;
+      z-index: 90;
+    }
+  }
+}

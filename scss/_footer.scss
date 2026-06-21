@@ -34,7 +34,7 @@ footer {
 }
 
 .footer-logo-text {
-  font-family: $font-sans;
+  font-family: "EB Garamond", serif !important;
   font-size: 0.78rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -128,6 +128,15 @@ footer {
     text-align: center;
     justify-self: center;
   }
+}
+
+// ── Footer container layout ───────────────────────────────────────────────────
+.footer-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-bottom: 0.5rem;
 }
 
 // ── Disclaimer bar ────────────────────────────────────────────────────────────
