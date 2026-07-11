@@ -4,30 +4,16 @@
 
 .framework-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 1.5rem;
   margin-top: 3rem;
 
-  // 7th item alone in its row on 3-col grid → place in center column
-  .framework-pillar:last-child:nth-child(3n + 1) {
-    grid-column: 2;
-  }
-
-  @media (max-width: 900px) {
-    grid-template-columns: repeat(2, 1fr);
-
-    // Reset 3-col centering rule
-    .framework-pillar:last-child:nth-child(3n + 1) {
-      grid-column: unset;
-    }
-
-    // 7th item alone in its row on 2-col grid → center it
-    .framework-pillar:last-child:nth-child(odd) {
-      grid-column: 1 / -1;
-      max-width: 380px;
-      margin-left: auto;
-      margin-right: auto;
-    }
+  // 7th item alone in its row on 2-col grid → center it
+  .framework-pillar:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+    max-width: 380px;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   @media (max-width: 600px) {

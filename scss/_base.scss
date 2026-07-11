@@ -63,31 +63,6 @@
   --claude: #E8640A;
 }
 
-// ── Light-mode token overrides ────────────────────────────────────────────────
-@media (prefers-color-scheme: light) {
-  :root {
-    // Surfaces
-    --bg1: #F5F2ED;
-    --bg2: #ECEAE5;
-    --bg3: #E2E0DA;
-    --calloutbg: #E6E3DE;
-    --border: #C8C5BF;
-    --shadow: rgba(0, 0, 0, 0.08);
-
-    // Luminance hierarchy (WCAG AA on light surfaces)
-    --bright: #000000;
-    --text: #141414;
-    --subdued: #4A4540;
-    --muted: #545050;
-
-    // Gold — dark amber for AA contrast on light backgrounds (6:1 on #F5F2ED)
-    --gold: #6B5000;
-    --gold-dim: rgba(107, 80, 0, 0.35);
-    --gold-ghost: rgba(107, 80, 0, 0.12);
-    --gold-border: #8a6600;
-  }
-}
-
 @media (max-width: 768px) {
   :root {
     --nav-h: 3.5rem;

@@ -4,7 +4,7 @@
 // ── Cards grid ───────────────────────────────────────────────────────────────
 .cards {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(500px, 2fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: 1px; // border-collapse effect
   background: var(--border);
 }
@@ -246,11 +246,11 @@
 
 .related-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: 1.5px;
   align-items: stretch;
 
-  @media (max-width: 420px) {
+  @media (max-width: 768px) {
     grid-template-columns: 1fr;
   }
 }
@@ -275,21 +275,17 @@
 
 .values-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: 1.5px;
 
-  @media (max-width: 949px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  @media (max-width: 600px) {
+  @media (max-width: 768px) {
     grid-template-columns: 1fr;
   }
 }
 
 .specialties-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: 1.5px;
 
   @media (max-width: 768px) {
@@ -389,13 +385,5 @@
   .testimonials-grid {
     grid-template-columns: 1fr;
   }
-}
-
-@media (prefers-color-scheme: light) {
-  // All card surfaces, text, and gold accents adapt automatically via the
-  // light-mode token overrides in _base.scss. The one exception is .bib-byline,
-  // whose base style uses --gold-dim (35% opacity) which is too pale on light
-  // card backgrounds — promote it to full --gold here.
-  .bib-byline { color: var(--gold); }
 }
 

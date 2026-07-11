@@ -125,21 +125,17 @@ nav {
   }
 }
 
-// ── Centered button group ─────────────────────────────────────────────────────
+// ── Right-anchored button group ─────────────────────────────────────────────
 .nav-buttons {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
   display: flex;
   flex-direction: row;
-  align-items: center;
+  // flex-start, not center: Exit/News/Contact are taller flex items (card +
+  // label below), while search is card-only. Centering would vertically
+  // offset the search card relative to the other three; flex-start aligns
+  // all card tops since each card is the first child of its flex item.
+  align-items: flex-start;
   gap: 0.75rem;
-
-  @media (max-width: 768px) {
-    position: static;
-    margin-left: auto;
-    transform: none;
-  }
+  margin-left: auto;
 }
 
 // ── Dropdowns ─────────────────────────────────────────────────────────────────
@@ -242,6 +238,9 @@ nav {
 }
 
 // ── Button card chamfer variant (matches footer socials) ─────────────────────
+// Card stays icon-only (original square proportions, unclipped by a label).
+// The label renders as a sibling caption below the card — see .nav-button a
+// and .nav-btn-label below — so it's never inside the gold chamfer border.
 .nav-button .nav-card {
   @include chamfer($chamfer-arc);
   background: var(--gold-border);
@@ -256,49 +255,37 @@ nav {
     justify-content: center;
     background: var(--bg1);
 
-    a {
-      display: flex;
-      align-items: center;
-      gap: 0;
-      color: var(--muted);
-      transition: color 0.2s ease, gap 0.25s ease;
-
-      i {
-        font-size: 1.54rem;
-        color: var(--muted);
-        transition: color 0.2s ease;
-        flex-shrink: 0;
-      }
+    i {
+      font-size: 1.54rem;
+      color: var(--bright);
+      transition: color 0.2s ease;
+      flex-shrink: 0;
     }
-  }
-
-  .nav-btn-label {
-    font-family: $font-sans;
-    font-size: 0.72rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    white-space: nowrap;
-    overflow: hidden;
-    max-width: 0;
-    opacity: 0;
-    transition: max-width 0.28s ease, opacity 0.18s ease;
   }
 }
 
-.nav-button:hover .nav-card {
-  &__interior a {
-    gap: 0.45rem;
-    color: var(--gold);
+// Wraps card + label in a column so the label sits below the card, outside it.
+.nav-button a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  text-decoration: none;
+}
 
-    i {
-      color: var(--gold);
-    }
-  }
+.nav-btn-label {
+  font-family: $font-sans;
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--muted);
+  transition: color 0.2s ease;
+}
 
-  .nav-btn-label {
-    max-width: 5rem;
-    opacity: 1;
-  }
+.nav-button:hover .nav-card__interior i,
+.nav-button:hover .nav-btn-label {
+  color: var(--gold);
 }
 
 @keyframes dropdown-card-in {
@@ -560,27 +547,16 @@ nav {
   line-height: 1.2;
 }
 
-// Input and icon sit side-by-side, so the card height matches other nav buttons.
-.nav-search-wrap .nav-card__interior {
-  flex-direction: row;
-  align-items: center;
-}
-
-// ── Search (right-anchored; input grows leftward) ────────────────────────────
+// ── Search (first in the button group; input grows leftward over the bar) ───
+// .nav-search__input is a sibling of .nav-card (not nested inside it) so it
+// isn't clipped by the card's chamfer clip-path as it expands past the card's
+// edge. position: relative here anchors the absolutely-positioned input so
+// its leftward growth overlays the bar instead of widening this flex item
+// and shifting the Exit/News/Contact buttons that follow it.
 .nav-search-wrap {
-  position: absolute;
-  right: 2rem;
-  top: 50%;
-  transform: translateY(-50%);
+  position: relative;
+  flex-shrink: 0;
   overflow: visible;
-
-  @media (max-width: 768px) {
-    position: static;
-    right: auto;
-    top: auto;
-    transform: none;
-    margin-left: 0.5rem;
-  }
 }
 
 .nav-search__submit {
@@ -603,6 +579,10 @@ nav {
 }
 
 .nav-search__input {
+  position: absolute;
+  top: 50%;
+  right: 100%;
+  transform: translateY(-50%);
   box-sizing: border-box; // width: 0 collapses padding too
   min-width: 0;
   font-family: $font-sans;
