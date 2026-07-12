@@ -2,7 +2,10 @@
 @use "base" as *;
 // ── Service Hero ──────────────────────────────────────────────────────────────
 .svc-hero {
-  padding: var(--nav-h) 10vw 5rem;
+  padding: var(--nav-h) 10vw 2.5rem;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
   border-bottom: 2px solid var(--border);
   position: relative;
   @include elevation-standard;
@@ -40,9 +43,10 @@
 }
 
 .svc-hero-inner {
+  flex: 1;
   display: flex;
   justify-content: space-between;
-  align-items: stretch;
+  align-items: center;
   gap: 4rem;
   margin-top: 0.5rem;
   flex-wrap: wrap;
@@ -58,10 +62,8 @@
 }
 
 .svc-hero-icon {
-  display: block;
-  font-size: clamp(2rem, 3.5vw, 2.8rem);
+  font-size: clamp(90px, 12vw, 170px);
   color: var(--bright);
-  margin-bottom: 1.25rem;
   line-height: 1;
 }
 
@@ -101,19 +103,39 @@
 
 .svc-hero-cta {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 1rem;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 1.5rem;
-  min-width: 260px;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  margin-top: 1.75rem;
 }
 
 .svc-price {
   font-size: 0.78rem;
   color: var(--gold);
   letter-spacing: 0.08em;
+}
+
+// ── Service Hero Art — hand-crafted SVG (falls back to a large FA glyph) ──────
+.svc-hero-art {
+  flex-shrink: 0;
+  align-self: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: clamp(200px, 26vw, 380px);
+  filter: drop-shadow(0 0 26px rgba(201, 168, 76, 0.18));
+}
+
+.svc-hero-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+// Scroll cue pinned to the bottom of the one-screen hero, centered.
+.svc-hero .scroll-hint {
+  align-self: center;
+  padding-top: 1.5rem;
 }
 
 // ── Service Hero Portrait — hex-framed ───────────────────────────────────────
@@ -434,7 +456,12 @@
 // ── Responsive ────────────────────────────────────────────────────────────────
 @media (max-width: 768px) {
   .svc-hero {
-    padding: 7rem 6vw 3.5rem;
+    padding: 6rem 6vw 2.5rem;
+    min-height: auto;
+  }
+
+  .svc-hero-art {
+    width: clamp(150px, 45vw, 240px);
   }
 
   .svc-body {

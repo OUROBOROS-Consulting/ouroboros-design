@@ -14,7 +14,7 @@
   --label-size: 1.0rem;
 
   // Surfaces
-  --bg1: #303442;
+  --bg1: #0c101a;
   --bg-hero: #1e213e; // dark navy — homepage + service hero background
   --bg2: #1E1E1E;
   --bg3: #252525;
@@ -88,7 +88,9 @@ html {
 }
 
 body {
-  background: var(--bg1);
+  // Page floor: subtle top-lit gradient, viewport-fixed so every screenful
+  // reads the same.
+  background: linear-gradient(180deg, #1A1A1A 0%, #131313 55%, #0E0E0E 100%) fixed;
   color: var(--text);
   font-family: $font-serif;
   font-weight: 400;
@@ -171,15 +173,9 @@ body {
   background: linear-gradient(90deg, transparent 0%, var(--gold) 30%, var(--gold) 70%, transparent 100%);
 }
 
-// ── Body background — recessed scallop ───────────────────────────────────────
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  @include scallop-recessed;
-}
+// Body background — flat near-black. Scallop texture is reserved for nav,
+// cards, and footer; the page floor stays untextured so those surfaces read
+// as elevated against it.
 
 // ── Vignette + cursor spotlight — merged into single body::after ─────────────
 // Two background layers: vignette (edge darkening) + spotlight (cursor glow).
