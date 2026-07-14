@@ -32,7 +32,7 @@
   --gold: #C9A84C;
   --gold-dim: rgba(201, 168, 76, 0.35);
   --gold-ghost: rgba(201, 168, 76, 0.12);
-  --gold-border: #B1935D; // opaque — for visible 1px borders
+  --gold-border: #b39f7b; // opaque — for visible 1px borders
 
   // Accent: Steel (replaces sapphire)
   --steel: #7B8FA1;
@@ -90,7 +90,7 @@ html {
 body {
   // Page floor: subtle top-lit gradient, viewport-fixed so every screenful
   // reads the same.
-  background: linear-gradient(180deg, #1A1A1A 0%, #131313 55%, #0E0E0E 100%) fixed;
+  background: linear-gradient(180deg, var(--bg1) 0%, var(--bg1) 55%, var(--bg1) 100%) fixed;
   color: var(--text);
   font-family: $font-serif;
   font-weight: 400;
@@ -202,7 +202,7 @@ body::after {
   position: fixed;
   top: 0;
   left: 0;
-  height: 2px;
+  height: 5px;
   background: var(--gold);
   width: 0%;
   z-index: 200;

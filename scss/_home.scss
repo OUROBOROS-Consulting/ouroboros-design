@@ -393,23 +393,20 @@
   }
 }
 
-// ── Services cards: icon + text side-by-side ─────────────────────────────────
-#services .card--formula__interior {
-  flex-direction: row;
-  align-items: flex-start;
-  gap: 2rem;
-}
-
+// ── Services cards: icon stacked above copy ──────────────────────────────────
 .svc-card-icon {
-  font-size: 5rem;
+  width: 30%;
+  margin-bottom: 1.25rem;
+  font-size: 5rem; // Font Awesome fallback glyph when no hero_svg
   color: var(--bright);
-  flex-shrink: 0;
-  width: 5rem;
-  text-align: center;
-  padding-top: 0.1rem;
-  padding-right: 2rem;
-  border-right: 1px solid var(--border);
   filter: drop-shadow(0 0 8px rgba(106, 142, 127, 0.4));
+
+  // Hand-crafted service SVG reused from the hero fills the icon box.
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
 }
 
 .svc-card-body {
@@ -435,6 +432,8 @@
   text-align: center;
 
   .about-header {
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
     text-align: center;
 
@@ -455,6 +454,93 @@
     justify-content: center;
     margin-top: 2.5rem;
   }
+}
+
+// ── Two-column CTA: primary action (left) + newsletter link-out (right) ────────
+#cta .cta-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: stretch;
+  text-align: left;
+}
+
+// Left column: matching card chassis, minus the .related-card hover lift
+#cta .cta-primary {
+  text-align: left;
+
+  &:hover {
+    transform: none;
+
+    &::before { background: var(--gold-border); }
+    &::after  { background: var(--bg2); }
+  }
+}
+
+// Left column drops the full-bleed banner treatment so it fits inside a column
+#cta .cta-split .about-header {
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  text-align: left;
+  margin: 0;
+  padding: 0;
+  background: none;
+  border: 0;
+
+  &::after {
+    margin-left: 0;
+    margin-right: auto;
+  }
+}
+
+#cta .cta-split .about-heading {
+  margin-left: 0;
+  margin-right: 0;
+  font-size: clamp(1.4rem, 2vw, 1.85rem);
+}
+
+#cta .cta-split .hero-cta {
+  justify-content: flex-start;
+  margin-top: 0;   // TUNE: aligns the button with the embed's Subscribe row
+}
+
+// Right column: newsletter card copy stays left-aligned despite #cta centering
+#cta .cta-newsletter {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+
+  // Static embed card — suppress the .related-card hover lift
+  &:hover {
+    transform: none;
+
+    &::before { background: var(--gold-border); }
+    &::after  { background: var(--bg2); }
+  }
+
+  // Top-pin the copy + embed (override the design system's flex-grow) so the
+  // Subscribe row sits at a fixed offset that the left button is aligned to
+  .card-desc {
+    flex-grow: 0;
+    margin: 0.75rem 0 0;
+  }
+}
+
+// Crop the Substack embed's redundant publication masthead
+#cta .cta-newsletter__embed-wrap {
+  margin-top: 2.4rem;   // pushes the Subscribe row down to meet the left CTA button
+  height: 152px;
+  overflow: hidden;
+}
+
+#cta .cta-newsletter__embed {
+  display: block;
+  width: 100%;
+  height: 220px;
+  margin-top: -68px;
+  border: 0;
+  background: transparent;
 }
 
 // ── Responsive ────────────────────────────────────────────────────────────────
@@ -493,6 +579,27 @@
     gap: 0.5rem;
     margin: -4rem -6vw 2.5rem;
     padding: 3rem 6vw 2rem;
+  }
+
+  // Closing CTA stacks: primary block re-centers, newsletter card below
+  #cta .cta-split {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  #cta .cta-split .about-header {
+    align-items: center;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+
+    &::after {
+      margin-left: auto;
+    }
+  }
+
+  #cta .cta-split .hero-cta {
+    justify-content: center;
   }
 }
 
