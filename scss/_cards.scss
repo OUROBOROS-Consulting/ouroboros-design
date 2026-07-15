@@ -205,6 +205,25 @@
     }
   }
 
+  // Optional SVG/glyph icon at the top of the card (reuses the service
+  // hero_svg, falling back to the Font Awesome glyph). Gold-toned, no glow.
+  .rc-icon {
+    width: clamp(46px, 18%, 68px);
+    margin-bottom: 1rem;
+    color: var(--gold);
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    i {
+      font-size: 2.4rem;
+      line-height: 1;
+    }
+  }
+
   .rc-tag {
     font-size: 0.72rem;
     letter-spacing: 0.15em;
