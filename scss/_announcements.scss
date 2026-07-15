@@ -268,7 +268,7 @@
   }
 
   &[data-category="Institutional Betrayal"] {
-    color: var(--teal);
+    color: var(--teal-text); // --teal fails WCAG AA as text on every surface
     border-color: rgba(74, 107, 95, 0.5);
   }
 

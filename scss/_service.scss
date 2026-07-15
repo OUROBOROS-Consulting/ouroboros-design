@@ -527,9 +527,7 @@
     height: auto;
   }
 
-  svg {
-    fill: currentColor;
-  }
+  // Inline SVGs self-describe stroke/fill via presentation attributes.
 
   i {
     font-size: clamp(120px, 13vw, 210px);

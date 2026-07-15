@@ -1,0 +1,44 @@
+@use "typography" as *;
+
+// ── Quick exit ────────────────────────────────────────────────────────────────
+// Fixed escape hatch for visitors who need to leave the site immediately.
+// The click handler lives in the consuming site's main.js (#safety-exit):
+// clears session/local storage and replaces the history entry with a neutral
+// page. Double-tap Escape triggers the same exit. Keep this visible on every
+// layout — do not hide it behind media queries.
+.safety-exit {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 9999;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 1.05rem;
+  background: var(--bg3);
+  border: 1px solid var(--gold-border);
+  color: var(--text);
+  font-family: $font-sans;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 0 2px 12px rgba(8, 8, 8, 0.55);
+  transition: background 0.2s, border-color 0.2s;
+
+  &::before {
+    content: '✕';
+    color: var(--gold);
+    font-size: 0.8rem;
+  }
+
+  &:hover {
+    background: var(--calloutbg);
+    border-color: var(--gold);
+  }
+
+  @media print {
+    display: none;
+  }
+}

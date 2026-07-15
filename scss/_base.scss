@@ -54,6 +54,7 @@
   --teal: #4a6b5f;
   --teal-dim: rgba(74, 107, 95, 0.35);
   --teal-ghost: rgba(74, 107, 95, 0.12);
+  --teal-text: #709C8C; // readable variant — 4.6:1+ on every surface; use for text, never decoration
 
   // Semantic aliases — active use only
   --ruby: #ba6868; // timeline error/alert states (_timeline.scss)
@@ -108,6 +109,27 @@ body {
 :focus-visible {
   outline: 2px solid var(--gold);
   outline-offset: 3px;
+}
+
+// ── Skip link (visually hidden until keyboard focus) ─────────────────────────
+.skip-link {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 10000;
+  padding: 0.6rem 1.1rem;
+  background: var(--bg3);
+  border: 1px solid var(--gold-border);
+  color: var(--text);
+  font-family: $font-sans;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  transform: translateY(-200%);
+
+  &:focus-visible {
+    transform: none;
+  }
 }
 
 // ── Reduced motion ────────────────────────────────────────────────────────────

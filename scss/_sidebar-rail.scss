@@ -1,0 +1,176 @@
+@use "typography" as *;
+@use "base" as *;
+
+// ── Left section rail (replaces the horizontal secondary nav) ────────────────
+// LessWrong-style dock: a thin icon column pinned to the left edge that expands
+// on hover to reveal labels and child links. It sits inside the existing 10vw
+// hero/prose gutter, so page content needs no offset — the expansion is a pure
+// overlay, never a reflow. On mobile it hides and the primary-bar hamburger
+// slides it in as a drawer.
+
+:root {
+  --rail-top: 6.5rem;   // clears the fixed primary bar
+  --rail-w: 3.5rem;     // collapsed icon column
+  --rail-w-open: 15rem; // expanded overlay
+}
+
+.rail {
+  position: fixed;
+  top: var(--rail-top);
+  left: 0;
+  bottom: 0;
+  z-index: 90;
+  width: var(--rail-w);
+  overflow: hidden;
+  background: rgba(20, 20, 20, 0.92);
+  backdrop-filter: blur(12px);
+  border-right: 1px solid rgba(177, 147, 93, 0.22);
+  transition: width 0.24s cubic-bezier(0.4, 0, 0.2, 1);
+
+  &:hover,
+  &:focus-within {
+    width: var(--rail-w-open);
+    overflow-y: auto;
+    box-shadow: 8px 0 32px rgba(0, 0, 0, 0.45);
+  }
+}
+
+.rail-nav {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch; // override any global bare `nav { align-items:center }`
+  padding: 0.75rem 0;
+}
+
+// ── Top-level item (icon + label) ────────────────────────────────────────────
+.rail-item {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  height: 3rem;
+  padding: 0 0 0 calc((var(--rail-w) - 1.35rem) / 2); // centres icon when collapsed
+  text-decoration: none;
+  color: var(--subdued);
+  white-space: nowrap;
+  transition: color 0.18s ease, background 0.18s ease;
+
+  &:hover {
+    color: var(--gold);
+    background: var(--gold-ghost);
+  }
+}
+
+.rail-ic {
+  flex-shrink: 0;
+  width: 1.35rem;
+  text-align: center;
+
+  i {
+    font-size: 1.15rem;
+  }
+}
+
+.rail-tx {
+  font-family: $font-sans;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0;
+  transition: opacity 0.18s ease;
+
+  .rail:hover &,
+  .rail:focus-within & {
+    opacity: 1;
+  }
+}
+
+// Active section: gold marker + brightened label
+.rail-group--active {
+  .rail-item {
+    color: var(--gold);
+    box-shadow: inset 3px 0 0 var(--gold);
+  }
+}
+
+// ── Child links (revealed only when expanded) ────────────────────────────────
+.rail-sub {
+  display: flex;
+  flex-direction: column;
+  max-height: 0;
+  overflow: hidden;
+  padding-left: calc(var(--rail-w) - 0.35rem);
+  transition: max-height 0.24s ease;
+
+  .rail:hover &,
+  .rail:focus-within & {
+    max-height: 20rem;
+  }
+}
+
+.rail-subitem {
+  font-family: $font-sans;
+  font-size: 0.66rem;
+  letter-spacing: 0.1em;
+  line-height: 1.35;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  white-space: normal; // long labels (e.g. "Investigations & Due Diligence") wrap instead of clipping
+  padding: 0.4rem 0;
+  opacity: 0;
+  transition: color 0.16s ease, opacity 0.18s ease;
+
+  .rail:hover &,
+  .rail:focus-within & {
+    opacity: 1;
+  }
+
+  &:hover {
+    color: var(--gold);
+  }
+
+  &--active {
+    color: var(--gold);
+  }
+}
+
+// ── Mobile: hide the rail; primary-bar hamburger slides it in as a drawer ─────
+@media (max-width: 768px) {
+  .rail {
+    top: 0;
+    width: var(--rail-w-open);
+    transform: translateX(-100%);
+    transition: transform 0.26s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 120;
+    box-shadow: 8px 0 32px rgba(0, 0, 0, 0.55);
+
+    &--open {
+      transform: translateX(0);
+    }
+
+    // On mobile the drawer is always full-open: labels and children visible.
+    &:hover,
+    &:focus-within {
+      width: var(--rail-w-open);
+      box-shadow: 8px 0 32px rgba(0, 0, 0, 0.55);
+    }
+  }
+
+  .rail-nav {
+    padding-top: 4.5rem; // clear the fixed primary bar
+  }
+
+  .rail-tx,
+  .rail-subitem {
+    opacity: 1;
+  }
+
+  .rail-sub {
+    max-height: 20rem;
+  }
+
+  .rail-item {
+    padding-left: 1.25rem;
+  }
+}
