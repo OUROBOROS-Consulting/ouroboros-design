@@ -241,6 +241,10 @@
 @media (max-width: 768px) {
   .nav-hamburger {
     display: flex;
+    // The nav centers each child; the octagon buttons are taller (card + label
+    // below), so a centered hamburger drops below the octagon icons. Pin its top
+    // to the content-box top so it lines up with the button cards.
+    align-self: flex-start;
   }
 
   #nav-secondary-menu {

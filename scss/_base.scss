@@ -10,7 +10,8 @@
 
 // ── CSS custom properties — Ouroboros v5 ──────────────────────────────────────
 :root {
-  --nav-h: 13rem; // desktop: primary (~96px) + secondary (~44px) nav-shell
+  --nav-h: 13rem; // desktop: primary (~96px)
+  --pad:  2.5rem;
   --label-size: 1.0rem;
 
   // Surfaces
@@ -85,6 +86,11 @@ body.has-title-banner {
 html {
   scroll-behavior: smooth;
   scroll-padding-top: var(--nav-h);
+  // Clip full-bleed section bleeds (e.g. .about-header's -10vw margins) to the
+  // viewport so they never create a horizontal scrollbar in the tablet band.
+  // `clip` (not `hidden`) keeps overflow-y visible without making html a scroll
+  // container, so body remains the scroller and sticky/fixed elements are safe.
+  overflow-x: clip;
 }
 
 body {
@@ -169,7 +175,7 @@ body {
 
 // ── Accent rule — luminous divider ───────────────────────────────────────────
 @mixin accent-rule {
-  height: 1px;
+  height: 5px;
   background: linear-gradient(90deg, transparent 0%, var(--gold) 30%, var(--gold) 70%, transparent 100%);
 }
 
