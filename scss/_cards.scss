@@ -64,7 +64,7 @@
     border-bottom: none;
     color: var(--gold);
     font-weight: 700;
-    font-size: 0.85rem;
+    font-size: var(--fs-sm);
     font-family: $font-sans;
     letter-spacing: 0.08em;
     text-transform: uppercase;
@@ -95,14 +95,14 @@
 
 .card-title {
   font-family: $font-serif;
-  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  font-size: var(--fs-display-xs);
   font-weight: 400;
   line-height: 1.3;
   color: var(--text);
 }
 
 .card-desc {
-  font-size: 0.88rem;
+  font-size: var(--fs-sm);
   color: var(--subdued);
   line-height: 1.85;
   flex-grow: 1; // pushes card-link to bottom
@@ -116,7 +116,7 @@
 .card-link {
   display: inline-block;
   margin-top: auto;
-  font-size: 0.75rem;
+  font-size: var(--fs-xs);
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--gold);
@@ -143,7 +143,7 @@
     display: block;
     margin-top: 1rem;
     font-family: $font-sans;
-    font-size: 0.72rem;
+    font-size: var(--fs-xs);
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--gold);
@@ -226,7 +226,7 @@
   }
 
   .rc-tag {
-    font-size: 0.72rem;
+    font-size: var(--fs-xs);
     letter-spacing: 0.15em;
     text-transform: uppercase;
     color: var(--gold);
@@ -235,7 +235,7 @@
 
   .rc-title {
     font-family: $font-serif;
-    font-size: 1.05rem;
+    font-size: var(--fs-base);
     font-weight: 400;
     color: var(--text);
     line-height: 1.35;
@@ -243,7 +243,7 @@
   }
 
   .rc-date {
-    font-size: 0.75rem;
+    font-size: var(--fs-xs);
     color: var(--muted);
   }
 
@@ -255,7 +255,7 @@
   }
 
   .rc-tag-chip {
-    font-size: 0.65rem;
+    font-size: var(--fs-xs);
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--muted);
@@ -368,7 +368,7 @@
 .bib-title {
   display: block;
   font-family: $font-serif;
-  font-size: 1.0rem;
+  font-size: var(--fs-base);
   font-weight: 400;
   color: var(--text);
   line-height: 1.4;
@@ -376,7 +376,7 @@
 }
 
 .bib-byline {
-  font-size: 0.78rem;
+  font-size: var(--fs-xs);
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--gold-dim);
@@ -384,14 +384,14 @@
 }
 
 .bib-venue {
-  font-size: 0.82rem;
+  font-size: var(--fs-xs);
   color: var(--muted);
   line-height: 1.5;
   margin-bottom: 0.6rem;
 }
 
 .bib-link {
-  font-size: 0.78rem;
+  font-size: var(--fs-xs);
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--gold);

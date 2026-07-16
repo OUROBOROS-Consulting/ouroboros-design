@@ -23,13 +23,13 @@
   }
 
   code {
-    font-size: 0.85rem;
+    font-size: var(--fs-sm);
     color: var(--gold);
     font-family: 'JetBrains Mono', monospace;
   }
 
   p {
-    font-size: 0.8rem;
+    font-size: var(--fs-xs);
     color: var(--muted);
     margin: 0;
     font-family: 'JetBrains Mono', monospace;
@@ -37,7 +37,7 @@
 
   .contrast-note {
     display: block;
-    font-size: 0.7rem;
+    font-size: var(--fs-xs);
     color: var(--subdued);
     font-family: 'Inter', sans-serif;
     margin-top: 0.25rem;
@@ -70,7 +70,7 @@
     border-radius: 0.25rem;
     overflow-x: auto;
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.9rem;
+    font-size: var(--fs-sm);
     line-height: 1.6;
   }
 }
@@ -85,6 +85,6 @@
 
   p {
     margin: 0;
-    font-size: 0.95rem;
+    font-size: var(--fs-base);
   }
 }

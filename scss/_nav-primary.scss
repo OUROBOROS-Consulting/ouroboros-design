@@ -73,7 +73,7 @@ nav {
 .nav-logo-sub {
   font-family: $font-cormorant;
   display: block;
-  font-size: 1.0rem;
+  font-size: var(--fs-base);
   letter-spacing: 0.12em;
   opacity: 0.75;
   margin-top: 0.15rem;
@@ -106,7 +106,7 @@ nav {
     gap: 0.5rem;
 
     i {
-      font-size: 1.35rem;
+      font-size: var(--fs-lg);
       text-align: center;
     }
 
@@ -156,7 +156,7 @@ nav {
   gap: 0.35rem;
 
   i {
-    font-size: 1.05rem;
+    font-size: var(--fs-base);
     text-align: center;
   }
 
@@ -197,7 +197,7 @@ nav {
   a {
     display: block;
     padding: 0.3rem 0.85rem;
-    font-size: 0.7rem;
+    font-size: var(--fs-xs);
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--muted);
@@ -256,7 +256,7 @@ nav {
     background: var(--bg1);
 
     i {
-      font-size: 1.54rem;
+      font-size: var(--fs-xl);
       color: var(--bright);
       transition: color 0.2s ease;
       flex-shrink: 0;
@@ -275,7 +275,7 @@ nav {
 
 .nav-btn-label {
   font-family: $font-sans;
-  font-size: 0.6rem;
+  font-size: var(--fs-xs);
   letter-spacing: 0.1em;
   text-transform: uppercase;
   white-space: nowrap;
@@ -406,16 +406,16 @@ nav {
     padding: 0.4rem 0.48rem;
 
     i {
-      font-size: 1.05rem;
+      font-size: var(--fs-base);
     }
   }
 
   .nav-btn-label {
-    font-size: 0.5rem;
+    font-size: var(--fs-xs);
   }
 
   .nav-logo-text {
-    font-size: 0.95rem;
+    font-size: var(--fs-base);
   }
 
   .nav-logo-sub {
@@ -458,7 +458,7 @@ nav {
     // Links and buttons full-width, larger tap target
     a,
     .nav-dropdown-toggle {
-      font-size: 0.85rem;
+      font-size: var(--fs-sm);
       width: 100%;
       display: block;
     }
@@ -502,7 +502,7 @@ nav {
     transition: color 0.2s, transform 0.2s;
 
     i {
-      font-size: 1.2rem;
+      font-size: var(--fs-md);
       transition: transform 0.25s ease;
     }
 
@@ -544,7 +544,7 @@ nav {
 
 .page-title-banner__eyebrow {
   font-family: $font-sans;
-  font-size: 0.6rem;
+  font-size: var(--fs-xs);
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -554,7 +554,7 @@ nav {
 
 .page-title-banner__title {
   font-family: $font-cormorant;
-  font-size: 1rem;
+  font-size: var(--fs-base);
   font-weight: 500;
   letter-spacing: 0.04em;
   color: var(--text);
@@ -584,7 +584,7 @@ nav {
   transition: color 0.2s ease;
 
   i {
-    font-size: 1.54rem;
+    font-size: var(--fs-xl);
   }
 
   &:hover {
@@ -600,7 +600,7 @@ nav {
   box-sizing: border-box; // width: 0 collapses padding too
   min-width: 0;
   font-family: $font-sans;
-  font-size: 0.72rem;
+  font-size: var(--fs-xs);
   letter-spacing: 0.12em;
   text-transform: uppercase;
   background: var(--bg1);
@@ -690,7 +690,7 @@ nav {
 
 .search-result__type {
   font-family: $font-sans;
-  font-size: 0.6rem;
+  font-size: var(--fs-xs);
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--gold);
@@ -698,7 +698,7 @@ nav {
 
 .search-result__title {
   font-family: $font-sans;
-  font-size: 0.85rem;
+  font-size: var(--fs-sm);
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--text);
@@ -706,14 +706,14 @@ nav {
 
 .search-result__desc {
   font-family: $font-sans;
-  font-size: 0.72rem;
+  font-size: var(--fs-xs);
   color: var(--muted);
   line-height: 1.5;
 }
 
 .search-empty {
   font-family: $font-sans;
-  font-size: 0.8rem;
+  font-size: var(--fs-xs);
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--muted);

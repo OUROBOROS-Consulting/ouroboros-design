@@ -59,7 +59,7 @@
 
 .nav-sec-item {
   font-family: 'Inter', sans-serif;
-  font-size: 0.6875rem;
+  font-size: var(--fs-xs);
   font-weight: 500;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -104,7 +104,7 @@
 }
 
 .nav-sec-chevron {
-  font-size: 0.5rem;
+  font-size: var(--fs-xs);
   margin-left: 0.3rem;
   transition: transform 0.2s ease;
   opacity: 0.55;
@@ -152,7 +152,7 @@
 
 .nav-sec-child-item {
   font-family: 'Inter', sans-serif;
-  font-size: 0.625rem;
+  font-size: var(--fs-xs);
   font-weight: 500;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -225,7 +225,7 @@
   color: var(--text);
   padding: 0.4rem 0.65rem;
   cursor: pointer;
-  font-size: 1rem;
+  font-size: var(--fs-base);
   line-height: 1;
   transition: background 0.15s ease, color 0.15s ease;
 

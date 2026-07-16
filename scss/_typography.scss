@@ -26,7 +26,7 @@ $font-garamond:  'EB Garamond', Georgia, serif;
 // ── Page / section headings ───────────────────────────────────────────────────
 .about-heading {
   font-family: $font-serif;
-  font-size: clamp(2rem, 4vw, 3rem);
+  font-size: var(--fs-display-md);
   font-weight: 400;
   line-height: 1.2;
   margin-bottom: 1.5rem;
@@ -43,7 +43,7 @@ $font-garamond:  'EB Garamond', Georgia, serif;
 
   blockquote {
     font-family: $font-serif;
-    font-size: clamp(1.1rem, 2vw, 1.4rem);
+    font-size: var(--fs-display-xs);
     font-style: italic;
     line-height: 1.6;
     color: var(--text);
@@ -52,7 +52,7 @@ $font-garamond:  'EB Garamond', Georgia, serif;
   cite {
     display: block;
     margin-top: 1.2rem;
-    font-size: 0.75rem;
+    font-size: var(--fs-xs);
     letter-spacing: 0.15em;
     text-transform: uppercase;
     color: var(--gold);
@@ -64,7 +64,7 @@ $font-garamond:  'EB Garamond', Georgia, serif;
 .about-body {
   font-family: $font-serif;
   color: var(--subdued);
-  font-size: 1rem;
+  font-size: var(--fs-base);
   line-height: 2;
   letter-spacing: 0.3px;
   hyphens: auto; // cleaner prose wrapping alongside inherited overflow-wrap

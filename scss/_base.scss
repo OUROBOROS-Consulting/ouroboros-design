@@ -138,7 +138,7 @@ body {
   border: 1px solid var(--gold-border);
   color: var(--text);
   font-family: $font-sans;
-  font-size: 0.78rem;
+  font-size: var(--fs-xs);
   letter-spacing: 0.08em;
   text-decoration: none;
   transform: translateY(-200%);
@@ -270,7 +270,7 @@ body::after {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  font-size: 1.5rem;
+  font-size: var(--fs-xl);
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--gold);
@@ -299,7 +299,7 @@ body::after {
 
 .error-code {
   font-family: $font-serif;
-  font-size: clamp(4rem, 12vw, 9rem);
+  font-size: var(--fs-display-xl);
   font-weight: 400;
   line-height: 1;
   color: var(--gold);
@@ -309,7 +309,7 @@ body::after {
 
 .error-heading {
   font-family: $font-serif;
-  font-size: clamp(2rem, 4vw, 3rem);
+  font-size: var(--fs-display-md);
   font-weight: 400;
   line-height: 1.15;
   color: var(--text);
@@ -317,14 +317,14 @@ body::after {
 }
 
 .error-lede {
-  font-size: 1rem;
+  font-size: var(--fs-base);
   color: var(--subdued);
   line-height: 1.85;
   max-width: 560px;
 }
 
 .error-body {
-  font-size: 0.9rem;
+  font-size: var(--fs-sm);
   color: var(--subdued);
   margin-top: 0.5rem;
 }
@@ -337,7 +337,7 @@ body::after {
   gap: 0.4rem;
 
   li {
-    font-size: 0.88rem;
+    font-size: var(--fs-sm);
     color: var(--subdued);
     padding-left: 1.2rem;
     position: relative;
@@ -359,7 +359,7 @@ body::after {
 }
 
 .error-footnote {
-  font-size: 0.78rem;
+  font-size: var(--fs-xs);
   color: var(--muted);
   margin-top: 1.5rem;
   border-top: 1px solid var(--border);

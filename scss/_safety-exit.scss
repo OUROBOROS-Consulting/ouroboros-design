@@ -19,7 +19,7 @@
   border: 1px solid var(--gold-border);
   color: var(--text);
   font-family: $font-sans;
-  font-size: 0.72rem;
+  font-size: var(--fs-xs);
   font-weight: 500;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -30,7 +30,7 @@
   &::before {
     content: '✕';
     color: var(--gold);
-    font-size: 0.8rem;
+    font-size: var(--fs-xs);
   }
 
   &:hover {

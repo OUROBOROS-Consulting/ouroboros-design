@@ -35,7 +35,7 @@ footer {
 
 .footer-logo-text {
   font-family: "EB Garamond", serif !important;
-  font-size: 0.78rem;
+  font-size: var(--fs-xs);
   letter-spacing: 0.12em;
   text-transform: uppercase;
   line-height: 1.2;
@@ -43,13 +43,13 @@ footer {
 
 .footer-logo-sub {
   display: block;
-  font-size: 0.65rem;
+  font-size: var(--fs-xs);
   letter-spacing: 0.18em;
   color: var(--muted);
 }
 
 .footer-copy {
-  font-size: 0.78rem;
+  font-size: var(--fs-xs);
   color: var(--subdued);
   text-align: right;
   justify-self: end;
@@ -75,7 +75,7 @@ footer {
     display: flex;
     align-items: center;
     gap: 0.75rem;
-    font-size: 0.85rem;
+    font-size: var(--fs-sm);
 
     .footer-label {
       font-size: var(--label-size);
@@ -84,7 +84,7 @@ footer {
     }
 
     i {
-      font-size: 1.3rem;
+      font-size: var(--fs-lg);
     }
 
     &:hover {
@@ -112,7 +112,7 @@ footer {
   }
 
   .footer-social i {
-    font-size: 1.1rem;
+    font-size: var(--fs-md);
   }
 }
 
@@ -145,7 +145,7 @@ footer {
   align-items: center;
   justify-content: center;
   color: var(--bright);
-  font-size: 1.25rem;
+  font-size: var(--fs-md);
   transition: color 0.15s ease;
 
   &:hover {
@@ -154,7 +154,7 @@ footer {
 }
 
 .footer-label {
-  font-size: 0.75rem;
+  font-size: var(--fs-xs);
   color: var(--muted);
   letter-spacing: 0.05em;
   text-transform: uppercase;
@@ -167,7 +167,7 @@ footer {
   padding: 0.5rem 2rem;
   text-align: center;
   font-family: $font-mono;
-  font-size: 1.0rem;
+  font-size: var(--fs-base);
   letter-spacing: 0.09em;
   color: var(--muted);
   text-transform: uppercase;

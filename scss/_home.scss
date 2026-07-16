@@ -39,7 +39,7 @@
 
 .hero-name {
   font-family: $font-serif;
-  font-size: clamp(3.5rem, 10vw, 8rem);
+  font-size: var(--fs-display-xl);
   font-weight: 500;
   line-height: 0.95;
   letter-spacing: -0.01em;
@@ -47,7 +47,7 @@
 }
 
 .hero-tagline {
-  font-size: 1.05rem;
+  font-size: var(--fs-base);
   color: var(--subdued);
   line-height: 1.85;
   max-width: 520px;
@@ -57,7 +57,7 @@
   }
 
   p:first-child {
-    font-size: clamp(1.15rem, 2.2vw, 1.35rem);
+    font-size: var(--fs-display-xs);
     color: var(--text);
     line-height: 1.45;
     font-style: italic;
@@ -196,7 +196,7 @@
 
 .stat-value {
   font-family: $font-serif;
-  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  font-size: var(--fs-display-md);
   font-weight: 400;
   color: var(--gold);
   line-height: 1;
@@ -276,7 +276,7 @@
   }
 
   &__icon {
-    font-size: clamp(2.8rem, 3.5vw, 6rem);
+    font-size: var(--fs-display-lg);
     color: var(--bright);
     opacity: 0.6;
     line-height: 1;
@@ -284,7 +284,7 @@
 
   &__name {
     font-family: $font-serif;
-    font-size: clamp(1.35rem, 2vw, 3rem);
+    font-size: var(--fs-display-md);
     font-weight: 400;
     color: var(--text);
     line-height: 1.2;
@@ -294,7 +294,7 @@
 
   &__desc {
     font-family: $font-sans;
-    font-size: 0.875rem;
+    font-size: var(--fs-sm);
     line-height: 1.8;
     color: var(--subdued);
     margin: 0;
@@ -370,7 +370,7 @@
 .work-heading,
 .testimonials-heading {
   font-family: $font-serif;
-  font-size: clamp(2rem, 4vw, 3rem);
+  font-size: var(--fs-display-md);
   font-weight: 400;
   line-height: 1.15;
   margin-top: 0.6rem;
@@ -506,7 +506,7 @@
 #cta .cta-split .about-heading {
   margin-left: 0;
   margin-right: 0;
-  font-size: clamp(1.4rem, 2vw, 1.85rem);
+  font-size: var(--fs-display-sm);
 }
 
 #cta .cta-split .hero-cta {
@@ -705,7 +705,7 @@
   background: var(--steel);
   color: var(--text);
   font-family: var(--font-sans, 'Inter', sans-serif);
-  font-size: 0.8rem;
+  font-size: var(--fs-xs);
   letter-spacing: 0.03em;
   display: flex;
   align-items: center;
@@ -740,14 +740,14 @@
   &--tagline {
     font-style: italic;
     letter-spacing: 0.07em;
-    font-size: 0.75rem;
+    font-size: var(--fs-xs);
     opacity: 0.9;
   }
 
   // brand: Cormorant SC wordmark treatment
   &--brand {
     font-family: 'Cormorant SC', serif;
-    font-size: 0.9rem;
+    font-size: var(--fs-sm);
     letter-spacing: 0.15em;
     font-weight: 600;
   }
@@ -777,7 +777,7 @@ body.has-banner nav {
 
 // ── Testimonials context label ────────────────────────────────────────────────
 .testimonials-context {
-  font-size: 0.9rem;
+  font-size: var(--fs-sm);
   color: var(--subdued);
   font-style: italic;
   margin-top: 0.5rem;
