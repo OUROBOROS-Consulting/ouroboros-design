@@ -62,6 +62,7 @@
   max-width: 680px;
   margin: 0 auto;
   padding: 3.5rem 10vw 7rem;
+  hyphens: auto; // cleaner prose wrapping alongside inherited overflow-wrap
 
   // Body copy
   p {

@@ -67,6 +67,7 @@ $font-garamond:  'EB Garamond', Georgia, serif;
   font-size: 1rem;
   line-height: 2;
   letter-spacing: 0.3px;
+  hyphens: auto; // cleaner prose wrapping alongside inherited overflow-wrap
 
   p + p {
     margin-top: 1.75rem;
