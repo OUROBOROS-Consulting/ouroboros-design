@@ -85,7 +85,7 @@
 }
 
 .card-tag {
-  @include label-caps(0.65rem, 0.2em);
+  @include label-caps(var(--fs-xs), 0.2em);
 
   // Strip margins from markdownify
   p {

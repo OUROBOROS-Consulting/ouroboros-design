@@ -200,7 +200,7 @@
 
 .svc-section-label {
   p {
-    @include label-caps(0.95rem, 0.15em);
+    @include label-caps(var(--fs-base), 0.15em);
     position: sticky;
     top: 6rem;
 

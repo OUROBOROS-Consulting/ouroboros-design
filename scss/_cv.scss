@@ -89,7 +89,7 @@
   padding: 3rem 2rem 0 0;
 
   p {
-    @include label-caps(0.65rem, 0.28em);
+    @include label-caps(var(--fs-xs), 0.28em);
     position: sticky;
     top: 6rem;
   }

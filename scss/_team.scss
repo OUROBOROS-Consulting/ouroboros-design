@@ -59,7 +59,7 @@
 }
 
 .team-role {
-  @include label-caps(0.68rem, 0.16em);
+  @include label-caps(var(--fs-xs), 0.16em);
   color: var(--gold);
   margin: 0 0 0.4rem;
 }

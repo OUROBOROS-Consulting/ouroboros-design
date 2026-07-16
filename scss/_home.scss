@@ -34,7 +34,7 @@
 }
 
 .hero-eyebrow {
-  @include label-caps(0.75rem);
+  @include label-caps(var(--fs-xs));
 }
 
 .hero-name {
@@ -304,7 +304,7 @@
 }
 
 .stat-label {
-  @include label-caps(0.72rem, 0.18em);
+  @include label-caps(var(--fs-xs), 0.18em);
 }
 
 // ── Scroll hint ───────────────────────────────────────────────────────────────
@@ -318,7 +318,7 @@
   align-self: end;
 
   span {
-    @include label-caps(0.6rem, 0.25em);
+    @include label-caps(var(--fs-xs), 0.25em);
     animation: scrollPulse 2s ease-in-out infinite;
   }
 }
@@ -378,7 +378,7 @@
 
 .work-count,
 .testimonials-count {
-  @include label-caps(0.65rem, 0.2em);
+  @include label-caps(var(--fs-xs), 0.2em);
   padding-bottom: 0.4rem;
 }
 
@@ -390,7 +390,7 @@
 }
 
 .work-viewall {
-  @include label-caps(0.65rem, 0.15em);
+  @include label-caps(var(--fs-xs), 0.15em);
   color: var(--gold);
   text-decoration: none;
   padding-bottom: 0.4rem;
@@ -671,7 +671,7 @@
 
 
 .carousel-count {
-  @include label-caps(0.72rem, 0.12em);
+  @include label-caps(var(--fs-xs), 0.12em);
   min-width: 4ch;
   text-align: center;
 }

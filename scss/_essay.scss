@@ -8,7 +8,7 @@
 
 // Uses mixin — was duplicating .section-label with a slightly smaller size
 .post-category {
-  @include label-caps(0.68rem);
+  @include label-caps(var(--fs-xs));
   margin-bottom: 1.1rem;
 }
 
@@ -48,7 +48,7 @@
 }
 
 .post-meta-tag {
-  @include label-caps(0.68rem, 0.18em);
+  @include label-caps(var(--fs-xs), 0.18em);
 }
 
 .post-meta-read {
@@ -100,7 +100,7 @@
 
   // H3 as small-caps label
   h3 {
-    @include label-caps(0.85rem, 0.18em);
+    @include label-caps(var(--fs-sm), 0.18em);
     margin: 2.5rem 0 0.8rem;
   }
 
@@ -251,7 +251,7 @@ sup {
 }
 
 .post-related-label {
-  @include label-caps(0.68rem);
+  @include label-caps(var(--fs-xs));
   margin-bottom: 2.5rem;
 }
 
