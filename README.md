@@ -67,9 +67,6 @@ Three levels apply scallop texture + background:
 | `_service.scss` | Service/mission page layouts |
 | `_essay.scss` | Essay reading layout |
 | `_cv.scss` | CV/resume styling |
-| `_linkedin.scss` | LinkedIn post layout |
-| `_timeline.scss` | Timeline component |
-| `_floorplan.scss` | Grid/floorplan layouts |
 
 ## Design Philosophy
 
