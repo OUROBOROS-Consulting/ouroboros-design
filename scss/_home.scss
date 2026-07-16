@@ -358,6 +358,15 @@
   }
 }
 
+// About / audience headers carry only a label + heading (no right-hand count or
+// link), so stack them vertically — heading below the label, left-aligned —
+// matching the left column of the work / testimonials headers instead of
+// splitting the two across the strip.
+.about-header {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
 .work-heading,
 .testimonials-heading {
   font-family: $font-serif;
@@ -375,9 +384,9 @@
 
 .work-header-right {
   display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 0.5rem;
+  flex-direction: row;      // count + View All inline so the link lands at the strip's end
+  align-items: baseline;
+  gap: 1.25rem;
 }
 
 .work-viewall {
@@ -415,6 +424,7 @@
 }
 
 // ── Section spacing ───────────────────────────────────────────────────────────
+#audience,
 #about,
 #values,
 #services,
@@ -568,6 +578,7 @@
     display: none;
   }
 
+  #audience,
   #about,
   #values,
   #services,
@@ -772,45 +783,6 @@ body.has-banner nav {
   margin-top: 0.5rem;
 }
 
-// ── Who This Is For (homepage audience section) ────────────────────────
-#audience {
-  padding: 4rem 2rem;
-  max-width: 1100px;
-  margin: 0 auto;
-
-  @media (max-width: 768px) {
-    padding: 4rem 6vw;
-  }
-
-  .audience-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.25rem;
-    margin-top: 2rem;
-
-    @media (max-width: 768px) {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  .audience-card {
-    padding: 1.5rem;
-    border: 1px solid var(--border);
-    background: var(--bg2);
-    border-radius: 2px;
-
-    h3 {
-      font-family: Lora, serif;
-      font-size: 1.1rem;
-      color: var(--gold);
-      margin: 0 0 0.5rem;
-    }
-
-    p {
-      color: var(--subdued);
-      font-size: 0.95rem;
-      line-height: 1.55;
-      margin: 0;
-    }
-  }
-}
+// Audience section now shares the standard section chrome (see the
+// #audience,#about,… list above) and the .testimonials-grid + .card--formula
+// card pattern used by #services, so no bespoke rules are needed here.

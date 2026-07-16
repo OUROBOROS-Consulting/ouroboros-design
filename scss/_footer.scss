@@ -163,12 +163,23 @@ footer {
 // ── Disclaimer bar ────────────────────────────────────────────────────────────
 .disclaimer-bar {
   background: var(--bg1);
-  border-top: 1px solid rgba(51, 51, 51, 0.6);
+  border-top: 1.5px solid rgba(51, 51, 51, 0.6);
   padding: 0.5rem 2rem;
   text-align: center;
   font-family: $font-mono;
-  font-size: 0.6rem;
+  font-size: 1.0rem;
   letter-spacing: 0.09em;
   color: var(--muted);
   text-transform: uppercase;
+
+  a {
+    color: var(--subdued);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+
+    &:hover,
+    &:focus-visible {
+      color: var(--gold);
+    }
+  }
 }

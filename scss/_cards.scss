@@ -1,5 +1,6 @@
 @use "typography" as *;
 @use "chamfer" as *;
+@use "base" as *;
 
 // ── Cards grid ───────────────────────────────────────────────────────────────
 .cards {
@@ -11,25 +12,26 @@
 
 // ── Card component ───────────────────────────────────────────────────────────
 .card {
-  background: var(--bg2);
+  background-color: var(--bg2);
   padding: 2rem;
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
-  transition: background 0.3s;
+  transition: background-color 0.3s;
+  @include snakeskin;
 
   &:hover {
-    background: var(--bg3);
+    background-color: var(--bg3);
   }
 
   // Values and testimonials cards use bg2 as base, so invert hover
   #audience &,
   #values &,
   #testimonials & {
-    background: var(--bg2);
+    background-color: var(--bg2);
 
     &:hover {
-      background: var(--bg3);
+      background-color: var(--bg3);
     }
   }
 }
@@ -73,14 +75,12 @@
   // Interior — same chamfer minus the border width so the gold edge shows
   &__interior {
     background-color: var(--bg2);
-    background-image:
-      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16'%3E%3Cpath d='M0 16 Q4 10 8 6 Q12 10 16 16' fill='none' stroke='%23C9A84C' stroke-width='0.8' stroke-opacity='0.17'/%3E%3Cpath d='M-8 8 Q-4 2 0 -2 Q4 2 8 8' fill='none' stroke='%23C9A84C' stroke-width='0.8' stroke-opacity='0.17'/%3E%3Cpath d='M8 8 Q12 2 16 -2 Q20 2 24 8' fill='none' stroke='%23C9A84C' stroke-width='0.8' stroke-opacity='0.17'/%3E%3C/svg%3E");
-    background-size: 14px 14px;
     padding: 1.4rem;
     @include chamfer($chamfer-inner);
     display: flex;
     flex-direction: column;
     flex: 1;
+    @include snakeskin;
   }
 }
 
@@ -179,10 +179,11 @@
     content: '';
     position: absolute;
     inset: #{$chamfer-border};
-    background: var(--bg2);
+    background-color: var(--bg2);
     @include chamfer($chamfer-inner);
     z-index: -1;
-    transition: background 0.2s;
+    transition: background-color 0.2s;
+    @include snakeskin;
   }
 
   &:hover {
@@ -190,7 +191,7 @@
     transform: translateY(-2px);
 
     &::before { background: var(--gold); }
-    &::after  { background: var(--bg3); }
+    &::after  { background-color: var(--bg3); }
   }
 
   &--soon {
@@ -201,7 +202,7 @@
       transform: none;
 
       &::before { background: var(--gold-border); }
-      &::after  { background: var(--bg2); }
+      &::after  { background-color: var(--bg2); }
     }
   }
 
@@ -349,9 +350,10 @@
     content: '';
     position: absolute;
     inset: #{$chamfer-border};
-    background: var(--bg2);
+    background-color: var(--bg2);
     @include chamfer($chamfer-inner);
     z-index: -1;
+    @include snakeskin;
   }
 
   &:hover {

@@ -201,6 +201,17 @@ body {
   background: linear-gradient(90deg, transparent 0%, var(--gold) 30%, var(--gold) 70%, transparent 100%);
 }
 
+// ── Snakeskin scale texture — shared card fill ───────────────────────────────
+// Denser, subtler take on the scallop so every card fill carries the ouroboros
+// scale motif and reads as fine serpent skin. Sets only background-image +
+// -size; each card keeps its own background-color. Keep this include LAST in a
+// rule — a later `background:` shorthand would wipe the image (use
+// background-color for state changes instead).
+@mixin snakeskin($accent: 'C9A84C') {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16'%3E%3Cpath d='M0 16 Q4 10 8 6 Q12 10 16 16' fill='none' stroke='%23#{$accent}' stroke-width='0.7' stroke-opacity='0.10'/%3E%3Cpath d='M-8 8 Q-4 2 0 -2 Q4 2 8 8' fill='none' stroke='%23#{$accent}' stroke-width='0.7' stroke-opacity='0.10'/%3E%3Cpath d='M8 8 Q12 2 16 -2 Q20 2 24 8' fill='none' stroke='%23#{$accent}' stroke-width='0.7' stroke-opacity='0.10'/%3E%3C/svg%3E");
+  background-size: 9px 9px;
+}
+
 // Body background — flat near-black. Scallop texture is reserved for nav,
 // cards, and footer; the page floor stays untextured so those surfaces read
 // as elevated against it.
