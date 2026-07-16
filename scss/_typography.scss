@@ -9,7 +9,7 @@ $font-garamond:  'EB Garamond', Georgia, serif;
 // Single definition of the gold small-caps label pattern used across the site.
 // Use: @include label-caps;                    → default 0.7rem / 0.3em
 // Use: @include label-caps(0.65rem, 0.28em);   → tighter variant (CV / service)
-@mixin label-caps($size: 0.75rem, $tracking: 0.22em) {
+@mixin label-caps($size: var(--fs-xs), $tracking: 0.22em) {
   font-family: $font-sans;
   font-size: $size;
   letter-spacing: $tracking;

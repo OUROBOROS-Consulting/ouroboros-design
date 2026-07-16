@@ -12,7 +12,7 @@
 :root {
   --nav-h: 13rem; // desktop: primary (~96px)
   --pad:  2.5rem;
-  --label-size: 1.0rem;
+  --label-size: var(--fs-base);
 
   // Surfaces
   --bg1: #0c101a;
@@ -63,6 +63,19 @@
 
   // Claude orange
   --claude: #E8640A;
+
+  /* ── Type scale ── */
+  --fs-xs: 0.8rem;
+  --fs-sm: 0.9rem;
+  --fs-base: 1rem;
+  --fs-md: 1.2rem;
+  --fs-lg: 1.4rem;
+  --fs-xl: 1.6rem;
+  --fs-display-xs: clamp(1.2rem, 2vw, 1.45rem);
+  --fs-display-sm: clamp(1.5rem, 3vw, 2.1rem);
+  --fs-display-md: clamp(2rem, 4vw, 3rem);
+  --fs-display-lg: clamp(2.4rem, 5vw, 4rem);
+  --fs-display-xl: clamp(3.5rem, 10vw, 8rem);
 }
 
 @media (max-width: 768px) {
