@@ -135,7 +135,6 @@ nav {
   // all card tops since each card is the first child of its flex item.
   align-items: flex-start;
   gap: 0.75rem;
-  margin-left: auto;
 }
 
 // ── Dropdowns ─────────────────────────────────────────────────────────────────
@@ -387,6 +386,13 @@ nav {
   }
 }
 
+// Accordion button (mobile only, hidden on desktop). Owned in this file, not
+// _nav-secondary, so source order can't put an unconditional display:none
+// after the mobile override below and win the cascade.
+.nav-accordion-btn {
+  display: none;
+}
+
 // ── Responsive ───────────────────────────────────────────────────────────────
 @media (max-width: 768px) {
   nav {
@@ -488,6 +494,15 @@ nav {
     animation: none !important;
   }
 
+  // Parent row: link + chevron side by side. Scoped to its own class rather
+  // than reusing .nav-card__interior, which carries unrelated octagon-button
+  // chamfer/background styling from the search-button card system.
+  .nav-dropdown-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
   // Accordion chevron button (mobile only)
   .nav-accordion-btn {
     display: flex;
@@ -495,8 +510,13 @@ nav {
     justify-content: center;
     background: transparent;
     border: none;
+    // Separates the chevron's tap zone from the adjacent link so mis-taps
+    // don't navigate away instead of expanding.
+    border-left: 1px solid var(--border);
     cursor: pointer;
-    padding: 0.25rem 0.5rem;
+    min-width: 44px;
+    min-height: 44px;
+    padding: 0.25rem 0.75rem;
     color: var(--muted);
     flex-shrink: 0;
     transition: color 0.2s, transform 0.2s;
@@ -617,8 +637,11 @@ nav {
     color: var(--muted);
   }
 
-  &:focus {
-    border-color: rgba(177, 147, 93, 0.55);
+  // clip-path (via @include chamfer above) clips outline and box-shadow, so
+  // the focus indicator must be a border instead — box-sizing: border-box
+  // (set above) keeps the widened border from shifting layout.
+  &:focus-visible {
+    border: 2px solid var(--gold);
   }
 }
 
@@ -635,6 +658,11 @@ nav {
 }
 
 @media (max-width: 768px) {
+
+  // 16px minimum prevents iOS Safari from auto-zooming the viewport on focus.
+  .nav-search__input {
+    font-size: var(--fs-base);
+  }
 
   .nav-search-wrap:hover .nav-search__input,
   .nav-search-wrap:focus-within .nav-search__input {

@@ -2,11 +2,6 @@
 @use "base" as *;
 @use "chamfer" as *;
 
-// ── Accordion button (mobile only, hidden on desktop) ────────────────────────
-.nav-accordion-btn {
-  display: none;
-}
-
 // ── Dropdown stagger animation (shared with secondary nav child entries) ──────
 @keyframes dropdown-card-in {
   from {

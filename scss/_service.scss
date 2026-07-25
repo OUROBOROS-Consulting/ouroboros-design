@@ -183,6 +183,12 @@
     max-width: none;
     padding: 3.5rem 3.5rem;
   }
+
+  // Announcement layout also nests .post-header here — same 680px cap, same fix.
+  .post-header {
+    max-width: none;
+    padding: var(--nav-h) 3.5rem 3.5rem;
+  }
 }
 
 // ── Section rows (label + content) ────────────────────────────────────────────

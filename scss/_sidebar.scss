@@ -1,7 +1,13 @@
 @use "typography" as *;
 // ── Page TOC Sidebar ──────────────────────────────────────────────────────────
-// Shared grid wrapper + sticky sidebar used by essays, foundation, and
-// mission layouts. Two variants handle the different content widths.
+// Shared wrapper + fixed right-edge panel used by foundation and mission
+// layouts. The panel mirrors the left .rail: pinned to the viewport edge,
+// full height below the primary bar. Consuming sites reserve the strip via
+// body padding-right (see site main.scss) and supply the marble texture.
+
+:root {
+  --toc-w: 200px; // fixed right panel width
+}
 
 .page-toc-wrap {
   display: grid;
@@ -10,7 +16,7 @@
 
   // ── Service / mission variant: wide prose, matches .svc-body centering ──
   &--svc {
-    grid-template-columns: 1fr 200px;
+    grid-template-columns: 1fr;
     max-width: 1600px;
     margin: 0 auto;
     padding: 0 5vw;
@@ -43,12 +49,17 @@
 }
 
 // ── Sidebar panel ─────────────────────────────────────────────────────────────
+// Fixed to the right viewport edge, same vertical span as the left .rail —
+// it does not travel with the page scroll.
 .page-toc {
-  position: sticky;
-  top: var(--nav-h);
-  max-height: calc(100svh - var(--nav-h) - 2rem);
+  position: fixed;
+  top: var(--rail-top);
+  right: 0;
+  bottom: 0;
+  z-index: 90;
+  width: var(--toc-w);
   overflow-y: auto;
-  padding-top: 3.5rem; // visual alignment with first content block
+  padding: 2rem 1.4rem 2rem;
   scrollbar-width: thin;
   scrollbar-color: var(--border) transparent;
 
