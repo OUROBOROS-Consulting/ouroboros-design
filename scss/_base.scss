@@ -14,14 +14,20 @@
   --pad:  2.5rem;
   --label-size: var(--fs-base);
 
-  // Surfaces
+  // Surfaces — all one navy family (hue ~223°) so the elevation ramp reads as
+  // the same material lifted, not a different material. Values were chosen to
+  // match the luminance of the neutral greys they replaced on 2026-07-26, so
+  // every text-on-surface contrast ratio is unchanged. Do not reintroduce
+  // neutral greys here.
   --bg1: #0c101a;
   --bg-hero: #1e213e; // dark navy — homepage + service hero background
-  --bg2: #1E1E1E;
-  --bg3: #252525;
-  --border: #333333;
-  --calloutbg: #2A2A2A;
-  --shadow: #080808;
+  --bg2: #1a1d26; // was #1E1E1E
+  --bg3: #22262f; // was #252525
+  --border: #30343e; // was #333333
+  --calloutbg: #252831; // was #2A2A2A — nudged darker to give the accents
+  // headroom on the site's lightest surface: steel/amethyst were 4.57:1 on the
+  // old grey, which is barely over AA. Now 4.69:1.
+  --shadow: #06080d; // was #080808
 
   // Luminance hierarchy (all pass WCAG AA on bg1)
   --bright: #FFFFFF; // 18.4:1
