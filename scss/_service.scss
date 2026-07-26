@@ -1,7 +1,7 @@
 @use "typography" as *;
 @use "base" as *;
 // ── Service Hero ──────────────────────────────────────────────────────────────
-.svc-hero {
+.page-hero {
   padding: var(--nav-h) 10vw 2.5rem;
   min-height: 100svh;
   display: flex;
@@ -42,7 +42,7 @@
   }
 }
 
-.svc-hero-inner {
+.page-hero-inner {
   flex: 1;
   display: flex;
   justify-content: space-between;
@@ -52,7 +52,7 @@
   flex-wrap: wrap;
 }
 
-.svc-hero-text {
+.page-hero-text {
   flex: 1;
   min-width: 280px;
   background: rgba(255, 255, 255, 0.04);
@@ -61,13 +61,13 @@
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.10);
 }
 
-.svc-hero-icon {
+.page-hero-icon {
   font-size: clamp(90px, 12vw, 170px);
   color: var(--bright);
   line-height: 1;
 }
 
-.svc-title {
+.page-hero-title {
   font-family: $font-serif;
   font-size: var(--fs-display-lg);
   font-weight: 700;
@@ -75,7 +75,7 @@
   margin-bottom: 1.2rem;
 }
 
-.svc-lede {
+.page-hero-lede {
   font-size: var(--fs-base);
   color: var(--subdued);
   line-height: 1.85;
@@ -83,7 +83,7 @@
   margin-bottom: 1.5rem;
 }
 
-.svc-tags {
+.page-hero-tags {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
@@ -101,7 +101,7 @@
   line-height: 1.5;
 }
 
-.svc-hero-cta {
+.page-hero-cta {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
@@ -116,7 +116,7 @@
 }
 
 // ── Service Hero Art — hand-crafted SVG (falls back to a large FA glyph) ──────
-.svc-hero-art {
+.page-hero-art {
   flex-shrink: 0;
   align-self: center;
   display: flex;
@@ -126,14 +126,14 @@
   filter: drop-shadow(0 0 26px rgba(201, 168, 76, 0.18));
 }
 
-.svc-hero-svg {
+.page-hero-svg {
   display: block;
   width: 100%;
   height: auto;
 }
 
 // Scroll cue pinned to the bottom of the one-screen hero, centered.
-.svc-hero .scroll-hint {
+.page-hero .scroll-hint {
   align-self: center;
   padding-top: 1.5rem;
 }
@@ -172,7 +172,7 @@
 }
 
 // ── Service Body ──────────────────────────────────────────────────────────────
-.svc-body {
+.page-body {
   max-width: 1600px;
   margin: 0 auto;
   padding: var(--pad) var(--pad);
@@ -419,7 +419,7 @@
 // ── Banded section headers — mission/about + glossary ─────────────────────────
 // Full-width black-marble header bands that bleed to the viewport edges, like
 // the homepage section headers. Applied to:
-//   .svc-body--banded .svc-section-label → mission-layout section headings
+//   .page-body--banded .svc-section-label → mission-layout section headings
 //   .post-body--banded h2                → glossary field-group headings
 // Both live in .page-toc-wrap--svc col-1, so the same bleed clears the wrap's
 // 5vw padding, the 3rem grid gap and the 200px TOC sidebar to reach the right
@@ -447,8 +447,8 @@
 
 // Mission/about: restructure the two-column svc-section into a stacked layout so
 // the heading becomes a full-width band above its content. Scoped to
-// .svc-body--banded so service/foundation keep their two-column grid.
-.svc-body--banded {
+// .page-body--banded so service/foundation keep their two-column grid.
+.page-body--banded {
   .svc-section {
     grid-template-columns: 1fr;
     gap: 0;
@@ -506,7 +506,7 @@
 // ── Single-column hero (no headshot) ─────────────────────────────────────────
 // Applied when page.headshot is absent — removes space-between gap so the
 // text column and CTA column sit naturally without a large void between them.
-.svc-hero-inner--single {
+.page-hero-inner--single {
   justify-content: flex-start;
   gap: 6rem;
 }
@@ -514,7 +514,7 @@
 // ── Landing page emblem ───────────────────────────────────────────────────────
 // The logo SVG placed on the right side of collection landing pages.
 // Opacity and drop-shadow keep it ambient rather than dominant.
-.svc-emblem {
+.page-hero-emblem {
   flex-shrink: 0;
   align-self: center;
   width: clamp(180px, 18vw, 270px);
@@ -548,16 +548,16 @@
 
 // ── Responsive ────────────────────────────────────────────────────────────────
 @media (max-width: 768px) {
-  .svc-hero {
+  .page-hero {
     padding: 6rem 6vw 2.5rem;
     min-height: auto;
   }
 
-  .svc-hero-art {
+  .page-hero-art {
     width: clamp(150px, 45vw, 240px);
   }
 
-  .svc-body {
+  .page-body {
     padding: 0 6vw 6rem;
   }
 
@@ -571,13 +571,13 @@
     position: static;
   }
 
-  .svc-hero-inner {
+  .page-hero-inner {
     flex-direction: column;
     gap: 2rem;
   }
 
   .hex-portrait,
-  .svc-emblem {
+  .page-hero-emblem {
     display: none;
   }
 }

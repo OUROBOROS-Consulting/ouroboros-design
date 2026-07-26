@@ -14,15 +14,15 @@
   gap: 0 3rem;
   align-items: start;
 
-  // ── Service / mission variant: wide prose, matches .svc-body centering ──
+  // ── Service / mission variant: wide prose, matches .page-body centering ──
   &--svc {
     grid-template-columns: 1fr;
     max-width: 1600px;
     margin: 0 auto;
     padding: 0 5vw;
 
-    // Wrapper now owns the horizontal padding; strip it from the inner .svc-body
-    .svc-body {
+    // Wrapper now owns the horizontal padding; strip it from the inner .page-body
+    .page-body {
       padding-left: 0;
       padding-right: 0;
       max-width: none;
