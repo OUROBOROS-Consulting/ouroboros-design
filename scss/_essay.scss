@@ -51,12 +51,6 @@
   @include label-caps(var(--fs-xs), 0.18em);
 }
 
-.post-meta-read {
-  font-size: var(--fs-xs);
-  color: var(--muted);
-  margin-left: auto;
-}
-
 // ── Prose body ────────────────────────────────────────────────────────────────
 .post-body {
   max-width: 680px;
@@ -217,30 +211,6 @@ sup {
   vertical-align: super;
   line-height: 0;
   cursor: default;
-}
-
-// ── Footnotes ─────────────────────────────────────────────────────────────────
-.post-footnotes {
-  margin-top: 4rem;
-  padding-top: 2rem;
-  border-top: 1px solid var(--border);
-
-  p {
-    font-size: var(--fs-xs);
-    color: var(--subdued);
-    line-height: 1.75;
-    margin-bottom: 0.5rem;
-    padding-left: 1.4rem;
-    position: relative;
-  }
-
-  .fn-num {
-    position: absolute;
-    left: 0;
-    color: var(--gold);
-    font-size: var(--fs-xs);
-    top: 0.15em;
-  }
 }
 
 // ── Related posts ─────────────────────────────────────────────────────────────

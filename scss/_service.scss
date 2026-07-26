@@ -192,7 +192,7 @@
 }
 
 // ── Section rows (label + content) ────────────────────────────────────────────
-.svc-section {
+.page-section {
   display: grid;
   grid-template-columns: 180px 1fr;
   gap: 0 3rem;
@@ -204,7 +204,7 @@
   }
 }
 
-.svc-section-label {
+.page-section-label {
   p {
     @include label-caps(var(--fs-base), 0.15em);
     position: sticky;
@@ -225,7 +225,7 @@
   }
 }
 
-.svc-section-content {
+.page-section-content {
 
   // Scoped to direct <p> children only — prevents bleeding onto named
   // descendant classes (.svc-item-title, .svc-pricing-notes, etc.)
@@ -300,7 +300,7 @@
   margin-top: 0.25rem;
 }
 
-// No !important needed — .svc-section-content > p no longer bleeds here
+// No !important needed — .page-section-content > p no longer bleeds here
 .svc-item-title {
   font-size: var(--fs-sm);
   color: var(--text);
@@ -405,13 +405,13 @@
 }
 
 // ── Section modifier variants ─────────────────────────────────────────────────
-.svc-section--cta {
+.page-section--cta {
   text-align: center;
   padding-top: 3rem;
   padding-bottom: 3rem;
 }
 
-.svc-section--stacked {
+.page-section--stacked {
   grid-template-columns: 1fr;
   gap: 1.5rem;
 }
@@ -419,7 +419,7 @@
 // ── Banded section headers — mission/about + glossary ─────────────────────────
 // Full-width black-marble header bands that bleed to the viewport edges, like
 // the homepage section headers. Applied to:
-//   .page-body--banded .svc-section-label → mission-layout section headings
+//   .page-body--banded .page-section-label → mission-layout section headings
 //   .post-body--banded h2                → glossary field-group headings
 // Both live in .page-toc-wrap--svc col-1, so the same bleed clears the wrap's
 // 5vw padding, the 3rem grid gap and the 200px TOC sidebar to reach the right
@@ -445,17 +445,17 @@
   }
 }
 
-// Mission/about: restructure the two-column svc-section into a stacked layout so
+// Mission/about: restructure the two-column page-section into a stacked layout so
 // the heading becomes a full-width band above its content. Scoped to
 // .page-body--banded so service/foundation keep their two-column grid.
 .page-body--banded {
-  .svc-section {
+  .page-section {
     grid-template-columns: 1fr;
     gap: 0;
     padding: 0 0 3.5rem;
   }
 
-  .svc-section-label {
+  .page-section-label {
     @include marble-band;
     margin-bottom: 2.5rem;
 
@@ -561,13 +561,13 @@
     padding: 0 6vw 6rem;
   }
 
-  .svc-section {
+  .page-section {
     grid-template-columns: 1fr;
     gap: 1rem;
     padding: 2.5rem 0;
   }
 
-  .svc-section-label p {
+  .page-section-label p {
     position: static;
   }
 

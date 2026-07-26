@@ -403,7 +403,7 @@
 }
 
 // ── Services cards: icon stacked above copy ──────────────────────────────────
-.svc-card-icon {
+.card-icon {
   width: 30%;
   margin-bottom: 1.25rem;
   font-size: 5rem; // Font Awesome fallback glyph when no hero_svg
@@ -417,7 +417,7 @@
   }
 }
 
-.svc-card-body {
+.card-body {
   display: flex;
   flex-direction: column;
   flex: 1;

@@ -547,40 +547,6 @@ nav {
   }
 }
 
-// ── Page-title banner (slide-title bar below secondary nav) ──────────────────
-.page-title-banner {
-  background: var(--bg-hero);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
-  padding: 0.6rem 2rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 0.2rem;
-
-  @media (max-width: 768px) {
-    display: none; // secondary nav also hidden on mobile; banner follows suit
-  }
-}
-
-.page-title-banner__eyebrow {
-  font-family: $font-sans;
-  font-size: var(--fs-xs);
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--gold);
-  line-height: 1;
-}
-
-.page-title-banner__title {
-  font-family: $font-cormorant;
-  font-size: var(--fs-base);
-  font-weight: 500;
-  letter-spacing: 0.04em;
-  color: var(--text);
-  line-height: 1.2;
-}
-
 // ── Search (first in the button group; input grows leftward over the bar) ───
 // .nav-search__input is a sibling of .nav-card (not nested inside it) so it
 // isn't clipped by the card's chamfer clip-path as it expands past the card's
