@@ -254,12 +254,12 @@
 
   &[data-category="AI"] {
     color: var(--amethyst);
-    border-color: rgba(150, 122, 187, 0.35);
+    border-color: var(--amethyst-dim);
   }
 
   &[data-category="Technology"] {
     color: var(--steel);
-    border-color: rgba(50, 76, 222, 0.3);
+    border-color: var(--steel-dim);
   }
 
   &[data-category="Accountability"] {
@@ -268,13 +268,13 @@
   }
 
   &[data-category="Institutional Betrayal"] {
-    color: var(--teal-text); // --teal fails WCAG AA as text on every surface
-    border-color: rgba(74, 107, 95, 0.5);
+    color: var(--teal);
+    border-color: var(--teal-dim);
   }
 
   &[data-category="Psychopathology"] {
     color: var(--sage);
-    border-color: rgba(106, 142, 127, 0.35);
+    border-color: var(--sage-dim);
   }
 }
 
