@@ -99,79 +99,6 @@
   }
 }
 
-// ── Hero ornate border ────────────────────────────────────────────────────────
-// Greek key (meander) pattern tiling clockwise around the hero.
-// Horizontal tile (24×14px): M0,7 H6 V0 H18 V14 H6 V7 H24
-// Vertical tile (14×24px): 90° CW rotation via (x,y)→(y, 24−x)
-// CSS geometry properties require SVG 2 (Chrome 88+, Firefox 72+, Safari 15.4+).
-.hero-ornate-svg {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 1;
-  opacity: 0.26;
-  animation: none;
-}
-
-
-.hob-strip {
-  &--top {
-    x: 0;
-    y: 0;
-    width: 100%;
-    height: 14px;
-  }
-
-  &--bottom {
-    x: 0;
-    y: calc(100% - 14px);
-    width: 100%;
-    height: 14px;
-  }
-
-  &--right {
-    x: calc(100% - 14px);
-    y: 0;
-    width: 14px;
-    height: 100%;
-  }
-
-  &--left {
-    x: 0;
-    y: 0;
-    width: 14px;
-    height: 100%;
-  }
-}
-
-.hob-corner {
-  fill: var(--text);
-  width: 14px;
-  height: 14px;
-
-  &--tl {
-    x: 0;
-    y: 0;
-  }
-
-  &--tr {
-    x: calc(100% - 14px);
-    y: 0;
-  }
-
-  &--bl {
-    x: 0;
-    y: calc(100% - 14px);
-  }
-
-  &--br {
-    x: calc(100% - 14px);
-    y: calc(100% - 14px);
-  }
-}
-
 // ──|| STATS ||─────────────────────────────────────────────────────────────
 .stats-grid {
   display: grid;
@@ -536,20 +463,11 @@
   }
 }
 
-// Crop the Substack embed's redundant publication masthead
-#cta .cta-newsletter__embed-wrap {
-  margin-top: 2.4rem;   // pushes the Subscribe row down to meet the left CTA button
-  height: 152px;
-  overflow: hidden;
-}
-
-#cta .cta-newsletter__embed {
-  display: block;
-  width: 100%;
-  height: 220px;
-  margin-top: -68px;
-  border: 0;
-  background: transparent;
+// Subscribe link. Replaced a cropped Substack iframe on 2026-07-26 — it was the
+// last third-party request on the site and it loaded on every page. The 2.4rem
+// offset is what aligns this button with the CTA button in the left column.
+#cta .cta-newsletter__action {
+  margin-top: 2.4rem;
 }
 
 // ── Responsive ────────────────────────────────────────────────────────────────

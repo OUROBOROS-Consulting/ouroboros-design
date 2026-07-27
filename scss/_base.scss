@@ -247,7 +247,7 @@ body::after {
 }
 
 // ── Reading progress bar ──────────────────────────────────────────────────────
-// Global element — used on essay, service, and mission pages via foundation.html
+// Global element — rendered by the article, sections, service, announcement and psa layouts
 #progress-bar {
   position: fixed;
   top: 0;
