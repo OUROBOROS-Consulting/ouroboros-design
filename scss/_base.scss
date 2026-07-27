@@ -10,6 +10,10 @@
 
 // ── CSS custom properties — Ouroboros v5 ──────────────────────────────────────
 :root {
+  // The system has no light mode. Declaring it stops the UA from rendering form
+  // controls, scrollbars, and the default link colour for a light page.
+  color-scheme: dark;
+
   --nav-h: 13rem; // desktop: primary (~96px)
   --pad:  2.5rem;
   --label-size: var(--fs-base);
@@ -29,11 +33,14 @@
   // old grey, which is barely over AA. Now 4.69:1.
   --shadow: #06080d; // was #080808
 
-  // Luminance hierarchy (all pass WCAG AA on bg1)
-  --bright: #FFFFFF; // 18.4:1
-  --text: #E8E4DC; // 14.5:1
-  --subdued: #B0AAA0; // 8.0:1  — AAA for normal text
-  --muted: #999999; // 6.5:1  — AA for normal text
+  // Luminance hierarchy. Ratios below are the WORST case across all five
+  // surfaces (calloutbg, the lightest), not the bg1 figure — quoting bg1 hid
+  // roughly 1.5 points of headroom and made the ramp look safer than it is.
+  // bg1 figures follow in parentheses.
+  --bright: #FFFFFF; // 14.7:1 (19.0 on bg1)
+  --text: #E8E4DC; // 11.6:1 (15.0)
+  --subdued: #B0AAA0; // 6.4:1  (8.2) — AA for normal text on every surface
+  --muted: #999999; // 5.2:1  (6.7) — AA for normal text on every surface
 
   // Accent: Gold
   --gold: #C9A84C;
@@ -114,6 +121,15 @@ body {
   // Reflow safety (WCAG 1.4.10): inherited, so long words / URLs / display
   // headings break instead of overflowing and being clipped by overflow-x.
   overflow-wrap: break-word;
+}
+
+// Anchors do not inherit `color` — the UA rule `a:-webkit-any-link` outranks
+// inheritance — so an <a> with no rule of its own renders #0000EE at ~1.4:1,
+// regardless of what its parent is coloured. This is the catch-all floor.
+// At 0,0,1 specificity it loses to every class-based anchor rule in the
+// system, so it only ever reaches anchors that had no colour at all.
+a {
+  color: var(--gold);
 }
 
 // ── Focus styles (keyboard navigation) ───────────────────────────────────────
