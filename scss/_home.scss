@@ -392,6 +392,46 @@
   }
 }
 
+// ── The YES / NO fork ─────────────────────────────────────────────────────────
+// Each card answers the section's "Ready to Start?" heading. These are visual
+// answers to a visible question: the markup marks them aria-hidden and the
+// card's <h3> carries the meaning instead.
+//
+// ⚠ Do not promote these to headings. Screen readers expose headings as a flat
+// list stripped of surrounding context, so "YES" and "NO" on their own would
+// answer nothing (WCAG 2.4.6). The <h3> is what has to read sensibly alone.
+#cta .rc-answer {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  font-family: $font-serif;
+  font-size: var(--fs-display-sm);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0.08em;
+  color: var(--gold);
+  margin-bottom: 1.1rem;
+
+  // Hairline running off the answer, echoing .about-header::after. Gives the
+  // fork a horizon so the two cards read as one question, two directions.
+  &::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--gold-dim), transparent);
+  }
+}
+
+// The decline is a real option, not a failure state. Steel keeps it legible
+// (5.36:1 on bg2) and one step down the brightness ramp from the gold YES.
+#cta .cta-newsletter .rc-answer {
+  color: var(--steel);
+
+  &::after {
+    background: linear-gradient(90deg, var(--steel-dim), transparent);
+  }
+}
+
 // ── Two-column CTA: primary action (left) + newsletter link-out (right) ────────
 #cta .cta-split {
   display: grid;
@@ -535,6 +575,12 @@
 
   #cta .cta-split .hero-cta {
     justify-content: center;
+  }
+
+  // Stacked and centered, the answer shrink-wraps and the trailing hairline has
+  // no run left to make. Drop it rather than render a 4px stub.
+  #cta .rc-answer::after {
+    display: none;
   }
 }
 
