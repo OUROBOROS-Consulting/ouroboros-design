@@ -97,6 +97,32 @@ All one navy family (hue ~223°) so the elevation ramp reads as the same materia
 
 Worst case in the whole system is now **4.69:1** (steel/amethyst on `--calloutbg`). Anything you add must clear 4.5:1 against the surface it sits on.
 
+### Light mode
+
+Added 2026-08-06. Same navy-tinted character (hue ~223°). The ramp keeps the same **order** as dark, mirrored across the luminance midpoint: `--bg1` is the page floor and the darkest of the four, rising through `--bg2` and `--bg3` to `--calloutbg` as the lightest. Elevation still means "brighter" in both themes, so the `--bg3` wash at the top of `elevation-elevated` stays a highlight instead of inverting into a dark band. `--bg1` is therefore the worst-case backdrop for dark-on-light text.
+
+```scss
+--bg1: #E7EAF0       --bg2: #EFF1F5       --bg3: #F5F7FA
+--border: #C7CBD6    --calloutbg: #FCFDFE --shadow: rgba(28, 32, 41, 0.18)
+
+--bright: #1C2029  // 13.53:1 on --bg1
+--text: #34394A    //  9.52:1 on --bg1
+--subdued: #3D4353 //  8.20:1 on --bg1  AAA
+--muted: #535971   //  5.74:1 on --bg1
+
+--gold: #7A6028      --steel: #4A5A68      --amethyst: #6B4F94
+--sage: #38624C      --teal: #295F5A       --gold-border: #8A7550 (3:1, non-text)
+```
+
+Default is dark. Two mechanisms bring in light:
+
+1. **OS preference, no explicit choice.** `@media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) { ... } }`.
+2. **Explicit choice**, set by the rail toggle and persisted to `localStorage`. `:root[data-theme="light"] { ... }`.
+
+`@include light-mode { ... }` (defined in `_base.scss`) wraps `@content` in both selectors — use it for any non-token effect (shadows, gradients, textures) that needs to flip.
+
+⚠ **Marble surfaces are dark islands in both themes.** Nav, footer, rail, `.page-toc`, service hero, marble bands, and section headers all call `@include dark-island;`, which forces the full dark token set regardless of the active theme. Do not let a light-mode rule reach inside one of these — if a new component needs to sit on a marble surface, wrap it in `dark-island` too, or its text will inherit light-theme tokens against a dark background and become unreadable.
+
 ### Luminance hierarchy
 
 Every value passes WCAG AA on `--bg1`.
@@ -148,13 +174,22 @@ Category bindings live in `_announcements.scss:256-277`. Audience bindings live 
 
 ## Elevation
 
-Three mixins in `_base.scss`. Each combines a scallop SVG tile with a background colour. Darker = further back, brighter = further forward.
+Three mixins in `_base.scss`. Each combines a scallop SVG tile with a background colour. Darker = further back, brighter = further forward. Each also has a `-dark` variant (`elevation-recessed-dark`, etc.) that never flips — use those on marble/chrome islands, the plain names on content that should theme normally.
 
-| Mixin | Tile | Stroke opacity |
+| Mixin | Tile | Stroke opacity (dark / light) |
 |---|---|---|
-| `@include elevation-recessed` | 12px | 0.08 |
-| `@include elevation-standard` | 16px | 0.18 |
-| `@include elevation-elevated` | 24px | 0.28 |
+| `@include elevation-recessed` | 12px | 0.076 / 0.12 |
+| `@include elevation-standard` | 16px | 0.09 / 0.14 |
+| `@include elevation-elevated` | 24px | 0.10 / 0.16 |
+
+## Theme Mixins
+
+| Mixin | Purpose |
+|---|---|
+| `dark-tokens` | Full dark custom-property set. Loaded unconditionally on `:root`. |
+| `light-tokens` | Full light custom-property set. Loaded under the two override selectors described above. |
+| `light-mode { @content }` | Wraps `@content` in both light override selectors, scoped to `&`. |
+| `dark-island` | `@include dark-tokens;`. Forces dark regardless of theme — use on marble/chrome surfaces. |
 
 ## Accessibility Invariants
 
@@ -165,6 +200,7 @@ Break these and the site regresses. They are not stylistic preferences.
 - **The cursor spotlight is gated twice** — the site's `main.js` skips the listener, and `_base.scss:409` hides `body::after` entirely under `prefers-reduced-motion`. Keep both gates.
 - **`.rail-tx` uses `opacity: 0`, not `display: none`.** The labels stay in the accessibility tree so screen readers announce "Contact" and "Announcements". Switching to `display: none` or `visibility: hidden` would silently strip the rail's accessible names. The rail is icon-only *visually* by deliberate design decision; that is a usability tradeoff, not a conformance failure.
 - **Any new accent must clear 4.5:1 on `--bg1`.**
+- **Marble surfaces are dark islands in both themes.** `@include dark-island;` on any new marble/chrome surface — see Light mode above.
 
 ## Typography
 
