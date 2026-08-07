@@ -380,6 +380,17 @@ a {
   box-shadow:
     0 4px 16px var(--shadow),
     0 1px 0 rgba(255, 255, 255, 0.04) inset;
+
+  @include light-mode {
+    // The dark theme's inset is a thin light line simulating light hitting
+    // the top edge. On a light surface a light-on-light inset is invisible,
+    // so flip to a thin dark line at the BOTTOM inner edge instead — same
+    // "lit from above, shadow pools at the bottom" read, opposite polarity.
+    // rgb(28, 32, 41) is the light theme's own --bright ink color.
+    box-shadow:
+      0 4px 16px var(--shadow),
+      0 1px 0 rgba(28, 32, 41, 0.14) inset;
+  }
 }
 
 // ── Accent rule — luminous divider ───────────────────────────────────────────
@@ -432,6 +443,20 @@ body::after {
       rgba(201, 168, 76, 0.06) 0%,
       rgba(201, 168, 76, 0.03) 35%,
       transparent 100%);
+
+  @include light-mode {
+    // Cool navy edge (matches the light surface family) instead of a black
+    // vignette, and the spotlight uses the darkened light-mode gold at the
+    // same alphas as the dark version so it stays a subtle glow, not a smear.
+    background:
+      radial-gradient(ellipse 70% 60% at 50% 40%,
+        transparent 0%,
+        rgba(60, 72, 96, 0.10) 100%),
+      radial-gradient(600px circle at var(--cx, -9999px) var(--cy, -9999px),
+        rgba(122, 96, 40, 0.06) 0%,
+        rgba(122, 96, 40, 0.03) 35%,
+        transparent 100%);
+  }
 }
 
 // ── Reading progress bar ──────────────────────────────────────────────────────

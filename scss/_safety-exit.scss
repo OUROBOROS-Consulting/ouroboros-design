@@ -1,3 +1,4 @@
+@use "base" as *;
 @use "typography" as *;
 
 // ── Quick exit ────────────────────────────────────────────────────────────────
@@ -26,6 +27,12 @@
   cursor: pointer;
   box-shadow: 0 2px 12px rgba(8, 8, 8, 0.55);
   transition: background 0.2s, border-color 0.2s;
+
+  @include light-mode {
+    // The dark theme's near-opaque black shadow reads as far too heavy on a
+    // light page. Same offsets, lighter and more transparent.
+    box-shadow: 0 2px 12px rgba(28, 32, 41, 0.18);
+  }
 
   &::before {
     content: '✕';
