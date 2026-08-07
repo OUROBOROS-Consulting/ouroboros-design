@@ -48,7 +48,9 @@ jobs:
 
   # ── 2. PRs only: build website with PR's SCSS source and deploy a preview ────
   # Uses the built-in GITHUB_TOKEN (contents: write) instead of a PAT — no
-  # secret to configure, works for any fork with write access to this repo.
+  # secret to configure. Note this only works for branches pushed to this repo:
+  # GitHub forces GITHUB_TOKEN read-only on pull_request events from a fork,
+  # regardless of the permissions block, so the gh-pages push would fail there.
   preview:
     name: Deploy website preview
     runs-on: ubuntu-latest
@@ -107,9 +109,14 @@ jobs:
           mkdir -p "gh-pages/preview/pr-${{ github.event.pull_request.number }}"
           cp -r site/_site/* "gh-pages/preview/pr-${{ github.event.pull_request.number }}/"
           cd gh-pages
+          # Pages serves this branch with build_type=legacy, which runs Jekyll
+          # over it. The preview is already-built Jekyll output, so a second
+          # pass would drop every path segment starting with _ or . .nojekyll
+          # makes Pages publish the tree verbatim.
+          touch .nojekyll
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add "preview/pr-${{ github.event.pull_request.number }}"
+          git add .nojekyll "preview/pr-${{ github.event.pull_request.number }}"
           git diff --staged --quiet && exit 0
           git commit -m "deploy: preview for PR #${{ github.event.pull_request.number }} (${{ github.sha }})"
           git push
