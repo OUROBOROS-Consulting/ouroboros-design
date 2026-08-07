@@ -575,6 +575,7 @@
 }
 
 .psa-section-header {
+  @include dark-island; // permanent near-black band in both themes
   display: flex;
   justify-content: space-between;
   align-items: baseline;
