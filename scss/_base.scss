@@ -144,6 +144,14 @@
 // hero, marble bands, section headers) gets this include — see Task 4.
 @mixin dark-island {
   @include dark-tokens;
+
+  // Redeclaring the tokens is not enough on its own. Descendants that never
+  // set `color` inherit it from `body`, which is `var(--text)` resolved at
+  // :root — light ink under a light theme, painted onto a permanently dark
+  // surface. Dark mode hid this because the root and island values of --text
+  // are identical there, so the bug only appears once a light theme exists.
+  // Pinning color here re-anchors inheritance to the island's own --text.
+  color: var(--text);
 }
 
 // ── CSS custom properties — Ouroboros v5 ──────────────────────────────────────

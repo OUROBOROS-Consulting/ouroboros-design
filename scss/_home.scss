@@ -669,7 +669,14 @@
 .site-banner {
   width: 100%;
   background: var(--steel);
-  color: var(--text);
+  // --steel is an ink accent, so its lightness flips between themes: light
+  // blue-grey on dark, dark slate on light. Using it as a surface means the
+  // text on it must flip too. --bg1 is the one token guaranteed to sit
+  // opposite --steel in both themes, because the contrast checker already
+  // asserts --steel clears its floor against --bg1. Same idiom the buttons
+  // use for `background: var(--gold); color: var(--bg1)`.
+  // Was var(--text): 2.48:1 on dark, 1.61:1 on light. Now 6.06:1 / 5.90:1.
+  color: var(--bg1);
   font-family: var(--font-sans, 'Inter', sans-serif);
   font-size: var(--fs-xs);
   letter-spacing: 0.03em;
