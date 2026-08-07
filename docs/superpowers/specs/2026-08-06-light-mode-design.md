@@ -27,6 +27,7 @@ approved scope is a full second palette.
 | Palette character | Cool navy-tinted, hue ~223° | Preserves the one-material invariant from the README. Light mode reads as the same system, not a second one |
 | Contrast target | AAA (7:1) for `--text` and `--subdued`; AA (4.5:1) elsewhere | Strongest service of the accessibility goal without flattening the four-step luminance ramp |
 | Effects | Re-tuned for light, not dropped | Light mode must be a peer of dark, not a lesser fallback |
+| Marble surfaces | Permanently dark in both themes, text included | Marble.png is black stone. No light variant exists or will be invented |
 | CI preview | Repaired as part of this work | Two palettes and four re-tuned texture mixins cannot be verified by reading a diff |
 
 ## Architecture
@@ -125,46 +126,73 @@ visible 1px borders, preserving the existing structure.
 `--sapphire` and `--emerald` are aliases (`var(--steel)`, `var(--sage)`) and inherit the flip
 for free.
 
-## Chrome tokenization
+## Dark islands
 
-The nav, footer, rail, and secondary nav paint themselves with hardcoded near-black
-translucent panels rather than tokens. These are invisible to the token flip and would render
-as black slabs on a light page. There are 42 hardcoded values across 8 partials.
+**Every surface backed by `Marble.png` stays dark in both themes, text included.** The marble
+is black stone; a light treatment of it does not exist and will not be invented.
 
-Rather than add light-mode branches to 8 files, convert them to new tokens that flip for free.
+### The seven islands
 
-| New token | Dark value | Replaces | Sites |
-|---|---|---|---|
-| `--chrome` | `rgba(20, 20, 20, 0.92)` | nav bar, footer, rail panels | 4 |
-| `--chrome-deep` | `rgba(15, 15, 15, 0.97)` | dropdown menus, secondary nav | 4 |
-| `--chrome-border` | `rgba(177, 147, 93, 0.22)` | all gold hairline borders | 9 |
-| `--chrome-hover` | `rgba(177, 147, 93, 0.06)` | nav item hover fills | 3 |
-| `--glass` | `rgba(255, 255, 255, 0.04)` | service card glass fill | 2 |
-| `--scrim` | `rgba(10, 10, 10, 0.80)` → `rgba(5, 5, 5, 0.90)` | Marble.png overlay gradient | 1 |
-| `--band-fallback` | `#0D0D0D` | fallback under marble rasters | 3 |
-| `--glow-gold` | `rgba(201, 168, 76, 0.16)` | logo and icon drop-shadows | 4 |
+| Surface | Declared in |
+|---|---|
+| Primary navbar | `main.scss:96`, `_nav-primary.scss:36` |
+| Secondary navbar | `main.scss:96`, `_nav-secondary.scss` |
+| Footer | `_footer.scss` |
+| Section headers (all pages) | `main.scss:138` |
+| Service hero | `main.scss:81`, `_service.scss` `.page-hero-*` |
+| Marble header bands | `_service.scss:428` `marble-band` mixin, `_home.scss:274` |
+| Sidebar / rail | `_sidebar.scss:6`, `_sidebar-rail.scss` |
+| Intake page | `intake.scss:18` (site repo) |
 
-Each gains a light-mode value in `light-tokens`. The scrim inverts (light overlay over marble
-rather than dark). The glows either invert to soft shadows or drop out in light, decided
-against the preview.
+The homepage `#hero` also counts: it carries a dimmed marble watermark (`main.scss:201`) over
+`#0C0E20`.
 
-Remaining stragglers handled individually: `_framework.scss:122-124` (error state `#8b1a1a` /
-`#c94a4a`), `_home.scss:14` (`#0C0E20` hero fallback), `_footer.scss:166`
-(`rgba(51,51,51,0.6)` rule), `_safety-exit.scss:27` (shadow), `_service.scss:499,522`
-(`rgba(165,128,82,…)` glows).
+### Mechanism
 
-### Pre-existing drift worth naming
+Custom properties cascade, so an island re-declares the dark token values on its own root
+selector and every descendant inherits correctly. No per-property edits.
 
-`#141414`, `#0e0e0e`, and `#0D0D0D` are **neutral greys**. The README's non-negotiable #3 says
-neutral-grey surfaces must never be reintroduced, and the 2026-07-26 commit moved every
-`--bg*` token into the navy family for exactly that reason. This chrome was missed in that
-pass.
+```scss
+@mixin dark-island {
+  --bg1: #0c101a;  --bg2: #1a1d26;  --bg3: #22262f;
+  --calloutbg: #252831;  --border: #30343e;  --shadow: #06080d;
+  --bright: #FFFFFF;  --text: #E8E4DC;  --subdued: #B0AAA0;  --muted: #999999;
+  --gold: #C9A84C;  --steel: #7F94A6;  --amethyst: #A284CA;
+  --sage: #6DA187;  --teal: #5DA19C;  --ruby: #ba6868;
+  --gold-border: #b39f7b;  --claude: #E8640A;
+  color-scheme: dark;
+}
+```
 
-Since these values are being tokenized anyway, the dark-mode replacements should be navy-family
-(hue ~223°) at matched luminance, finishing the job that commit started. This is a visible
-change to dark mode, not only light mode.
+Applied unconditionally, not only inside a light-mode branch. In dark mode it is a no-op; in
+light mode it protects the island. Idempotent, so it cannot drift out of sync with the theme
+blocks.
 
-**Decision needed.** See "Needs Apostolos."
+The dark values must be authored once and shared between `:root` and `dark-island` (a SCSS map
+or a `dark-tokens` mixin) so they cannot diverge. Two hand-maintained copies of 18 hex values
+is a defect waiting to happen.
+
+### Consequence for the hardcoded values
+
+The 42 hardcoded colors were the reason chrome tokenization looked necessary. Under the
+dark-island model, almost none of them need to change:
+
+| Disposition | Count | Detail |
+|---|---|---|
+| On a dark island, leave untouched | 39 | All of `_nav-primary`, `_nav-secondary`, `_footer`, `_sidebar-rail`, plus `.page-hero-*`, `#hero`, `.hero-emblem`, and both `marble-band` sites |
+| Theme-independent, leave untouched | 2 | `.exit-bar__btn` (`_framework.scss:122,124`): white on `#8b1a1a` is 9.3:1 and reads correctly on any background. A survivor-facing safety control should look identical in both themes |
+| Needs a light value | 1 | `.safety-exit` box-shadow (`_safety-exit.scss:27`), `rgba(8,8,8,0.55)`. A hard black shadow is too heavy on a light page |
+
+No new chrome tokens. No scrim inversion. No light marble variant.
+
+### Pre-existing drift, not fixed here
+
+`#141414`, `#0e0e0e`, and `#0D0D0D` in the chrome are **neutral greys**, which non-negotiable #3
+says must never be reintroduced. The 2026-07-26 navy migration missed them.
+
+This spec does not fix that. Under the dark-island model those values never flip, so the drift
+does not affect light mode, and correcting it would be an unrelated visible change to dark
+mode. Recorded here so it is not lost. Separate PR if you want it.
 
 ## Effects re-tuning
 
@@ -188,8 +216,20 @@ Fix at the mixin, not the call site. A shared helper emits both selector forms:
 ```
 
 Each texture mixin gains a nested `@include light-mode { background-image: /* darkened
-stroke, raised opacity */ }`. Four mixin edits cover all 15 call sites across 8 files, with
-zero call-site changes.
+stroke, raised opacity */ }`.
+
+**Dark islands must opt out.** `:root[data-theme="light"] .card` (0,2,1) outranks a
+`.nav-menu .card` island rule (0,2,0), so an auto-flipping mixin would repaint a texture that
+sits on black marble. Rather than fight specificity with `:not()` chains, split the mixins:
+
+- `snakeskin` / `scallop-*` — emits dark plus the light override. Content surfaces.
+- `snakeskin-dark` / `scallop-*-dark` — emits the dark data URI only, never flips. Island
+  surfaces.
+
+Each of the 15 call sites is classified during implementation. `_nav-primary.scss` and
+`_footer.scss` take the `-dark` variants; `_cards.scss`, `_framework.scss`, and
+`_design-system.scss` take the flipping ones; `_service.scss` and `_home.scss` are mixed and
+need per-rule inspection.
 
 Stroke opacity must rise in light mode. The dark values (0.076 / 0.09 / 0.10) were tuned for a
 light stroke on a dark ground; a dark stroke at 0.10 on near-white is invisible. Target
@@ -297,10 +337,11 @@ The `cleanup` job on PR close stays, minus its PAT dependency.
 
 **`ouroboros-design` — push first.**
 
-- `light-tokens` mixin and the two override blocks
+- `dark-tokens` / `light-tokens` mixins and the two override blocks
 - `light-mode` helper mixin
-- Chrome tokenization: 8 new tokens, 42 call sites across 8 partials
-- Four texture mixins, vignette, spotlight, inset highlight
+- `dark-island` mixin, applied to the seven island surfaces
+- Texture mixins split into flipping and `-dark` variants; 15 call sites classified
+- Vignette, spotlight, inset highlight, `.safety-exit` shadow
 - Rail toggle button styling
 - `check:contrast` script and CI wiring
 - CI preview repair
@@ -311,8 +352,12 @@ The `cleanup` job on PR close stays, minus its PAT dependency.
 - Rail toggle item in `_includes/nav.html`
 - Blocking theme script in `<head>` of `_layouts/default.html`
 - Toggle logic in `assets/js/main.js`
-- Audit of the 67 hardcoded color values in the site's own SCSS
-  (`main.scss`, `dashboard.scss`, `intake.scss`, `quiz.scss`)
+- `@include dark-island` on the marble surfaces declared here: navbars (`main.scss:96`),
+  section headers (`main.scss:138`), service hero (`main.scss:81`), hero watermark
+  (`main.scss:201`), intake (`intake.scss:18`)
+- Audit of the 67 hardcoded color values in the site's own SCSS. Expect most to sit on marble
+  surfaces and need no change, mirroring the 39-of-42 result in the design repo.
+  `dashboard.scss` and `quiz.scss` are the likely exceptions, being content-heavy
 
 Order is mandatory. The site's workflow re-checks-out the design repo with no `ref:`, so CI
 always pulls the design repo's default branch. Reversed order serves new markup against old CSS.
@@ -320,19 +365,23 @@ always pulls the design repo's default branch. Reversed order serves new markup 
 ## Out of scope
 
 - Any redesign of the navbar or hero beyond adding one rail item
+- A light variant of `Marble.png`. Marble surfaces are dark islands in both themes
+- The neutral-grey chrome drift (`#141414`, `#0e0e0e`, `#0D0D0D`). Recorded above, separate PR
 - The `.ruby-version` file is empty in the site repo; not touched here
 - Print stylesheet
-- Per-page or per-section theme overrides
-- Marble texture and logo art. Flagged as a risk below, not addressed in this pass
+- Per-page or per-section theme overrides beyond the dark-island mixin
 
 ## Risks
 
 | Risk | Mitigation |
 |---|---|
-| Marble.png and `logo.svg` were authored for a dark ground and may read badly on light | Inspect in preview. If they fail, a light-mode asset variant is follow-up work, not this spec |
+| Light-mode pages show full-width black bands at every section header | Accepted by design. This is the approved look, not a defect. Confirm against the preview |
+| Island boundaries are visually abrupt where a dark header meets a light body | Inspect the seams in preview: section header edges, nav underside, footer top. May need a transition rule |
+| `dark-island` duplicates 18 token values that could drift from `:root` | Author once in a shared `dark-tokens` mixin; both consume it. Never two literal copies |
+| A texture call site is given the wrong mixin variant, flipping on marble | Enumerate all 15 in the plan with an explicit variant per site. Visual check in preview |
 | Doubling texture CSS inflates bundle size | CI reports size on every run; record before/after |
-| Hardcoded rgba in the site repo (67 occurrences) may not all be theme-sensitive | Audit each; convert only those that are |
 | Toggle sits in markup owned by `_includes/nav.html`, adjacent to locked navbar | Additive only. No changes to existing nav structure |
+| `logo.svg` was authored for a dark ground | It sits in the navbar, which is an island. No exposure |
 
 ## Success criteria
 
@@ -342,17 +391,16 @@ always pulls the design repo's default branch. Reversed order serves new markup 
 4. No flash of the wrong theme on load in either direction.
 5. A PR against `ouroboros-design` posts a working preview link that renders the Jekyll site.
 6. Every text and accent token meets its declared level on the lightest surface.
-7. `dist/ouroboros.css` size change is recorded and accepted.
+7. In light mode, all seven island surfaces render identically to dark mode: same marble, same
+   scrim, same text colors, same texture. Verified by screenshot comparison.
+8. No texture on an island flips. No texture on a content surface fails to flip.
+9. `dist/ouroboros.css` size change is recorded and accepted.
 
 ## Needs Apostolos
 
 - **Switch GitHub Pages source** on `ouroboros-design` from `main` to `gh-pages`. Doable via
   `gh api` with admin rights, or through Settings → Pages. Blocks success criterion 5.
-- **Decide on the navy-family chrome fix.** The nav, footer, and rail use neutral greys
-  (`#141414`, `#0e0e0e`, `#0D0D0D`) that violate non-negotiable #3 and were missed by the
-  2026-07-26 navy migration. Tokenizing them is required either way; the question is whether
-  the dark-mode replacements stay neutral or move to navy. Moving them changes how dark mode
-  looks today. Options: fix now (finishes the migration, one visible dark-mode change),
-  tokenize at current values (zero dark-mode change, drift persists), or fix in a separate PR.
 - **Visual sign-off** on the light palette against a rendered preview. Contrast math is
-  automatable; whether it looks like OUROBOROS is not.
+  automatable; whether it looks like OUROBOROS is not. Pay particular attention to the island
+  seams: black section headers against a light page body is the single biggest visual change
+  and the hardest thing to judge from a spec.
