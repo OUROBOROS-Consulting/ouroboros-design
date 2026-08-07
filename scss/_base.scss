@@ -8,73 +8,150 @@
   padding: 0;
 }
 
+// ── Theme mixins — Ouroboros v5 + light mode ──────────────────────────────────
+// Two palettes (dark-tokens, light-tokens), a two-selector override pattern
+// (light-mode) for non-token effects, and a trivial wrapper (dark-island) for
+// marble/chrome surfaces that must render identically in both themes.
+//
+// Default is dark, unconditionally, on :root. Light applies in two cases:
+//   1. OS prefers light AND the visitor has not explicitly chosen dark
+//      (:root:not([data-theme="dark"]) inside a prefers-color-scheme: light
+//      media query).
+//   2. The visitor explicitly chose light (:root[data-theme="light"]),
+//      regardless of OS preference.
+// An explicit data-theme="dark" needs no extra rule — dark is already the
+// unconditional :root default, so choosing dark just means "no override
+// applies."
+@mixin dark-tokens {
+  --bg1: #0c101a;
+  --bg2: #1a1d26;
+  --bg3: #22262f;
+  --border: #30343e;
+  --calloutbg: #252831;
+  --shadow: #06080d;
+
+  --bright: #FFFFFF; // 14.7:1 (19.0 on bg1)
+  --text: #E8E4DC; // 11.6:1 (15.0)
+  --subdued: #B0AAA0; // 6.4:1 (8.2) — AA for normal text on every surface
+  --muted: #999999; // 5.2:1 (6.7) — AA for normal text on every surface
+
+  --gold: #C9A84C;
+  --gold-dim: rgba(201, 168, 76, 0.35);
+  --gold-ghost: rgba(201, 168, 76, 0.12);
+  --gold-border: #b39f7b;
+
+  --steel: #7F94A6;
+  --steel-dim: rgba(127, 148, 166, 0.35);
+  --steel-ghost: rgba(127, 148, 166, 0.12);
+
+  --amethyst: #A284CA;
+  --amethyst-dim: rgba(162, 132, 202, 0.35);
+  --amethyst-ghost: rgba(162, 132, 202, 0.12);
+
+  --sage: #6DA187;
+  --sage-dim: rgba(109, 161, 135, 0.35);
+  --sage-ghost: rgba(109, 161, 135, 0.12);
+
+  --teal: #5DA19C;
+  --teal-dim: rgba(93, 161, 156, 0.35);
+  --teal-ghost: rgba(93, 161, 156, 0.12);
+
+  --ruby: #ba6868; // pre-existing 3.70:1 on --calloutbg — zero call sites,
+  // out of scope for this feature, not asserted by the dark contrast floor.
+  --claude: #E8640A; // pre-existing 4.36:1 on --calloutbg — same as above.
+}
+
+// Light palette. Cool navy-tinted family (hue ~223°, same character as dark)
+// so the two themes read as one material, not two different systems. The
+// surface ramp keeps the SAME ORDER as dark — --bg1 is the page floor and the
+// darkest of the four, --calloutbg is the lightest — so "further forward" still
+// means "brighter" in both themes. That keeps three things working: the
+// elevation gradient in elevation-elevated (a --bg3 wash at the TOP of a card)
+// stays a lightening highlight rather than inverting into a dark band against
+// its paired rgba(255,255,255,0.04) inset; callouts keep a visible step off the
+// page floor; and hover-to---bg3 still reads as "lift", not "sink".
+// --bg1 (#E7EAF0) is therefore the worst-case backdrop for dark-on-light text —
+// the mirror of dark mode, where --calloutbg was the worst case for
+// light-on-dark. Every ratio below was computed by hand against WCAG 2.1
+// relative luminance (sRGB companding) using --bg1 as the worst-case surface,
+// and verified against `npm run check:contrast` in Step 6.
+@mixin light-tokens {
+  --bg1: #E7EAF0;
+  --bg2: #EFF1F5;
+  --bg3: #F5F7FA;
+  --border: #C7CBD6;
+  --calloutbg: #FCFDFE;
+  --shadow: rgba(28, 32, 41, 0.18);
+
+  --bright: #1C2029; // 13.53:1 on --bg1
+  --text: #34394A; // 9.52:1 on --bg1
+  --subdued: #3D4353; // 8.20:1 on --bg1 — AAA, matches the tighter light target
+  --muted: #535971; // 5.74:1 on --bg1
+
+  --gold: #7A6028; // 4.93:1 on --bg1
+  --gold-dim: rgba(122, 96, 40, 0.35);
+  --gold-ghost: rgba(122, 96, 40, 0.12);
+  --gold-border: #8A7550; // 3.68:1 on --bg1 — non-text, 3:1 floor
+
+  --steel: #4A5A68; // 5.90:1 on --bg1
+  --steel-dim: rgba(74, 90, 104, 0.35);
+  --steel-ghost: rgba(74, 90, 104, 0.12);
+
+  --amethyst: #6B4F94; // 5.49:1 on --bg1
+  --amethyst-dim: rgba(107, 79, 148, 0.35);
+  --amethyst-ghost: rgba(107, 79, 148, 0.12);
+
+  --sage: #38624C; // 5.77:1 on --bg1
+  --sage-dim: rgba(56, 98, 76, 0.35);
+  --sage-ghost: rgba(56, 98, 76, 0.12);
+
+  --teal: #295F5A; // 6.05:1 on --bg1
+  --teal-dim: rgba(41, 95, 90, 0.35);
+  --teal-ghost: rgba(41, 95, 90, 0.12);
+
+  --ruby: #8A3E3E; // 6.14:1 on --bg1 — zero call sites, given a real passing
+  // value anyway for palette completeness.
+  --claude: #A34608; // 5.07:1 on --bg1 — zero call sites, same rationale.
+}
+
+// Wraps @content in both light-theme override selectors. Use for non-token
+// effects (textures, shadows, gradients) that can't be expressed as a single
+// custom property. `&` is whatever selector this is @include'd inside.
+@mixin light-mode {
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) & {
+      @content;
+    }
+  }
+
+  :root[data-theme="light"] & {
+    @content;
+  }
+}
+
+// Forces dark-tokens on a marble/chrome surface regardless of the active
+// theme. A trivial wrapper (not a hand-copied property list) so there is
+// structurally zero chance of drifting from dark-tokens as the palette
+// changes. Every island in this system (nav, footer, rail, page-toc, service
+// hero, marble bands, section headers) gets this include — see Task 4.
+@mixin dark-island {
+  @include dark-tokens;
+}
+
 // ── CSS custom properties — Ouroboros v5 ──────────────────────────────────────
 :root {
-  // The system has no light mode. Declaring it stops the UA from rendering form
-  // controls, scrollbars, and the default link colour for a light page.
+  // Baseline is dark. `color-scheme: light dark` lets the UA render its own
+  // chrome (form controls, scrollbars, default link colour) for whichever
+  // theme is actually active; the two override blocks below set it to
+  // `light` explicitly when light-tokens is in effect.
   color-scheme: dark;
 
   --nav-h: 13rem; // desktop: primary (~96px)
   --pad:  2.5rem;
   --label-size: var(--fs-base);
-
-  // Surfaces — all one navy family (hue ~223°) so the elevation ramp reads as
-  // the same material lifted, not a different material. Values were chosen to
-  // match the luminance of the neutral greys they replaced on 2026-07-26, so
-  // every text-on-surface contrast ratio is unchanged. Do not reintroduce
-  // neutral greys here.
-  --bg1: #0c101a;
-  --bg-hero: #1e213e; // dark navy — homepage + service hero background
-  --bg2: #1a1d26; // was #1E1E1E
-  --bg3: #22262f; // was #252525
-  --border: #30343e; // was #333333
-  --calloutbg: #252831; // was #2A2A2A — nudged darker to give the accents
-  // headroom on the site's lightest surface: steel/amethyst were 4.57:1 on the
-  // old grey, which is barely over AA. Now 4.69:1.
-  --shadow: #06080d; // was #080808
-
-  // Luminance hierarchy. Ratios below are the WORST case across all five
-  // surfaces (calloutbg, the lightest), not the bg1 figure — quoting bg1 hid
-  // roughly 1.5 points of headroom and made the ramp look safer than it is.
-  // bg1 figures follow in parentheses.
-  --bright: #FFFFFF; // 14.7:1 (19.0 on bg1)
-  --text: #E8E4DC; // 11.6:1 (15.0)
-  --subdued: #B0AAA0; // 6.4:1  (8.2) — AA for normal text on every surface
-  --muted: #999999; // 5.2:1  (6.7) — AA for normal text on every surface
-
-  // Accent: Gold
-  --gold: #C9A84C;
-  --gold-dim: rgba(201, 168, 76, 0.35);
-  --gold-ghost: rgba(201, 168, 76, 0.12);
-  --gold-border: #b39f7b; // opaque — for visible 1px borders
-
-  // Accent: Steel (replaces sapphire)
-  --steel: #7F94A6;
-  --steel-dim: rgba(127, 148, 166, 0.35);
-  --steel-ghost: rgba(127, 148, 166, 0.12);
-
-  // Accent: Amethyst
-  --amethyst: #A284CA;
-  --amethyst-dim: rgba(162, 132, 202, 0.35);
-  --amethyst-ghost: rgba(162, 132, 202, 0.12);
-
-  // Accent: Sage
-  --sage: #6DA187;
-  --sage-dim: rgba(109, 161, 135, 0.35);
-  --sage-ghost: rgba(109, 161, 135, 0.12);
-
-  // Accent: Teal (logo hex frame colour)
-  --teal: #5DA19C;
-  --teal-dim: rgba(93, 161, 156, 0.35);
-  --teal-ghost: rgba(93, 161, 156, 0.12);
-
-  // Semantic aliases — active use only
-  --ruby: #ba6868; // timeline error/alert states (_timeline.scss)
-  --sapphire: var(--steel);
-  --emerald: var(--sage);
-
-  // Claude orange
-  --claude: #E8640A;
+  --bg-hero: #1e213e; // dark navy — homepage + service hero. Unconditional in
+  // BOTH themes: the hero is a photographic/marble surface, not flat colour,
+  // so it does not participate in the light/dark flip. See Task 4.
 
   /* ── Type scale ── */
   --fs-xs: 0.8rem;
@@ -88,6 +165,20 @@
   --fs-display-md: clamp(2rem, 4vw, 3rem);
   --fs-display-lg: clamp(2.4rem, 5vw, 4rem);
   --fs-display-xl: clamp(3.5rem, 10vw, 8rem);
+
+  @include dark-tokens;
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    color-scheme: light;
+    @include light-tokens;
+  }
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+  @include light-tokens;
 }
 
 @media (max-width: 768px) {

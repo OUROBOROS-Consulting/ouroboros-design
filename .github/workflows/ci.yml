@@ -27,6 +27,9 @@ jobs:
       - name: Build CSS
         run: npm run build
 
+      - name: Check contrast
+        run: node scripts/check-contrast.mjs
+
       - name: Report output size
         run: |
           SIZE_KB=$(echo "scale=1; $(wc -c < dist/ouroboros.css) / 1024" | bc)
