@@ -8,7 +8,7 @@
   flex-direction: column;
   border-bottom: 2px solid var(--border);
   position: relative;
-  @include elevation-standard;
+  @include elevation-standard-dark;
   background-color: var(--bg-hero);
   background-image: none;
   box-shadow: none;
