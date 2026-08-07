@@ -52,6 +52,19 @@
   }
 }
 
+// ── Button variant (theme toggle) ────────────────────────────────────────────
+// .rail-item is normally an <a>. The toggle is a <button> (no navigation, no
+// href) so it needs its own reset: no native button chrome, full width to
+// match the anchor items, and a visible pointer cursor.
+.rail-item--button {
+  width: 100%;
+  background: none;
+  border: none;
+  font: inherit;
+  cursor: pointer;
+  text-align: left;
+}
+
 .rail-ic {
   flex-shrink: 0;
   width: 1.35rem;
