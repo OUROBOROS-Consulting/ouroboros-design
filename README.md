@@ -112,7 +112,14 @@ Added 2026-08-06. Same navy-tinted character (hue ~223°). The ramp keeps the sa
 
 --gold: #7A6028      --steel: #4A5A68      --amethyst: #6B4F94
 --sage: #38624C      --teal: #295F5A       --gold-border: #8A7550 (3:1, non-text)
+
+--ruby: #8A3E3E    //  6.14:1 on --bg1
+--claude: #A34608  //  5.07:1 on --bg1
 ```
+
+`--ruby` and `--claude` have zero call sites in light-themed markup today. They are given real passing values anyway so the palette stays complete if one is ever used.
+
+There is no light `--bg-hero`. Both heroes are dark islands, so they keep the dark `#1e213e` in every theme; overriding it would only take effect somewhere it is never read.
 
 Default is dark. Two mechanisms bring in light:
 
