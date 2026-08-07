@@ -206,11 +206,15 @@
     }
   }
 
-  // Optional SVG/glyph icon at the top of the card (reuses the service
+  // Optional SVG/glyph icon in the card's top-right corner (reuses the service
   // hero_svg, falling back to the Font Awesome glyph). Gold-toned, no glow.
+  // Lifted out of flow so it pins to the corner regardless of how much copy
+  // follows; .rc-tag and .rc-title reserve a gutter so they never run under it.
   .rc-icon {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
     width: clamp(46px, 18%, 68px);
-    margin-bottom: 1rem;
     color: var(--gold);
 
     img {
@@ -222,6 +226,22 @@
     i {
       font-size: 2.4rem;
       line-height: 1;
+    }
+  }
+
+  // Only cards that actually carry an icon reserve the corner gutter. Related
+  // cards in essay and project footers have none and stay full width.
+  &:has(.rc-icon) {
+    .rc-tag,
+    .rc-title {
+      padding-right: calc(68px + 1rem);
+    }
+
+    // Tag + title together must be at least as tall as the icon box, or
+    // .card-desc below them runs under the corner. Tag is ~1.5rem with its
+    // margin, so 3rem here clears the 68px icon.
+    .rc-title {
+      min-height: 3rem;
     }
   }
 
@@ -292,6 +312,34 @@
   flex-direction: column;
   flex: 1;
   min-height: 0;
+}
+
+// ── Corner icon ───────────────────────────────────────────────────────────────
+// Cards carrying a .card-icon pin it to the top-right corner rather than
+// stacking it above the copy. The icon is a flex child of a column container,
+// so a float cannot work here; it is lifted out of flow and .card-body reserves
+// a gutter wide enough that no line ever runs under it. Guarded by :has() so
+// icon-less .card--formula instances (footer, values grid) stay full width.
+.card--formula:has(.card-icon) {
+  .card--formula__interior { position: relative; }
+
+  .card-icon {
+    position: absolute;
+    top: 1.4rem;   // matches the interior's padding
+    right: 1.4rem;
+    // Narrower than the stacked 30%: a corner mark, not a feature block.
+    width: clamp(40px, 16%, 60px);
+    margin-bottom: 0;
+    font-size: 2.4rem; // Font Awesome fallback, down from the stacked 5rem
+  }
+
+  // Only the title sits beside the icon, so only the title gives up width. The
+  // min-height matches the icon box, which guarantees .card-desc always starts
+  // below it and can stay full width.
+  .card-title {
+    padding-right: calc(60px + 1rem);
+    min-height: 60px;
+  }
 }
 
 .values-grid {
