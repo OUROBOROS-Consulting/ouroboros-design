@@ -1,4 +1,5 @@
 @use "typography" as *;
+@use "base" as *;
 // ── Page TOC Sidebar ──────────────────────────────────────────────────────────
 // Shared wrapper + fixed right-edge panel used by foundation and mission
 // layouts. The panel mirrors the left .rail: pinned to the viewport edge,
@@ -52,6 +53,7 @@
 // Fixed to the right viewport edge, same vertical span as the left .rail —
 // it does not travel with the page scroll.
 .page-toc {
+  @include dark-island;
   position: fixed;
   top: var(--rail-top);
   right: 0;

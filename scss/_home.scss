@@ -3,6 +3,7 @@
 @use "chamfer" as *;
 // ── Hero ──────────────────────────────────────────────────────────────────────
 #hero {
+  @include dark-island;
   min-height: 100vh;
   padding: var(--nav-h) 10vw 6rem;
   display: grid;
@@ -268,6 +269,7 @@
 .work-header,
 .testimonials-header,
 .about-header {
+  @include dark-island;
   display: flex;
   justify-content: space-between;
   align-items: flex-end;

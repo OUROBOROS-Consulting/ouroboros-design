@@ -17,6 +17,7 @@
 
 // ── Secondary nav (tab strip below primary nav) ──────────────────
 .nav-secondary {
+  @include dark-island;
   width: 100%;
   display: flex;
   align-items: center;

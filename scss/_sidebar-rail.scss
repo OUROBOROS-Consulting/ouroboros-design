@@ -14,6 +14,7 @@
 }
 
 .rail {
+  @include dark-island;
   position: fixed;
   top: var(--rail-top);
   left: 0;
