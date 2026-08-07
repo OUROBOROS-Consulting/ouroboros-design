@@ -59,6 +59,14 @@
   --ruby: #ba6868; // pre-existing 3.70:1 on --calloutbg — zero call sites,
   // out of scope for this feature, not asserted by the dark contrast floor.
   --claude: #E8640A; // pre-existing 4.36:1 on --calloutbg — same as above.
+
+  // Legacy aliases, zero call sites, documented in README as deprecated. They
+  // point at custom properties rather than literals, so they re-resolve per
+  // theme on their own and need no entry in light-tokens. Kept because this is
+  // a published package: dropping a documented token is a breaking change for
+  // consumers we cannot see. Remove deliberately, not as refactor fallout.
+  --sapphire: var(--steel);
+  --emerald: var(--sage);
 }
 
 // Light palette. Cool navy-tinted family (hue ~223°, same character as dark)
@@ -386,10 +394,12 @@ a {
     // the top edge. On a light surface a light-on-light inset is invisible,
     // so flip to a thin dark line at the BOTTOM inner edge instead — same
     // "lit from above, shadow pools at the bottom" read, opposite polarity.
-    // rgb(28, 32, 41) is the light theme's own --bright ink color.
+    // rgb(28, 32, 41) is the light theme's own --bright ink color. Note the
+    // negative Y offset: an inset shadow with +1px sits on the TOP inner edge,
+    // which is where the dark theme wants its light line. Bottom needs -1px.
     box-shadow:
       0 4px 16px var(--shadow),
-      0 1px 0 rgba(28, 32, 41, 0.14) inset;
+      0 -1px 0 rgba(28, 32, 41, 0.14) inset;
   }
 }
 
