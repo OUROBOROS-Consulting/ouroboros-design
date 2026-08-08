@@ -3,11 +3,11 @@
 // ── Footer ───────────────────────────────────────────────────────────────────
 footer {
   @include dark-island;
-  padding: 0.75rem 3rem;
+  padding: var(--space-4) var(--space-10);
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  gap: 0.75rem;
+  gap: var(--space-4);
   @include scallop-elevated-dark;
   background-color: rgba(20, 20, 20, 0.92);
   backdrop-filter: blur(12px);
@@ -17,13 +17,13 @@ footer {
 .footer-logo {
   display: flex;
   align-items: center;
-  gap: 0.6rem;
+  gap: var(--space-3);
   text-decoration: none;
-  color: var(--subdued);
+  color: var(--ink-2);
   transition: color 0.3s;
 
   &:hover {
-    color: var(--text);
+    color: var(--ink-3);
   }
 }
 
@@ -36,7 +36,7 @@ footer {
 
 .footer-logo-text {
   font-family: "EB Garamond", serif !important;
-  font-size: var(--fs-xs);
+  font-size: var(--fs-1);
   letter-spacing: 0.12em;
   text-transform: uppercase;
   line-height: 1.2;
@@ -44,14 +44,14 @@ footer {
 
 .footer-logo-sub {
   display: block;
-  font-size: var(--fs-xs);
+  font-size: var(--fs-1);
   letter-spacing: 0.18em;
-  color: var(--muted);
+  color: var(--ink-1);
 }
 
 .footer-copy {
-  font-size: var(--fs-xs);
-  color: var(--subdued);
+  font-size: var(--fs-1);
+  color: var(--ink-2);
   text-align: right;
   justify-self: end;
 }
@@ -66,17 +66,17 @@ footer {
   }
 
   .card--formula__interior {
-    padding: 0.5rem 0.5rem;
+    padding: var(--space-3) var(--space-3);
   }
 
   a {
-    color: var(--subdued);
+    color: var(--ink-2);
     text-decoration: none;
     transition: color 0.3s;
     display: flex;
     align-items: center;
-    gap: 0.75rem;
-    font-size: var(--fs-sm);
+    gap: var(--space-4);
+    font-size: var(--fs-2);
 
     .footer-label {
       font-size: var(--label-size);
@@ -85,11 +85,11 @@ footer {
     }
 
     i {
-      font-size: var(--fs-lg);
+      font-size: var(--fs-5);
     }
 
     &:hover {
-      color: var(--gold);
+      color: var(--mark);
     }
   }
 }
@@ -101,7 +101,7 @@ footer {
   }
 
   .card--formula__interior {
-    padding: 0.6rem 0.7rem !important;
+    padding: var(--space-3) var(--space-4) !important;
   }
 
   .footer-social {
@@ -113,14 +113,14 @@ footer {
   }
 
   .footer-social i {
-    font-size: var(--fs-md);
+    font-size: var(--fs-4);
   }
 }
 
 // ── Responsive ───────────────────────────────────────────────────────────────
 @media (max-width: 768px) {
   footer {
-    padding: 1rem 5vw;
+    padding: var(--space-5) 5vw;
     grid-template-columns: 1fr;
     justify-items: center;
   }
@@ -136,8 +136,8 @@ footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 2rem;
-  margin-bottom: 0.5rem;
+  gap: var(--space-8);
+  margin-bottom: var(--space-3);
 }
 
 // ── Footer social icon links ──────────────────────────────────────────────────
@@ -145,42 +145,42 @@ footer {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--bright);
-  font-size: var(--fs-md);
+  color: var(--ink-4);
+  font-size: var(--fs-4);
   transition: color 0.15s ease;
 
   &:hover {
-    color: var(--gold);
+    color: var(--mark);
   }
 }
 
 .footer-label {
-  font-size: var(--fs-xs);
-  color: var(--muted);
+  font-size: var(--fs-1);
+  color: var(--ink-1);
   letter-spacing: 0.05em;
   text-transform: uppercase;
 }
 
 // ── Disclaimer bar ────────────────────────────────────────────────────────────
 .disclaimer-bar {
-  background: var(--bg1);
+  background: var(--surface-1);
   border-top: 1.5px solid rgba(51, 51, 51, 0.6);
-  padding: 0.5rem 2rem;
+  padding: var(--space-3) var(--space-8);
   text-align: center;
   font-family: $font-mono;
-  font-size: var(--fs-base);
+  font-size: var(--fs-3);
   letter-spacing: 0.09em;
-  color: var(--muted);
+  color: var(--ink-1);
   text-transform: uppercase;
 
   a {
-    color: var(--subdued);
+    color: var(--ink-2);
     text-decoration: underline;
     text-underline-offset: 2px;
 
     &:hover,
     &:focus-visible {
-      color: var(--gold);
+      color: var(--mark);
     }
   }
 }

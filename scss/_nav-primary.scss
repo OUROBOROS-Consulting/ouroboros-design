@@ -19,7 +19,7 @@ nav {
   padding: 0.5rem var(--pad);
   display: flex;
   justify-content: flex-start;
-  gap: 0.75rem;
+  gap: var(--space-4);
   align-items: center;
   @include dark-island;
   @include scallop-recessed-dark;
@@ -46,7 +46,7 @@ nav {
 .nav-logo {
   display: flex;
   align-items: center;
-  gap: 0.55rem;
+  gap: var(--space-3);
   text-decoration: none;
   flex-shrink: 0;
 }
@@ -64,7 +64,7 @@ nav {
   font-size: 3.00rem;
   font-weight: 600;
   letter-spacing: 0.08em;
-  color: var(--bright);
+  color: var(--ink-4);
   line-height: 1.1;
   display: inline-flex;
   flex-direction: column;
@@ -74,7 +74,7 @@ nav {
 .nav-logo-sub {
   font-family: $font-cormorant;
   display: block;
-  font-size: var(--fs-base);
+  font-size: var(--fs-3);
   letter-spacing: 0.12em;
   opacity: 0.75;
   margin-top: 0.15rem;
@@ -82,7 +82,7 @@ nav {
 
 .nav-links {
   display: flex;
-  gap: 1.0rem;
+  gap: var(--space-5);
   margin-left: auto;
   font-family: $font-sans;
 
@@ -96,7 +96,7 @@ nav {
   }
 
   a {
-    color: var(--bright);
+    color: var(--ink-4);
     text-decoration: none;
     font-size: var(--label-size);
     letter-spacing: 0.12em;
@@ -104,24 +104,24 @@ nav {
     transition: color 0.3s;
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: var(--space-3);
 
     i {
-      font-size: var(--fs-lg);
+      font-size: var(--fs-5);
       text-align: center;
     }
 
     &:hover {
-      color: var(--gold-border);
+      color: var(--mark-border);
     }
   }
 
   .nav-button a {
-    color: var(--bright);
+    color: var(--ink-4);
     font-weight: 600;
 
     &:hover {
-      color: var(--gold);
+      color: var(--mark);
     }
   }
 }
@@ -135,14 +135,14 @@ nav {
   // offset the search card relative to the other three; flex-start aligns
   // all card tops since each card is the first child of its flex item.
   align-items: flex-start;
-  gap: 0.75rem;
+  gap: var(--space-4);
 }
 
 // ── Dropdowns ─────────────────────────────────────────────────────────────────
 .nav-dropdown-toggle {
   background: transparent;
   border: none;
-  color: var(--muted);
+  color: var(--ink-1);
   font-family: $font-sans;
   font-size: var(--label-size);
   letter-spacing: 0.12em;
@@ -153,15 +153,15 @@ nav {
   display: inline-flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.35rem;
+  gap: var(--space-2);
 
   i {
-    font-size: var(--fs-base);
+    font-size: var(--fs-3);
     text-align: center;
   }
 
   &:hover {
-    color: var(--gold);
+    color: var(--mark);
   }
 }
 
@@ -192,20 +192,20 @@ nav {
   background: rgba(15, 15, 15, 0.97);
   border: 1px solid rgba(177, 147, 93, 0.18);
   backdrop-filter: blur(16px);
-  padding: 0.2rem 0;
+  padding: var(--space-1) 0;
 
   a {
     display: block;
-    padding: 0.3rem 0.85rem;
-    font-size: var(--fs-xs);
+    padding: var(--space-1) var(--space-4);
+    font-size: var(--fs-1);
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--muted);
+    color: var(--ink-1);
     text-decoration: none;
     transition: color 0.2s, background 0.2s;
 
     &:hover {
-      color: var(--gold);
+      color: var(--mark);
       background: rgba(177, 147, 93, 0.06);
     }
   }
@@ -219,7 +219,7 @@ nav {
 // ── Nav card ──────────────────────────────────────────────────────────────────
 // Separate from .card--formula — style here without affecting formula boxes
 .nav-card {
-  background: var(--gold-border); // outer shell = visible chamfer edge
+  background: var(--mark-border); // outer shell = visible chamfer edge
   padding: $chamfer-border;
   position: relative;
   @include chamfer($chamfer-arc);
@@ -228,8 +228,8 @@ nav {
   height: 100%;
 
   &__interior {
-    background: var(--bg1);
-    padding: 0.5rem 0.5rem;
+    background: var(--surface-1);
+    padding: var(--space-3) var(--space-3);
     @include chamfer($chamfer-inner);
     display: flex;
     flex-direction: column;
@@ -243,21 +243,21 @@ nav {
 // and .nav-btn-label below — so it's never inside the gold chamfer border.
 .nav-button .nav-card {
   @include chamfer($chamfer-arc);
-  background: var(--gold-border);
+  background: var(--mark-border);
   padding: $chamfer-border;
   transition: background 0.2s ease;
 
   &__interior {
     @include chamfer($chamfer-inner);
-    padding: 0.61rem 0.72rem;
+    padding: var(--space-3) var(--space-4);
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--bg1);
+    background: var(--surface-1);
 
     i {
-      font-size: var(--fs-xl);
-      color: var(--bright);
+      font-size: var(--fs-6);
+      color: var(--ink-4);
       transition: color 0.2s ease;
       flex-shrink: 0;
     }
@@ -269,23 +269,23 @@ nav {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.35rem;
+  gap: var(--space-2);
   text-decoration: none;
 }
 
 .nav-btn-label {
   font-family: $font-sans;
-  font-size: var(--fs-xs);
+  font-size: var(--fs-1);
   letter-spacing: 0.1em;
   text-transform: uppercase;
   white-space: nowrap;
-  color: var(--muted);
+  color: var(--ink-1);
   transition: color 0.2s ease;
 }
 
 .nav-button:hover .nav-card__interior i,
 .nav-button:hover .nav-btn-label {
-  color: var(--gold);
+  color: var(--mark);
 }
 
 @keyframes dropdown-card-in {
@@ -306,7 +306,7 @@ nav {
   // inherits chamfer geometry and 3px border padding from .nav-card base
 
   &__interior {
-    padding: 0.2rem 0.75rem;
+    padding: var(--space-1) var(--space-4);
 
     a {
       padding: 0;
@@ -367,7 +367,7 @@ nav {
     display: block;
     width: 22px;
     height: 2px;
-    background: var(--gold);
+    background: var(--mark);
     transition: transform 0.25s, opacity 0.25s;
   }
 
@@ -397,7 +397,7 @@ nav {
 // ── Responsive ───────────────────────────────────────────────────────────────
 @media (max-width: 768px) {
   nav {
-    padding: 0.55rem 1rem;
+    padding: var(--space-3) var(--space-5);
     flex-wrap: wrap;
     align-items: center;
   }
@@ -410,19 +410,19 @@ nav {
   // Scale the octagon buttons down to sit in proportion with the 28px logo mark
   // and the hamburger.
   .nav-button .nav-card__interior {
-    padding: 0.4rem 0.48rem;
+    padding: var(--space-2) var(--space-3);
 
     i {
-      font-size: var(--fs-base);
+      font-size: var(--fs-3);
     }
   }
 
   .nav-btn-label {
-    font-size: var(--fs-xs);
+    font-size: var(--fs-1);
   }
 
   .nav-logo-text {
-    font-size: var(--fs-base);
+    font-size: var(--fs-3);
   }
 
   .nav-logo-sub {
@@ -440,9 +440,9 @@ nav {
     width: 100%;
     flex-direction: column;
     gap: 0;
-    padding: 1rem 0 1rem;
-    border-top: 1px solid var(--border);
-    margin-top: 0.75rem;
+    padding: var(--space-5) 0 var(--space-5);
+    border-top: 1px solid var(--line-3);
+    margin-top: var(--space-4);
 
     &.open {
       display: flex;
@@ -457,15 +457,15 @@ nav {
 
     .nav-card__interior {
       background: transparent;
-      padding: 0.6rem 0;
+      padding: var(--space-3) 0;
       clip-path: none;
-      border-bottom: 1px solid var(--border);
+      border-bottom: 1px solid var(--line-3);
     }
 
     // Links and buttons full-width, larger tap target
     a,
     .nav-dropdown-toggle {
-      font-size: var(--fs-sm);
+      font-size: var(--fs-2);
       width: 100%;
       display: block;
     }
@@ -479,7 +479,7 @@ nav {
     overflow: hidden;
     pointer-events: none;
     transform: none;
-    padding-left: 1rem;
+    padding-left: var(--space-5);
     transition: opacity 0.2s, max-height 0.28s ease;
   }
 
@@ -513,27 +513,27 @@ nav {
     border: none;
     // Separates the chevron's tap zone from the adjacent link so mis-taps
     // don't navigate away instead of expanding.
-    border-left: 1px solid var(--border);
+    border-left: 1px solid var(--line-3);
     cursor: pointer;
     min-width: 44px;
     min-height: 44px;
-    padding: 0.25rem 0.75rem;
-    color: var(--muted);
+    padding: var(--space-1) var(--space-4);
+    color: var(--ink-1);
     flex-shrink: 0;
     transition: color 0.2s, transform 0.2s;
 
     i {
-      font-size: var(--fs-md);
+      font-size: var(--fs-4);
       transition: transform 0.25s ease;
     }
 
     &:hover {
-      color: var(--gold);
+      color: var(--mark);
     }
   }
 
   .nav-dropdown.open .nav-accordion-btn {
-    color: var(--gold-border);
+    color: var(--mark-border);
 
     i {
       transform: rotate(180deg);
@@ -564,18 +564,18 @@ nav {
   background: none;
   border: none;
   cursor: pointer;
-  color: var(--muted);
+  color: var(--ink-1);
   display: flex;
   align-items: center;
   padding: 0;
   transition: color 0.2s ease;
 
   i {
-    font-size: var(--fs-xl);
+    font-size: var(--fs-6);
   }
 
   &:hover {
-    color: var(--gold);
+    color: var(--mark);
   }
 }
 
@@ -587,28 +587,28 @@ nav {
   box-sizing: border-box; // width: 0 collapses padding too
   min-width: 0;
   font-family: $font-sans;
-  font-size: var(--fs-xs);
+  font-size: var(--fs-1);
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  background: var(--bg1);
+  background: var(--surface-1);
   border: 1px solid rgba(177, 147, 93, 0.22);
-  color: var(--text);
+  color: var(--ink-3);
   @include chamfer($chamfer-inner);
   outline: none;
-  padding: 0.25rem 0.5rem;
+  padding: var(--space-1) var(--space-3);
   width: 0;
   opacity: 0;
   transition: width 0.28s ease, opacity 0.18s ease;
 
   &::placeholder {
-    color: var(--muted);
+    color: var(--ink-1);
   }
 
   // clip-path (via @include chamfer above) clips outline and box-shadow, so
   // the focus indicator must be a border instead — box-sizing: border-box
   // (set above) keeps the widened border from shifting layout.
   &:focus-visible {
-    border: 2px solid var(--gold);
+    border: 2px solid var(--mark);
   }
 }
 
@@ -628,7 +628,7 @@ nav {
 
   // 16px minimum prevents iOS Safari from auto-zooming the viewport on focus.
   .nav-search__input {
-    font-size: var(--fs-base);
+    font-size: var(--fs-3);
   }
 
   .nav-search-wrap:hover .nav-search__input,
@@ -641,14 +641,14 @@ nav {
 .search-page {
   max-width: 860px;
   margin: 0 auto;
-  padding: 4rem 1.5rem 6rem;
+  padding: var(--space-11) var(--space-7) var(--space-12);
 
   h1 {
     font-family: $font-serif;
     font-size: 2rem;
     font-weight: 400;
-    color: var(--text);
-    margin-bottom: 2.5rem;
+    color: var(--ink-3);
+    margin-bottom: var(--space-9);
     letter-spacing: 0.04em;
   }
 }
@@ -665,16 +665,16 @@ nav {
   @include elevation-standard;
 
   &:focus-visible {
-    outline: 2px solid var(--gold);
+    outline: 2px solid var(--mark);
     outline-offset: 2px;
   }
 }
 
 .search-page-result__interior {
-  padding: 1rem 1.25rem;
+  padding: var(--space-5) var(--space-6);
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  gap: var(--space-1);
   transition: background 0.15s;
 
   .search-page-result:hover &,
@@ -685,34 +685,34 @@ nav {
 
 .search-result__type {
   font-family: $font-sans;
-  font-size: var(--fs-xs);
+  font-size: var(--fs-1);
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--gold);
+  color: var(--mark);
 }
 
 .search-result__title {
   font-family: $font-sans;
-  font-size: var(--fs-sm);
+  font-size: var(--fs-2);
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--text);
+  color: var(--ink-3);
 }
 
 .search-result__desc {
   font-family: $font-sans;
-  font-size: var(--fs-xs);
-  color: var(--muted);
+  font-size: var(--fs-1);
+  color: var(--ink-1);
   line-height: 1.5;
 }
 
 .search-empty {
   font-family: $font-sans;
-  font-size: var(--fs-xs);
+  font-size: var(--fs-1);
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--muted);
-  padding: 2rem 0;
+  color: var(--ink-1);
+  padding: var(--space-8) 0;
 }
 
 // ── Logo text: EB Garamond ─────────────────────────────────────────────
@@ -729,7 +729,7 @@ nav {
 
 // ── Nav icon buttons — gold border ─────────────────────────────────────
 nav.nav-menu .nav-dropdown.nav-button .nav-card {
-  border: 1px solid var(--gold) !important;
+  border: 1px solid var(--mark) !important;
 }
 
 // ── Nav contact hexagon shape ───────────────────────────────────────────
@@ -738,7 +738,7 @@ nav.nav-menu .nav-dropdown.nav-button .nav-card {
     width: clamp(60px, 10vw, 80px);
     height: clamp(60px, 10vw, 80px);
     padding: 0;
-    border: 5px solid var(--gold);
+    border: 5px solid var(--mark);
     clip-path: polygon(50% 0%, 93.3% 25%, 93.3% 75%, 50% 100%, 6.7% 75%, 6.7% 25%);
   }
 
@@ -752,10 +752,10 @@ nav.nav-menu .nav-dropdown.nav-button .nav-card {
 
   i {
     font-size: 2.5rem;
-    color: var(--text);
+    color: var(--ink-3);
   }
 
   &:hover i {
-    color: var(--gold);
+    color: var(--mark);
   }
 }

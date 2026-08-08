@@ -8,28 +8,28 @@ $font-garamond:  'EB Garamond', Georgia, serif;
 // ── label-caps mixin ──────────────────────────────────────────────────────────
 // Single definition of the gold small-caps label pattern used across the site.
 // Use: @include label-caps;                    → default 0.7rem / 0.3em
-// Use: @include label-caps(var(--fs-xs), 0.28em);   → tighter variant (CV / service)
-@mixin label-caps($size: var(--fs-xs), $tracking: 0.22em) {
+// Use: @include label-caps(var(--fs-1), 0.28em);   → tighter variant (CV / service)
+@mixin label-caps($size: var(--fs-1), $tracking: 0.22em) {
   font-family: $font-sans;
   font-size: $size;
   letter-spacing: $tracking;
   text-transform: uppercase;
-  color: var(--gold);
+  color: var(--mark);
 }
 
 // ── Section label (shared utility class) ──────────────────────────────────────
 .section-label {
   @include label-caps;
-  margin-bottom: 1.5rem;
+  margin-bottom: var(--space-7);
 }
 
 // ── Page / section headings ───────────────────────────────────────────────────
 .about-heading {
   font-family: $font-serif;
-  font-size: var(--fs-display-md);
+  font-size: var(--fs-9);
   font-weight: 400;
   line-height: 1.2;
-  margin-bottom: 1.5rem;
+  margin-bottom: var(--space-7);
 }
 
 // ── Pull quote (standalone block component) ───────────────────────────────────
@@ -37,25 +37,25 @@ $font-garamond:  'EB Garamond', Georgia, serif;
 // (that lives in _essay.scss and is scoped to prose context).
 .pull-quote {
   position: relative;
-  padding: 2.5rem;
-  border-left: 2px solid var(--gold);
-  background: var(--calloutbg);
+  padding: var(--space-9);
+  border-left: 2px solid var(--mark);
+  background: var(--surface-4);
 
   blockquote {
     font-family: $font-serif;
-    font-size: var(--fs-display-xs);
+    font-size: var(--fs-7);
     font-style: italic;
     line-height: 1.6;
-    color: var(--text);
+    color: var(--ink-3);
   }
 
   cite {
     display: block;
-    margin-top: 1.2rem;
-    font-size: var(--fs-xs);
+    margin-top: var(--space-6);
+    font-size: var(--fs-1);
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: var(--gold);
+    color: var(--mark);
     font-style: normal;
   }
 }
@@ -63,13 +63,13 @@ $font-garamond:  'EB Garamond', Georgia, serif;
 // ── About body copy ───────────────────────────────────────────────────────────
 .about-body {
   font-family: $font-serif;
-  color: var(--subdued);
-  font-size: var(--fs-base);
+  color: var(--ink-2);
+  font-size: var(--fs-3);
   line-height: 2;
   letter-spacing: 0.3px;
   hyphens: auto; // cleaner prose wrapping alongside inherited overflow-wrap
 
   p + p {
-    margin-top: 1.75rem;
+    margin-top: var(--space-7);
   }
 }

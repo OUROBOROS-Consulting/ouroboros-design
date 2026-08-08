@@ -7,10 +7,10 @@
   min-height: 100svh;
   display: flex;
   flex-direction: column;
-  border-bottom: 2px solid var(--border);
+  border-bottom: 2px solid var(--line-3);
   position: relative;
   @include elevation-standard-dark;
-  background-color: var(--bg-hero);
+  background-color: var(--surface-hero);
   background-image: none;
   box-shadow: none;
   background-size: 300px 300px;
@@ -31,7 +31,7 @@
   &::before {
     top: 1.6rem;
     right: 2rem;
-    background: var(--gold);
+    background: var(--mark);
     opacity: 0.7;
   }
 
@@ -48,8 +48,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 4rem;
-  margin-top: 0.5rem;
+  gap: var(--space-11);
+  margin-top: var(--space-3);
   flex-wrap: wrap;
 }
 
@@ -58,46 +58,46 @@
   min-width: 280px;
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.07);
-  padding: 2.5rem;
+  padding: var(--space-9);
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.10);
 }
 
 .page-hero-icon {
   font-size: clamp(90px, 12vw, 170px);
-  color: var(--bright);
+  color: var(--ink-4);
   line-height: 1;
 }
 
 .page-hero-title {
   font-family: $font-serif;
-  font-size: var(--fs-display-lg);
+  font-size: var(--fs-10);
   font-weight: 700;
   line-height: 1.05;
-  margin-bottom: 1.2rem;
+  margin-bottom: var(--space-6);
 }
 
 .page-hero-lede {
-  font-size: var(--fs-base);
-  color: var(--subdued);
+  font-size: var(--fs-3);
+  color: var(--ink-2);
   line-height: 1.85;
   max-width: 560px;
-  margin-bottom: 1.5rem;
+  margin-bottom: var(--space-7);
 }
 
 .page-hero-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
+  gap: var(--space-3);
 }
 
 .lp-tag {
   display: inline-block;
   font-family: $font-sans;
-  font-size: var(--fs-xs);
+  font-size: var(--fs-1);
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--muted);
-  border: 1px solid var(--border);
+  color: var(--ink-1);
+  border: 1px solid var(--line-3);
   padding: 0.2em 0.6em;
   line-height: 1.5;
 }
@@ -106,13 +106,13 @@
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 1.25rem;
-  margin-top: 1.75rem;
+  gap: var(--space-6);
+  margin-top: var(--space-7);
 }
 
 .page-hero-meta {
-  font-size: var(--fs-xs);
-  color: var(--gold);
+  font-size: var(--fs-1);
+  color: var(--mark);
   letter-spacing: 0.08em;
 }
 
@@ -136,7 +136,7 @@
 // Scroll cue pinned to the bottom of the one-screen hero, centered.
 .page-hero .scroll-hint {
   align-self: center;
-  padding-top: 1.5rem;
+  padding-top: var(--space-7);
 }
 
 // ── Service Hero Portrait — hex-framed ───────────────────────────────────────
@@ -182,7 +182,7 @@
   // the essay's 680px cap is too narrow — override it here.
   .post-body {
     max-width: none;
-    padding: 3.5rem 3.5rem;
+    padding: var(--space-band-lg) var(--space-band-lg);
   }
 
   // Announcement layout also nests .post-header here — same 680px cap, same fix.
@@ -196,9 +196,9 @@
 .page-section {
   display: grid;
   grid-template-columns: 180px 1fr;
-  gap: 0 3rem;
-  padding: 3.5rem 0;
-  border-bottom: 1px solid var(--border);
+  gap: 0 var(--space-10);
+  padding: var(--space-band-lg) 0;
+  border-bottom: 1px solid var(--line-3);
 
   &:last-child {
     border-bottom: none;
@@ -207,7 +207,7 @@
 
 .page-section-label {
   p {
-    @include label-caps(var(--fs-base), 0.15em);
+    @include label-caps(var(--fs-3), 0.15em);
     position: sticky;
     top: 6rem;
 
@@ -217,10 +217,10 @@
       content: '⬡';
       display: block;
       color: var(--teal);
-      font-size: var(--fs-base);
+      font-size: var(--fs-3);
       letter-spacing: normal;
       text-transform: none;
-      margin-bottom: 0.45rem;
+      margin-bottom: var(--space-3);
       opacity: 0.85;
     }
   }
@@ -232,10 +232,10 @@
   // descendant classes (.svc-item-title, .svc-pricing-notes, etc.)
   // which is what caused all the !important overrides in the old version.
   > p {
-    font-size: var(--fs-sm);
-    color: var(--subdued);
+    font-size: var(--fs-2);
+    color: var(--ink-2);
     line-height: 1.9;
-    margin-bottom: 1rem;
+    margin-bottom: var(--space-5);
 
     &:last-child {
       margin-bottom: 0;
@@ -244,10 +244,10 @@
 
   // Paragraphs within card interiors (body_paragraphs in sections)
   .card--formula__interior p {
-    font-size: var(--fs-sm);
-    color: var(--subdued);
+    font-size: var(--fs-2);
+    color: var(--ink-2);
     line-height: 1.9;
-    margin-bottom: 1.5rem;
+    margin-bottom: var(--space-7);
 
     &:last-child {
       margin-bottom: 0;
@@ -255,7 +255,7 @@
   }
 
   strong {
-    color: var(--text);
+    color: var(--ink-3);
     font-weight: 500;
   }
 
@@ -264,18 +264,18 @@
     padding: 0;
 
     li {
-      font-size: var(--fs-sm);
-      color: var(--subdued);
+      font-size: var(--fs-2);
+      color: var(--ink-2);
       line-height: 1.8;
-      padding-left: 1.1rem;
+      padding-left: var(--space-5);
       position: relative;
-      margin-bottom: 0.4rem;
+      margin-bottom: var(--space-2);
 
       &::before {
         content: '–';
         position: absolute;
         left: 0;
-        color: var(--gold);
+        color: var(--mark);
       }
     }
   }
@@ -285,58 +285,58 @@
 .svc-included {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: var(--space-3);
 }
 
 .svc-item {
   display: flex;
-  gap: 1rem;
+  gap: var(--space-5);
   align-items: flex-start;
 }
 
 .svc-item-marker {
-  color: var(--gold);
-  font-size: var(--fs-xs);
+  color: var(--mark);
+  font-size: var(--fs-1);
   flex-shrink: 0;
-  margin-top: 0.25rem;
+  margin-top: var(--space-1);
 }
 
 // No !important needed — .page-section-content > p no longer bleeds here
 .svc-item-title {
-  font-size: var(--fs-sm);
-  color: var(--text);
+  font-size: var(--fs-2);
+  color: var(--ink-3);
   font-weight: 500;
-  margin-bottom: 0.2rem;
+  margin-bottom: var(--space-1);
 }
 
 .svc-item-desc {
-  font-size: var(--fs-sm);
-  color: var(--subdued);
+  font-size: var(--fs-2);
+  color: var(--ink-2);
   line-height: 1.75;
   margin: 0;
 }
 
 // ── Rate principle — subsidy-model preamble above pricing tiers ───────────────
 .svc-rate-principle {
-  font-size: var(--fs-sm);
-  color: var(--subdued);
+  font-size: var(--fs-2);
+  color: var(--ink-2);
   line-height: 1.8;
-  margin: 0 0 1.5rem;
-  padding-left: 1rem;
-  border-left: 2px solid var(--gold-border);
+  margin: 0 0 var(--space-7);
+  padding-left: var(--space-5);
+  border-left: 2px solid var(--mark-border);
   max-width: 60ch;
 }
 
 // ── Pricing tiers ─────────────────────────────────────────────────────────────
 .svc-pricing-tier {
-  padding: 1.5rem;
-  border: 1px solid var(--border);
-  background: var(--calloutbg);
+  padding: var(--space-7);
+  border: 1px solid var(--line-3);
+  background: var(--surface-4);
   margin-bottom: 1px;
   transition: border-color 0.3s;
 
   &:hover {
-    border-color: var(--gold-border);
+    border-color: var(--mark-border);
   }
 }
 
@@ -344,31 +344,31 @@
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  margin-bottom: 0.4rem;
+  margin-bottom: var(--space-2);
 }
 
 .svc-pricing-name {
-  font-size: var(--fs-sm);
-  color: var(--text);
+  font-size: var(--fs-2);
+  color: var(--ink-3);
   font-weight: 500;
 }
 
 .svc-pricing-rate {
   font-family: $font-serif;
-  font-size: var(--fs-md);
-  color: var(--gold);
+  font-size: var(--fs-4);
+  color: var(--mark);
 }
 
 .svc-pricing-notes {
-  font-size: var(--fs-xs);
-  color: var(--subdued);
+  font-size: var(--fs-1);
+  color: var(--ink-2);
   line-height: 1.7;
   margin: 0;
 }
 
 // ── Pull quote (foundation / case study pages) ───────────────────────────────
 .pull-quote {
-  padding: 3.5rem 0;
+  padding: var(--space-band-lg) 0;
   position: relative;
 
   // Oversized watermark quotation mark — teal, partially transparent,
@@ -390,12 +390,12 @@
   blockquote {
     position: relative; // sits above the watermark
     font-family: $font-serif;
-    font-size: var(--fs-display-xs);
+    font-size: var(--fs-7);
     font-style: italic;
     line-height: 1.9;
-    color: var(--text);
+    color: var(--ink-3);
     max-width: 720px;
-    padding-left: 2rem;
+    padding-left: var(--space-8);
     border-left: 3px solid var(--teal);
     margin: 0;
 
@@ -408,13 +408,13 @@
 // ── Section modifier variants ─────────────────────────────────────────────────
 .page-section--cta {
   text-align: center;
-  padding-top: 3rem;
-  padding-bottom: 3rem;
+  padding-top: var(--space-10);
+  padding-bottom: var(--space-10);
 }
 
 .page-section--stacked {
   grid-template-columns: 1fr;
-  gap: 1.5rem;
+  gap: var(--space-7);
 }
 
 // ── Banded section headers ────────────────────────────────────────────────────
@@ -433,7 +433,7 @@
   border-bottom: 1px solid rgba(177, 147, 93, 0.22);
   margin-left: -5vw;
   margin-right: calc(-5vw - 3rem - 200px);
-  padding: 1.9rem 5vw;
+  padding: var(--space-8) 5vw;
 
   @media (max-width: 1100px) {
     margin-right: -5vw;
@@ -442,7 +442,7 @@
   @media (max-width: 768px) {
     margin-left: -6vw;
     margin-right: -6vw;
-    padding: 1.9rem 6vw;
+    padding: var(--space-8) 6vw;
   }
 }
 
@@ -453,29 +453,29 @@
   .page-section {
     grid-template-columns: 1fr;
     gap: 0;
-    padding: 0 0 3.5rem;
+    padding: 0 0 var(--space-band-lg);
   }
 
   .page-section-label {
     @include marble-band;
-    margin-bottom: 2.5rem;
+    margin-bottom: var(--space-9);
 
     p {
       position: static;
       top: auto;
       font-family: $font-serif;
-      font-size: var(--fs-display-sm);
+      font-size: var(--fs-8);
       font-weight: 400;
       line-height: 1.2;
       letter-spacing: normal;
       text-transform: none;
-      color: var(--text);
+      color: var(--ink-3);
 
       // Hex gem sits inline before the heading rather than on its own line.
       &::before {
         display: inline-block;
-        margin: 0 0.6rem 0 0;
-        font-size: var(--fs-sm);
+        margin: 0 var(--space-3) 0 0;
+        font-size: var(--fs-2);
         vertical-align: middle;
       }
     }
@@ -487,7 +487,7 @@
 // text column and CTA column sit naturally without a large void between them.
 .page-hero-inner--single {
   justify-content: flex-start;
-  gap: 6rem;
+  gap: var(--space-12);
 }
 
 // ── Landing page emblem ───────────────────────────────────────────────────────
@@ -528,7 +528,7 @@
 // ── Responsive ────────────────────────────────────────────────────────────────
 @media (max-width: 768px) {
   .page-hero {
-    padding: 6rem 6vw 2.5rem;
+    padding: var(--space-12) 6vw var(--space-9);
     min-height: auto;
   }
 
@@ -537,13 +537,13 @@
   }
 
   .page-body {
-    padding: 0 6vw 6rem;
+    padding: 0 6vw var(--space-12);
   }
 
   .page-section {
     grid-template-columns: 1fr;
-    gap: 1rem;
-    padding: 2.5rem 0;
+    gap: var(--space-5);
+    padding: var(--space-9) 0;
   }
 
   .page-section-label p {
@@ -552,7 +552,7 @@
 
   .page-hero-inner {
     flex-direction: column;
-    gap: 2rem;
+    gap: var(--space-8);
   }
 
   .hex-portrait,
@@ -564,9 +564,9 @@
 
 // ── PSA listing sections ──────────────────────────────────────────────────────
 .psa-section {
-  padding-bottom: 4rem;
-  border-bottom: 1px solid var(--border);
-  margin-bottom: 4rem;
+  padding-bottom: var(--space-11);
+  border-bottom: 1px solid var(--line-3);
+  margin-bottom: var(--space-11);
 
   &:last-child {
     border-bottom: none;
@@ -580,15 +580,15 @@
   justify-content: space-between;
   align-items: baseline;
   background-color: #0D0D0D; // fallback under the black-marble raster (site main.scss)
-  margin: 0 -5vw 2.5rem;     // full-bleed to the viewport edges (no sidebar on this layout)
-  padding: 1.9rem 5vw;
+  margin: 0 -5vw var(--space-9);     // full-bleed to the viewport edges (no sidebar on this layout)
+  padding: var(--space-8) 5vw;
   border-top: 1px solid rgba(177, 147, 93, 0.22);
   border-bottom: 1px solid rgba(177, 147, 93, 0.22);
 }
 
 .psa-section-heading {
   font-family: $font-serif;
-  font-size: var(--fs-display-sm);
+  font-size: var(--fs-8);
   font-weight: 400;
   line-height: 1.15;
 }
@@ -597,7 +597,7 @@
 .psa-embed-wrap {
   max-width: 1600px;
   margin: 0 auto;
-  padding: 0 10vw 6rem;
+  padding: 0 10vw var(--space-12);
 }
 
 .psa-embed {
@@ -605,17 +605,17 @@
   width: 100%;
   height: 82vh;
   min-height: 560px;
-  border: 1px solid var(--border);
-  background: var(--bright);
+  border: 1px solid var(--line-3);
+  background: var(--ink-4);
 }
 
 .psa-embed-fallback {
-  margin-top: 0.75rem;
-  font-size: var(--fs-xs);
-  color: var(--muted);
+  margin-top: var(--space-4);
+  font-size: var(--fs-1);
+  color: var(--ink-1);
 
   a {
-    color: var(--gold);
+    color: var(--mark);
     text-decoration: none;
 
     &:hover {
@@ -626,7 +626,7 @@
 
 @media (max-width: 768px) {
   .psa-embed-wrap {
-    padding: 0 6vw 4rem;
+    padding: 0 6vw var(--space-11);
   }
 
   .psa-embed {
@@ -654,7 +654,7 @@
 .playlist-card {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: var(--space-7);
 }
 
 .playlist-iframe {
@@ -672,24 +672,24 @@
 
 .playlist-title {
   font-family: $font-serif;
-  font-size: var(--fs-md);
+  font-size: var(--fs-4);
   font-weight: 400;
-  color: var(--text);
-  margin-bottom: 0.4rem;
+  color: var(--ink-3);
+  margin-bottom: var(--space-2);
 }
 
 .playlist-carousel-controls {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  margin-top: 1.5rem;
+  gap: var(--space-5);
+  margin-top: var(--space-7);
 }
 
 .playlist-carousel-count {
-  font-size: var(--fs-xs);
+  font-size: var(--fs-1);
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--muted);
+  color: var(--ink-1);
   min-width: 4ch;
   text-align: center;
 }
@@ -697,8 +697,8 @@
 .playlist-carousel-dots {
   display: flex;
   justify-content: flex-start;
-  gap: 0.6rem;
-  margin-top: 1rem;
+  gap: var(--space-3);
+  margin-top: var(--space-5);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -709,7 +709,7 @@
 
 // ── Arch Divider (SVG section separator) ──────────────────────────────────────
 .arch-divider {
-  --arch-color: var(--gold);
+  --arch-color: var(--mark);
   width: 100%;
   margin: 5rem 0;
   padding: 0 10vw;
@@ -723,7 +723,7 @@
 
   // Responsive reduce margins on smaller screens
   @media (max-width: 768px) {
-    margin: 3.5rem 0;
+    margin: var(--space-band-lg) 0;
     padding: 0 6vw;
   }
 }

@@ -44,7 +44,8 @@ Consequences:
 
 | Partial | Purpose |
 |---|---|
-| `_base.scss` | Tokens, reset, elevation mixins, body texture, cursor spotlight |
+| `_tokens.scss` | **Mixins only, emits no CSS.** The four theme mixins. `@use` it alone to reach them without pulling in the reset and `:root`. |
+| `_base.scss` | `:root` scales, reset, elevation mixins, body texture, cursor spotlight. `@forward`s `_tokens.scss`. |
 | `_chamfer.scss` | `@include chamfer` corner-cut geometry |
 | `_typography.scss` | Type scale, `label-caps` mixin, font stacks |
 | `_framework.scss` | Layout primitives, grid helpers |
@@ -77,49 +78,80 @@ Consequences:
 
 ## Design Tokens
 
-Defined on `:root` in `_base.scss`.
+Scales live on `:root` in `_base.scss`. The themed colour sets live in `_tokens.scss` as mixins.
+
+### Naming
+
+Renamed to a numbered vocabulary on 2026-08-08. **Every ramp ascends, and ascending always means "more".**
+
+| Ramp | Ascending means | Steps |
+|---|---|---|
+| `--surface-N` | further forward | 1–5 |
+| `--line-N` | stronger | 1–4 |
+| `--ink-N` | higher emphasis | 1–4 |
+| `--space-N` | larger | 1–13 |
+| `--fs-N` | larger | 1–11 |
+| `--radius-N` | rounder | 1–5 |
+| `--elev-N` | higher | 0–5 |
+
+Two things sit deliberately outside the ramps because they are named decisions, not steps: `--surface-hero`, `--space-card`, `--space-band-lg`, `--radius-round`.
+
+The old names (`--bg1`, `--text`, `--gold`, `--fs-base`, …) are **gone**, not aliased. 901 call sites were rewritten across both repos. If you are reading older notes, the map is: `bg1..3`/`calloutbg` → `surface-1..4`, `border` → `line-3`, `muted`/`subdued`/`text`/`bright` → `ink-1..4`, `gold*` → `mark*`, `fs-xs..xl` → `fs-1..6`, `fs-display-*` → `fs-7..11`.
 
 ### Surfaces
 
 All one navy family (hue ~223°) so the elevation ramp reads as the same material lifted rather than a different material.
 
 ```scss
---bg1: #0c101a       // page background
---bg-hero: #1e213e   // homepage + service hero
---bg2: #1a1d26       // card/surface
---bg3: #22262f       // elevated surface
---border: #30343e
---calloutbg: #252831
+--surface-1: #0c101a   // page floor
+--surface-2: #1a1d26   // card
+--surface-3: #22262f   // elevated
+--surface-4: #252831   // callout
+--surface-5: #2b2f39   // top step — INK ONLY, see below
+--surface-hero: #1e213e  // homepage + service hero, unconditional in both themes
 --shadow: #06080d
 ```
 
-⚠ Surfaces were shifted from neutral grey into the navy family on 2026-07-26 at **matched luminance**, so every text-on-surface ratio moved by less than 0.15. The one deliberate exception is `--calloutbg`, darkened slightly: steel and amethyst sat at 4.57:1 on the old grey, barely over AA, and are now 4.69:1. Do not reintroduce neutral greys (`#1E1E1E`, `#252525`, `#333333`, `#2A2A2A`).
+⚠ Surfaces were shifted from neutral grey into the navy family on 2026-07-26 at **matched luminance**, so every text-on-surface ratio moved by less than 0.15. Do not reintroduce neutral greys (`#1E1E1E`, `#252525`, `#333333`, `#2A2A2A`).
 
-Worst case in the whole system is now **4.69:1** (steel/amethyst on `--calloutbg`). Anything you add must clear 4.5:1 against the surface it sits on.
+⚠ **`--surface-5` carries ink only. Never put accent-coloured text on it.** The dark accent palette is at its contrast ceiling: `--steel` caps a 4.5:1 surface at luminance 0.02432, and `--surface-4` already sits at 0.02133. `--surface-5` spends the remaining headroom, so steel lands at 4.26:1, amethyst 4.27:1 and teal 4.49:1 there. The ink ramp clears 4.5:1 on all five steps. `scripts/check-contrast.mjs` encodes this: accents are asserted over surfaces 1–4, ink over 1–5. Lifting the restriction means lightening steel, amethyst and teal, which is a brand change.
+
+Worst accent case is **4.69:1** (steel/amethyst on `--surface-4`). Anything you add must clear 4.5:1 against the surface it sits on.
+
+### Lines
+
+```scss
+--line-1: #22262f   // quiet: row separators, cell borders
+--line-2: #2b3038
+--line-3: #30343e   // the default — this is the former single --border
+--line-4: #3d424e   // assertive frame
+```
 
 ### Light mode
 
-Added 2026-08-06. Same navy-tinted character (hue ~223°). The ramp keeps the same **order** as dark, mirrored across the luminance midpoint: `--bg1` is the page floor and the darkest of the four, rising through `--bg2` and `--bg3` to `--calloutbg` as the lightest. Elevation still means "brighter" in both themes, so the `--bg3` wash at the top of `elevation-elevated` stays a highlight instead of inverting into a dark band. `--bg1` is therefore the worst-case backdrop for dark-on-light text.
+Added 2026-08-06. Same navy-tinted character (hue ~223°). The ramp keeps the same **order** as dark, mirrored across the luminance midpoint: `--surface-1` is the page floor and the darkest, rising to `--surface-5` as the lightest. Elevation still means "brighter" in both themes, so the wash at the top of `elevation-elevated` stays a highlight instead of inverting into a dark band. `--surface-1` is therefore the worst-case backdrop for dark-on-light text.
 
 ```scss
---bg1: #E7EAF0       --bg2: #EFF1F5       --bg3: #F5F7FA
---border: #C7CBD6    --calloutbg: #FCFDFE --shadow: rgba(28, 32, 41, 0.18)
+--surface-1: #E7EAF0  --surface-2: #EFF1F5  --surface-3: #F5F7FA
+--surface-4: #FCFDFE  --surface-5: #FFFFFF  --shadow: rgba(28, 32, 41, 0.18)
 
---bright: #1C2029  // 13.53:1 on --bg1
---text: #34394A    //  9.52:1 on --bg1
---subdued: #3D4353 //  8.20:1 on --bg1  AAA
---muted: #535971   //  5.74:1 on --bg1
+--line-1: #E1E4EC  --line-2: #D4D8E2  --line-3: #C7CBD6  --line-4: #B3B8C6
 
---gold: #7A6028      --steel: #4A5A68      --amethyst: #6B4F94
---sage: #38624C      --teal: #295F5A       --gold-border: #8A7550 (3:1, non-text)
+--ink-4: #1C2029  // 13.53:1 on --surface-1
+--ink-3: #34394A  //  9.52:1
+--ink-2: #3D4353  //  8.20:1  AAA
+--ink-1: #535971  //  5.74:1
 
---ruby: #8A3E3E    //  6.14:1 on --bg1
---claude: #A34608  //  5.07:1 on --bg1
+--mark: #7A6028      --steel: #4A5A68      --amethyst: #6B4F94
+--sage: #38624C      --teal: #295F5A       --mark-border: #8A7550 (3.68:1, non-text)
+
+--ruby: #8A3E3E    //  6.14:1 on --surface-1
+--claude: #A34608  //  5.07:1 on --surface-1
 ```
 
 `--ruby` and `--claude` have zero call sites in light-themed markup today. They are given real passing values anyway so the palette stays complete if one is ever used.
 
-There is no light `--bg-hero`. Both heroes are dark islands, so they keep the dark `#1e213e` in every theme; overriding it would only take effect somewhere it is never read.
+There is no light `--surface-hero`. Both heroes are dark islands, so they keep the dark `#1e213e` in every theme; overriding it would only take effect somewhere it is never read.
 
 Default is dark. Two mechanisms bring in light:
 
@@ -130,23 +162,23 @@ Default is dark. Two mechanisms bring in light:
 
 ⚠ **Marble surfaces are dark islands in both themes.** Nav, footer, rail, `.page-toc`, service hero, marble bands, and section headers all call `@include dark-island;`, which forces the full dark token set regardless of the active theme. Do not let a light-mode rule reach inside one of these — if a new component needs to sit on a marble surface, wrap it in `dark-island` too, or its text will inherit light-theme tokens against a dark background and become unreadable.
 
-### Luminance hierarchy
+### Ink
 
-Every value passes WCAG AA on `--bg1`.
+Ratios are given on `--surface-1` (the page floor) and on `--surface-5` (the worst case).
 
 ```scss
---bright: #FFFFFF    // 18.4:1
---text: #E8E4DC      // 14.5:1
---subdued: #B0AAA0   //  8.0:1  AAA for normal text
---muted: #999999     //  6.5:1  AA for normal text
+--ink-4: #FFFFFF   // 19.01:1 on --surface-1  ·  13.39:1 on --surface-5
+--ink-3: #E8E4DC   // 14.99:1  ·  10.56:1   — body copy
+--ink-2: #B0AAA0   //  8.24:1  ·   5.80:1   — AAA on the floor, AA at the top
+--ink-1: #999999   //  6.67:1  ·   4.70:1
 ```
 
 ### Accents
 
 ```scss
---gold: #C9A84C          --gold-dim: rgba(201, 168, 76, 0.35)
---gold-ghost: rgba(201, 168, 76, 0.12)
---gold-border: #b39f7b   // opaque, for visible 1px borders
+--mark: #b39f7b          --mark-dim: rgba(201, 168, 76, 0.35)
+--mark-ghost: rgba(201, 168, 76, 0.12)
+--mark-border: #b39f7b   // opaque, for visible 1px borders
 
 --steel: #7F94A6         --steel-dim / -ghost: rgba(127, 148, 166, …)
 --amethyst: #A284CA      --amethyst-dim / -ghost: rgba(162, 132, 202, …)
@@ -157,23 +189,65 @@ Every value passes WCAG AA on `--bg1`.
 --claude: #E8640A
 ```
 
-⚠ The five accents were **raised on 2026-07-25 to clear WCAG AA on `--bg1`**. The old `--teal` (`#4a6b5f`) was a genuine 3.22:1 failure. Do not restore older, darker values.
+**Known drift, unfixed:** `--mark-dim` and `--mark-ghost` are still `rgba(201, 168, 76, …)`, which is the pre-2026-07-25 `#C9A84C`. They were not updated when the primary darkened to `#b39f7b`, so the dim and ghost variants are a slightly different hue from the solid. `--mark` and `--mark-border` are now the same value, which makes `--mark-border` redundant; it is kept because 40 call sites read it and the two may diverge again.
+
+⚠ The five accents were **raised on 2026-07-25 to clear WCAG AA**. The old `--teal` (`#4a6b5f`) was a genuine 3.22:1 failure. Do not restore older, darker values.
 
 ⚠ Raising several accents at once can collapse them into each other. Original teal (158°) and sage (155°) were 3° apart and distinguished only by lightness. Replacements were chosen for ≥18° hue separation (teal 176°, sage 150°). Preserve that separation if you retune.
 
 `--sapphire` and `--emerald` are legacy aliases of `--steel` / `--sage` with zero call sites. Use the real names.
 
+#### `--accent-1..5` exist, but you almost certainly want the semantic name
+
+```scss
+--accent-1: var(--mark);   --accent-2: var(--amethyst);  --accent-3: var(--sage);
+--accent-4: var(--teal);   --accent-5: var(--steel);
+```
+
+Ordered by call-site prominence. They exist so the numbered vocabulary is complete, **not** because the accents form a ramp. This is a categorical set: each accent is bound to one meaning per context (see below), and a number implies an interchangeability this palette does not have. Reach for `--accent-N` only when you genuinely mean "the nth swatch", such as on the specimen page. Everywhere else, name the meaning.
+
+### Spacing, radius, elevation
+
+Added 2026-08-08 alongside the rename. All three were derived from an audit of the literals already in the codebase, not from a generic grid.
+
+```scss
+--space-1..13:  0.25 0.375 0.5 0.75 1 1.25 1.5 2 2.5 3 4 6 8  (rem)
+--space-card: 1.4rem     --space-band-lg: 3.5rem
+
+--radius-1..5:  2px 3px 4px 8px 20px     --radius-round: 50%
+
+--elev-0: none                --elev-1: 0 1px 3px var(--shadow)
+--elev-2: 0 2px 8px …         --elev-3: 0 2px 12px …
+--elev-4: 0 4px 16px …        --elev-5: 0 24px 60px …
+```
+
+- **Spacing** covered 719 literals. The ten values the system actually leaned on are present at their exact former size, so most of the migration was a pure rename. The rest snapped under a rule of **no more than 0.25rem and no more than 25% of movement**; 16 sites failed that test and were left as literals rather than silently resized.
+- **Radius** is in px on purpose. A corner radius is a fixed optical detail, not rhythm, so it should not scale with the root font the way `--space-*` does. 2/3/4px account for 54 of the 65 sites, which is why the low end steps one pixel at a time.
+- **Elevation** puts shadow on the shadow scale and lightness on the surface scale, per Material's rule that lightness carries elevation in dark mode and shadow carries it in light. `--shadow` is themed, so all six re-resolve per palette. Pair `--elev-N` with the matching `--surface-N`.
+
+### Everything else on `:root`
+
+```scss
+--lh-1..4:   1 · 1.35 · 1.75 (body) · 1.85
+--fw-1..4:   300 · 400 · 500 · 700
+--f-1..5:    1 · 1.25 · 1.563 · 1.953 · 2.441   // modular scale ratios, unitless
+--measure:   68ch                                // readable prose column
+--font-body / --font-sans / --font-mono          // custom-property mirrors of the SCSS vars
+```
+
+`--font-mono` replaced a bare `'JetBrains Mono', monospace` repeated at 53 call sites and adds the `ui-monospace, SFMono-Regular, Menlo` fallback chain those sites lacked.
+
 ## Accent Semantics
 
-**This is not a six-accent palette.** Gold is the primary accent (211 call sites); the other four are situational and each carries one meaning per context. Never pick a non-gold accent for decoration.
+**This is not a six-accent palette.** `--mark` is the primary accent (211 call sites); the other four are situational and each carries one meaning per context. Never pick a non-`--mark` accent for decoration.
 
 | Accent | Announcement category | Dashboard audience | Other bound uses |
 |---|---|---|---|
-| gold (211) | Accountability | `--accent-gate` | Everything else: links, focus, borders, CTA, drop caps |
-| amethyst (12) | AI | `--accent-pol` (policy) | `quiz.scss` ×8 |
-| sage (10) | Psychopathology | `--accent-adv` (advocate) | `quiz.scss` correct-answer state ×6 |
-| teal (9) | Institutional Betrayal | — | Logo hex frame, `_service.scss` ×5, `_sidebar.scss` |
-| steel (5) | Technology | `--accent-inst` (institution) | `_home.scss:705` |
+| `--mark` (211) | Accountability | `--accent-gate` | Everything else: links, focus, borders, CTA, drop caps |
+| `--amethyst` (12) | AI | `--accent-pol` (policy) | `quiz.scss` ×8 |
+| `--sage` (10) | Psychopathology | `--accent-adv` (advocate) | `quiz.scss` correct-answer state ×6 |
+| `--teal` (9) | Institutional Betrayal | — | Logo hex frame, `_service.scss` ×5, `_sidebar.scss` |
+| `--steel` (5) | Technology | `--accent-inst` (institution) | `_home.scss:705` |
 
 Category bindings live in `_announcements.scss:256-277`. Audience bindings live in the site's `assets/css/dashboard.scss:25-29`. `--accent-surv` (survivor) is a hardcoded `#c0392b`, outside this token set.
 
@@ -181,7 +255,7 @@ Category bindings live in `_announcements.scss:256-277`. Audience bindings live 
 
 ## Elevation
 
-Three mixins in `_base.scss`. Each combines a scallop SVG tile with a background colour. Darker = further back, brighter = further forward. Each also has a `-dark` variant (`elevation-recessed-dark`, etc.) that never flips — use those on marble/chrome islands, the plain names on content that should theme normally.
+Three mixins in `_base.scss`. Each combines a scallop SVG tile with a background colour, and paints its shadow from the `--elev-*` scale above. Darker = further back, brighter = further forward. Each also has a `-dark` variant (`elevation-recessed-dark`, etc.) that never flips — use those on marble/chrome islands, the plain names on content that should theme normally.
 
 | Mixin | Tile | Stroke opacity (dark / light) |
 |---|---|---|
@@ -196,7 +270,13 @@ Three mixins in `_base.scss`. Each combines a scallop SVG tile with a background
 | `dark-tokens` | Full dark custom-property set. Loaded unconditionally on `:root`. |
 | `light-tokens` | Full light custom-property set. Loaded under the two override selectors described above. |
 | `light-mode { @content }` | Wraps `@content` in both light override selectors, scoped to `&`. |
-| `dark-island` | `@include dark-tokens;`. Forces dark regardless of theme — use on marble/chrome surfaces. |
+| `dark-island` | `dark-tokens` plus an explicit `color: var(--ink-3)`. Forces dark regardless of theme — use on marble/chrome surfaces. |
+
+All four live in `_tokens.scss`, which **emits no CSS of its own**. That is the whole point: a stylesheet can `@use "@ouroboros-consulting/ouroboros-design/scss/tokens" as *;` to reach them without also pulling in the reset, the `:root` scales, and the `body` rule. `_base.scss` `@forward`s it, so `@use "base" as *` still reaches everything and no existing import had to change.
+
+The site's `dashboard.scss`, `quiz.scss` and `intake.scss` each used to hand-copy a 30-token dark set for exactly that reason, and the copies had drifted — all three still carried `--gold: #C9A84C` long after the package moved it to `#b39f7b`. They are now one `@include dark-island;` apiece, so that class of bug cannot recur.
+
+`dark-island` pins `color` as well as the tokens because `color` is **inherited**: without the pin, any descendant that sets no `color` of its own would inherit light-theme ink from `body` and render dark text on the dark island.
 
 ## Accessibility Invariants
 
@@ -206,17 +286,26 @@ Break these and the site regresses. They are not stylistic preferences.
 - **Every interactive element needs a visible focus indicator.** If a chamfered control appears to have none, that is a bug, not a design choice.
 - **The cursor spotlight is gated twice** — the site's `main.js` skips the listener, and `_base.scss:409` hides `body::after` entirely under `prefers-reduced-motion`. Keep both gates.
 - **`.rail-tx` uses `opacity: 0`, not `display: none`.** The labels stay in the accessibility tree so screen readers announce "Contact" and "Announcements". Switching to `display: none` or `visibility: hidden` would silently strip the rail's accessible names. The rail is icon-only *visually* by deliberate design decision; that is a usability tradeoff, not a conformance failure.
-- **Any new accent must clear 4.5:1 on `--bg1`.**
+- **Any new accent must clear 4.5:1 on `--surface-4`**, the worst case it is allowed to sit on. `--surface-5` is ink-only; see Surfaces.
 - **Marble surfaces are dark islands in both themes.** `@include dark-island;` on any new marble/chrome surface — see Light mode above.
+- **Reach for a token before a literal.** Colour, spacing, radius, elevation, line-height, weight and font stack all have scales. A literal is a claim that none of the steps fit; if that is true, add a named exception (as `--space-card` and `--radius-round` are) rather than an anonymous number. This is what keeps a theme flip from having to chase hardcoded values.
 
 ## Typography
 
-- **Lora** — serif, body and headings
-- **Inter** — sans, UI and labels
-- **JetBrains Mono** — code
+- **Lora** — serif, body and headings (`--font-body`)
+- **Inter** — sans, UI and labels (`--font-sans`)
+- **JetBrains Mono** — code (`--font-mono`, which carries the `ui-monospace, SFMono-Regular, Menlo` fallback chain)
 - **Cormorant SC** — nav wordmark (`family=Cormorant+SC:wght@400;600;700`)
 
 Loaded via Google Fonts CDN in the consuming site's `_layouts/default.html`, not by this package.
+
+Sizes are `--fs-1..11`. Steps 1–6 are the text range and 7–11 the display range:
+
+| | 1 | 2 | 3 | 4 | 5 | 6 |
+|---|---|---|---|---|---|---|
+| **rem** | 0.8 | 0.9 | 1 | 1.2 | 1.4 | 1.6 |
+
+Steps 7–11 are all `clamp()`ed and fluid: `--fs-7` 1.2→1.45, `--fs-8` 1.5→2.1, `--fs-9` 2→3, `--fs-10` 2.4→4, `--fs-11` 3.5→8.
 
 ## License
 

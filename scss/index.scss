@@ -17,6 +17,9 @@
 // Foundation: design tokens, reset, mixins, body texture
 @forward "base";
 
+// Type levels: the five size/leading/weight/tracking/ink bindings
+@forward "type-levels";
+
 // Component styles
 @forward "buttons";
 @forward "safety-exit";
@@ -24,11 +27,13 @@
 @forward "nav-primary";
 @forward "nav-secondary";
 @forward "footer";
+@forward "hours";
 
 // Layout & page-specific styles
 @forward "home";
 @forward "service";
 @forward "essay";
+@forward "feed";
 @forward "sidebar";
 @forward "cv";
 @forward "framework";
@@ -36,5 +41,5 @@
 @forward "team";
 @forward "sidebar-rail";
 
-// Design system reference (optional, for documentation)
-// @forward "design-system";
+// Token specimen page — /design-system/
+@forward "design-system";

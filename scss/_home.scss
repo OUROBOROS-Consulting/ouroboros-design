@@ -9,7 +9,7 @@
   display: grid;
   grid-template-rows: auto 1fr auto;
   align-content: center;
-  gap: 3.5rem 0;
+  gap: var(--space-band-lg) 0;
   position: relative;
   z-index: 0;
   background-color: #0C0E20; // matches page-hero deep-navy scrim end; homepage hero only
@@ -24,32 +24,32 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 4rem;
+  gap: var(--space-11);
 }
 
 
 .hero-text {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: var(--space-7);
 }
 
 .hero-eyebrow {
-  @include label-caps(var(--fs-xs));
+  @include label-caps(var(--fs-1));
 }
 
 .hero-name {
   font-family: $font-serif;
-  font-size: var(--fs-display-xl);
+  font-size: var(--fs-11);
   font-weight: 500;
   line-height: 0.95;
   letter-spacing: -0.01em;
-  color: var(--text);
+  color: var(--ink-3);
 }
 
 .hero-tagline {
-  font-size: var(--fs-base);
-  color: var(--subdued);
+  font-size: var(--fs-3);
+  color: var(--ink-2);
   line-height: 1.85;
   max-width: 520px;
 
@@ -58,11 +58,11 @@
   }
 
   p:first-child {
-    font-size: var(--fs-display-xs);
-    color: var(--text);
+    font-size: var(--fs-7);
+    color: var(--ink-3);
     line-height: 1.45;
     font-style: italic;
-    margin-bottom: 0.75rem;
+    margin-bottom: var(--space-4);
   }
 }
 
@@ -70,7 +70,7 @@
   margin-top: 0;
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: var(--space-5);
   align-items: center;
 }
 
@@ -105,8 +105,8 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1px;
-  background: var(--border);
-  margin-top: 3rem;
+  background: var(--line-3);
+  margin-top: var(--space-10);
 
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
@@ -114,27 +114,27 @@
 }
 
 .stat {
-  background-color: var(--bg1);
+  background-color: var(--surface-1);
   @include scallop-standard;
-  padding: 2.5rem 2rem;
+  padding: var(--space-9) var(--space-8);
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: var(--space-3);
 }
 
 .stat-value {
   font-family: $font-serif;
-  font-size: var(--fs-display-md);
+  font-size: var(--fs-9);
   font-weight: 400;
-  color: var(--gold);
+  color: var(--mark);
   line-height: 1;
 }
 
 // ── Values flip cards ─────────────────────────────────────────────────────────
 #values .values-grid {
   grid-template-columns: repeat(2, 1fr);
-  gap: 1.25rem;
-  margin-top: 2rem;
+  gap: var(--space-6);
+  margin-top: var(--space-8);
   grid-auto-rows: 260px;
 
   @media (max-width: 768px) {
@@ -172,7 +172,7 @@
     inset: 0;
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
-    background: var(--gold-border);
+    background: var(--mark-border);
     padding: $chamfer-border;
     @include chamfer($chamfer-arc);
   }
@@ -184,7 +184,7 @@
   &__surface {
     height: 100%;
     box-sizing: border-box;
-    padding: 1.5rem 1.6rem;
+    padding: var(--space-7) var(--space-7);
     @include chamfer($chamfer-inner);
     @include elevation-standard;
     display: flex;
@@ -194,7 +194,7 @@
   &__front &__surface {
     align-items: center;
     justify-content: center;
-    gap: 1.1rem;
+    gap: var(--space-5);
     text-align: center;
   }
 
@@ -204,17 +204,17 @@
   }
 
   &__icon {
-    font-size: var(--fs-display-lg);
-    color: var(--bright);
+    font-size: var(--fs-10);
+    color: var(--ink-4);
     opacity: 0.6;
     line-height: 1;
   }
 
   &__name {
     font-family: $font-serif;
-    font-size: var(--fs-display-md);
+    font-size: var(--fs-9);
     font-weight: 400;
-    color: var(--text);
+    color: var(--ink-3);
     line-height: 1.2;
 
     p { margin: 0; }
@@ -222,9 +222,9 @@
 
   &__desc {
     font-family: $font-sans;
-    font-size: var(--fs-sm);
+    font-size: var(--fs-2);
     line-height: 1.8;
-    color: var(--subdued);
+    color: var(--ink-2);
     margin: 0;
 
     p { margin: 0; }
@@ -232,7 +232,7 @@
 }
 
 .stat-label {
-  @include label-caps(var(--fs-xs), 0.18em);
+  @include label-caps(var(--fs-1), 0.18em);
 }
 
 // ── Scroll hint ───────────────────────────────────────────────────────────────
@@ -241,12 +241,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.5rem;
-  padding-top: 3rem;
+  gap: var(--space-3);
+  padding-top: var(--space-10);
   align-self: end;
 
   span {
-    @include label-caps(var(--fs-xs), 0.25em);
+    @include label-caps(var(--fs-1), 0.25em);
     animation: scrollPulse 2s ease-in-out infinite;
   }
 }
@@ -254,7 +254,7 @@
 .scroll-line {
   width: 1px;
   height: 48px;
-  background: var(--gold);
+  background: var(--mark);
   opacity: 0.4;
   animation: scrollPulse 2s ease-in-out infinite;
 }
@@ -274,15 +274,15 @@
   justify-content: space-between;
   align-items: flex-end;
   background-color: #0D0D0D; // fallback under the black-marble raster (site main.scss)
-  margin: -6rem -10vw 3rem;
-  padding: 4.5rem 10vw 2.5rem;
+  margin: -6rem -10vw var(--space-10);
+  padding: 4.5rem 10vw var(--space-9);
   border-top: 1px solid rgba(177, 147, 93, 0.22);
   border-bottom: 1px solid rgba(177, 147, 93, 0.22);
 
   &::after {
     content: '';
     display: block;
-    margin-top: 2.5rem;
+    margin-top: var(--space-9);
     @include accent-rule;
   }
 }
@@ -299,30 +299,30 @@
 .work-heading,
 .testimonials-heading {
   font-family: $font-serif;
-  font-size: var(--fs-display-md);
+  font-size: var(--fs-9);
   font-weight: 400;
   line-height: 1.15;
-  margin-top: 0.6rem;
+  margin-top: var(--space-3);
 }
 
 .work-count,
 .testimonials-count {
-  @include label-caps(var(--fs-xs), 0.2em);
-  padding-bottom: 0.4rem;
+  @include label-caps(var(--fs-1), 0.2em);
+  padding-bottom: var(--space-2);
 }
 
 .work-header-right {
   display: flex;
   flex-direction: row;      // count + View All inline so the link lands at the strip's end
   align-items: baseline;
-  gap: 1.25rem;
+  gap: var(--space-6);
 }
 
 .work-viewall {
-  @include label-caps(var(--fs-xs), 0.15em);
-  color: var(--gold);
+  @include label-caps(var(--fs-1), 0.15em);
+  color: var(--mark);
   text-decoration: none;
-  padding-bottom: 0.4rem;
+  padding-bottom: var(--space-2);
   transition: opacity 0.2s;
 
   &:hover {
@@ -334,9 +334,9 @@
 // ── Services cards: icon stacked above copy ──────────────────────────────────
 .card-icon {
   width: 30%;
-  margin-bottom: 1.25rem;
+  margin-bottom: var(--space-6);
   font-size: 5rem; // Font Awesome fallback glyph when no hero_svg
-  color: var(--bright);
+  color: var(--ink-4);
 
   // Hand-crafted service SVG reused from the hero fills the icon box.
   img {
@@ -360,9 +360,9 @@
 #work,
 #testimonials,
 #cta {
-  padding: 6rem 10vw;
-  background: var(--bg1);
-  border-top: 1px solid var(--border);
+  padding: var(--space-12) 10vw;
+  background: var(--surface-1);
+  border-top: 1px solid var(--line-3);
 }
 
 // ── Closing CTA ────────────────────────────────────────────────────────────────
@@ -390,7 +390,7 @@
 
   .hero-cta {
     justify-content: center;
-    margin-top: 2.5rem;
+    margin-top: var(--space-9);
   }
 }
 
@@ -405,14 +405,14 @@
 #cta .rc-answer {
   display: flex;
   align-items: center;
-  gap: 0.9rem;
+  gap: var(--space-5);
   font-family: $font-serif;
-  font-size: var(--fs-display-sm);
+  font-size: var(--fs-8);
   font-weight: 400;
   line-height: 1;
   letter-spacing: 0.08em;
-  color: var(--gold);
-  margin-bottom: 1.1rem;
+  color: var(--mark);
+  margin-bottom: var(--space-5);
 
   // Hairline running off the answer, echoing .about-header::after. Gives the
   // fork a horizon so the two cards read as one question, two directions.
@@ -420,7 +420,7 @@
     content: '';
     flex: 1;
     height: 1px;
-    background: linear-gradient(90deg, var(--gold-dim), transparent);
+    background: linear-gradient(90deg, var(--mark-dim), transparent);
   }
 }
 
@@ -450,8 +450,8 @@
   &:hover {
     transform: none;
 
-    &::before { background: var(--gold-border); }
-    &::after  { background: var(--bg2); }
+    &::before { background: var(--mark-border); }
+    &::after  { background: var(--surface-2); }
   }
 }
 
@@ -475,7 +475,7 @@
 #cta .cta-split .about-heading {
   margin-left: 0;
   margin-right: 0;
-  font-size: var(--fs-display-sm);
+  font-size: var(--fs-8);
 }
 
 #cta .cta-split .hero-cta {
@@ -493,15 +493,15 @@
   &:hover {
     transform: none;
 
-    &::before { background: var(--gold-border); }
-    &::after  { background: var(--bg2); }
+    &::before { background: var(--mark-border); }
+    &::after  { background: var(--surface-2); }
   }
 
   // Top-pin the copy + embed (override the design system's flex-grow) so the
   // Subscribe row sits at a fixed offset that the left button is aligned to
   .card-desc {
     flex-grow: 0;
-    margin: 0.75rem 0 0;
+    margin: var(--space-4) 0 0;
   }
 }
 
@@ -509,14 +509,14 @@
 // last third-party request on the site and it loaded on every page. The 2.4rem
 // offset is what aligns this button with the CTA button in the left column.
 #cta .cta-newsletter__action {
-  margin-top: 2.4rem;
+  margin-top: var(--space-9);
 }
 
 // ── Responsive ────────────────────────────────────────────────────────────────
 @media (max-width: 768px) {
   #hero {
-    padding: 8rem 6vw 4rem;
-    gap: 2rem 0;
+    padding: var(--space-13) 6vw var(--space-11);
+    gap: var(--space-8) 0;
   }
 
   // Phone hero mirrors the tablet band: drop the wordmark text, show the logo
@@ -524,7 +524,7 @@
   .hero-identity {
     flex-direction: column;
     align-items: center;
-    gap: 1.5rem;
+    gap: var(--space-7);
   }
 
   .hero-emblem {
@@ -545,7 +545,7 @@
   #work,
   #testimonials,
   #cta {
-    padding: 4rem 6vw;
+    padding: var(--space-11) 6vw;
   }
 
   .work-header,
@@ -553,9 +553,9 @@
   .about-header {
     flex-direction: column;
     align-items: flex-start;
-    gap: 0.5rem;
-    margin: -4rem -6vw 2.5rem;
-    padding: 3rem 6vw 2rem;
+    gap: var(--space-3);
+    margin: -4rem -6vw var(--space-9);
+    padding: var(--space-10) 6vw var(--space-8);
   }
 
   // Closing CTA stacks: primary block re-centers, newsletter card below
@@ -596,7 +596,7 @@
   .hero-identity {
     flex-direction: column;
     align-items: flex-start;
-    gap: 1.5rem;
+    gap: var(--space-7);
   }
 
   .hero-emblem {
@@ -632,12 +632,12 @@
 .carousel-controls {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: var(--space-5);
 }
 
 
 .carousel-count {
-  @include label-caps(var(--fs-xs), 0.12em);
+  @include label-caps(var(--fs-1), 0.12em);
   min-width: 4ch;
   text-align: center;
 }
@@ -645,23 +645,23 @@
 .carousel-dots {
   display: flex;
   justify-content: center;
-  gap: 0.6rem;
-  margin-top: 2rem;
+  gap: var(--space-3);
+  margin-top: var(--space-8);
 }
 
 .carousel-dot {
   width: 24px;
   height: 24px;
-  border-radius: 50%;
-  background: var(--border);
-  border: 1px solid var(--gold-dim);
+  border-radius: var(--radius-round);
+  background: var(--line-3);
+  border: 1px solid var(--mark-dim);
   cursor: pointer;
   padding: 0;
   transition: background 0.25s;
 
   &.active {
-    background: var(--gold);
-    border-color: var(--gold);
+    background: var(--mark);
+    border-color: var(--mark);
   }
 }
 // ── Site Banner ──────────────────────────────────────────────────────────────
@@ -674,17 +674,17 @@
   // text on it must flip too. --bg1 is the one token guaranteed to sit
   // opposite --steel in both themes, because the contrast checker already
   // asserts --steel clears its floor against --bg1. Same idiom the buttons
-  // use for `background: var(--gold); color: var(--bg1)`.
-  // Was var(--text): 2.48:1 on dark, 1.61:1 on light. Now 6.06:1 / 5.90:1.
-  color: var(--bg1);
+  // use for `background: var(--mark); color: var(--surface-1)`.
+  // Was var(--ink-3): 2.48:1 on dark, 1.61:1 on light. Now 6.06:1 / 5.90:1.
+  color: var(--surface-1);
   font-family: var(--font-sans, 'Inter', sans-serif);
-  font-size: var(--fs-xs);
+  font-size: var(--fs-1);
   letter-spacing: 0.03em;
   display: flex;
   align-items: center;
   justify-content: center;
   min-height: 36px;
-  padding: 0.4rem 1.5rem;
+  padding: var(--space-2) var(--space-7);
   position: fixed;
   top: 0;
   left: 0;
@@ -699,12 +699,12 @@
 
   // announcement: icon + text + optional arrow
   &--announcement {
-    gap: 0.5rem;
+    gap: var(--space-3);
 
     .site-banner__icon { opacity: 0.85; }
 
     .site-banner__arrow {
-      margin-left: 0.35rem;
+      margin-left: var(--space-2);
       opacity: 0.7;
     }
   }
@@ -713,14 +713,14 @@
   &--tagline {
     font-style: italic;
     letter-spacing: 0.07em;
-    font-size: var(--fs-xs);
+    font-size: var(--fs-1);
     opacity: 0.9;
   }
 
   // brand: Cormorant SC wordmark treatment
   &--brand {
     font-family: 'Cormorant SC', serif;
-    font-size: var(--fs-sm);
+    font-size: var(--fs-2);
     letter-spacing: 0.15em;
     font-weight: 600;
   }
@@ -740,7 +740,7 @@ body.has-banner nav {
   font-size: 0.5em;
   letter-spacing: 0.25em;
   font-weight: 400;
-  color: var(--subdued);
+  color: var(--ink-2);
   text-transform: uppercase;
 }
 
@@ -750,10 +750,10 @@ body.has-banner nav {
 
 // ── Testimonials context label ────────────────────────────────────────────────
 .testimonials-context {
-  font-size: var(--fs-sm);
-  color: var(--subdued);
+  font-size: var(--fs-2);
+  color: var(--ink-2);
   font-style: italic;
-  margin-top: 0.5rem;
+  margin-top: var(--space-3);
 }
 
 // Audience section now shares the standard section chrome (see the

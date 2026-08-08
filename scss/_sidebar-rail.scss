@@ -31,24 +31,24 @@
   display: flex;
   flex-direction: column;
   align-items: stretch; // override any global bare `nav { align-items:center }`
-  padding: 0.75rem 0;
+  padding: var(--space-4) 0;
 }
 
 // ── Top-level item (icon + label) ────────────────────────────────────────────
 .rail-item {
   display: flex;
   align-items: center;
-  gap: 0.9rem;
+  gap: var(--space-5);
   height: 3rem;
   padding: 0 0 0 calc((var(--rail-w) - 1.35rem) / 2); // centres icon when collapsed
   text-decoration: none;
-  color: var(--subdued);
+  color: var(--ink-2);
   white-space: nowrap;
   transition: color 0.18s ease, background 0.18s ease;
 
   &:hover {
-    color: var(--gold);
-    background: var(--gold-ghost);
+    color: var(--mark);
+    background: var(--mark-ghost);
   }
 }
 
@@ -71,13 +71,13 @@
   text-align: center;
 
   i {
-    font-size: var(--fs-md);
+    font-size: var(--fs-4);
   }
 }
 
 .rail-tx {
   font-family: $font-garamond;
-  font-size: var(--fs-base);
+  font-size: var(--fs-3);
   font-weight: 500;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -87,8 +87,8 @@
 // Active section: gold marker + brightened label
 .rail-group--active {
   .rail-item {
-    color: var(--gold);
-    box-shadow: inset 3px 0 0 var(--gold);
+    color: var(--mark);
+    box-shadow: inset 3px 0 0 var(--mark);
   }
 }
 
@@ -104,23 +104,23 @@
 
 .rail-subitem {
   font-family: $font-garamond;
-  font-size: var(--fs-xs);
+  font-size: var(--fs-1);
   letter-spacing: 0.1em;
   line-height: 1.35;
   text-transform: uppercase;
-  color: var(--muted);
+  color: var(--ink-1);
   text-decoration: none;
   white-space: normal; // long labels (e.g. "Investigations & Due Diligence") wrap instead of clipping
-  padding: 0.4rem 0;
+  padding: var(--space-2) 0;
   opacity: 0;
   transition: color 0.16s ease;
 
   &:hover {
-    color: var(--gold);
+    color: var(--mark);
   }
 
   &--active {
-    color: var(--gold);
+    color: var(--mark);
   }
 }
 

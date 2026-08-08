@@ -14,13 +14,13 @@
   z-index: 9999;
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.55rem 1.05rem;
-  background: var(--bg3);
-  border: 1px solid var(--gold-border);
-  color: var(--text);
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-5);
+  background: var(--surface-3);
+  border: 1px solid var(--mark-border);
+  color: var(--ink-3);
   font-family: $font-sans;
-  font-size: var(--fs-xs);
+  font-size: var(--fs-1);
   font-weight: 500;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -36,13 +36,13 @@
 
   &::before {
     content: '✕';
-    color: var(--gold);
-    font-size: var(--fs-xs);
+    color: var(--mark);
+    font-size: var(--fs-1);
   }
 
   &:hover {
-    background: var(--calloutbg);
-    border-color: var(--gold);
+    background: var(--surface-4);
+    border-color: var(--mark);
   }
 
   @media print {

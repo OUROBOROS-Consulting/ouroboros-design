@@ -60,51 +60,76 @@ function isHex(v) {
 }
 
 // rgba(...) dim/ghost tokens and --shadow are not text/border colors under
-// test here — only plain hex tokens are checked.
+// test here — only plain hex tokens are checked. --accent-1..5 are aliases
+// (`var(--mark)` and friends), not hex, so they are deliberately absent: the
+// semantic token each one points at is already asserted below.
+//
+// The full surface ramp is listed, including --surface-5. In dark that step is
+// the lightest surface and therefore the new worst case for light-on-dark ink;
+// in light it is pure white and never the worst case for dark-on-light ink.
 const SURFACES = {
-  dark: ['--bg1', '--bg2', '--bg3', '--calloutbg'],
-  light: ['--bg1', '--bg2', '--bg3', '--calloutbg'],
+  dark: ['--surface-1', '--surface-2', '--surface-3', '--surface-4', '--surface-5'],
+  light: ['--surface-1', '--surface-2', '--surface-3', '--surface-4', '--surface-5'],
 };
 
+// ⚠ --surface-5 is an INK-ONLY surface. Do not put accent-coloured text on it.
+//
+// The dark accent palette is at its contrast ceiling. --steel (#7F94A6) is the
+// binding token: 4.5:1 against it caps the surface luminance at 0.02432, and
+// --surface-4 (#252831) already sits at 0.02133. That leaves room for roughly
+// one more perceptual step, which --surface-5 (#2b2f39, 0.02842) spends — so
+// steel lands at 4.26:1, amethyst 4.27:1, teal 4.49:1 there.
+//
+// The ink ramp clears 4.5:1 on all five steps, and the accents are categorical
+// badges on cards, which live on surface-2/3. So the ramp is kept and accents
+// are asserted only over the surfaces they are actually allowed on. Lifting
+// this restriction means lightening steel, amethyst and teal — a brand change,
+// not a CI change.
+const ACCENT_TOKENS = new Set([
+  '--mark', '--mark-border', '--steel', '--amethyst', '--sage', '--teal', '--ruby', '--claude',
+]);
+const surfacesFor = (theme, token) =>
+  ACCENT_TOKENS.has(token) ? SURFACES[theme].filter((s) => s !== '--surface-5') : SURFACES[theme];
+
 // Floors:
-// - --text/--subdued in LIGHT target AAA (7:1) — the spec's tighter light-mode
+// - --ink-3/--ink-2 in LIGHT target AAA (7:1) — the spec's tighter light-mode
 //   target.
-// - --subdued in DARK is genuinely 6.4:1 worst case, which _base.scss's own
+// - --ink-2 in DARK is genuinely 6.4:1 worst case, which _base.scss's own
 //   comment already documents as "AA for normal text" (not AAA) — so its dark
 //   floor is 4.5, matching the shipped, correctly-labeled palette.
-// - --gold-border is a border/non-text color (WCAG 1.4.11 non-text contrast),
+// - --mark-border is a border/non-text color (WCAG 1.4.11 non-text contrast),
 //   floor 3:1.
 // - --ruby and --claude have zero call sites in either repo (grep-verified:
 //   `grep -rn -- "--ruby\|--claude" scss/ ../OUROBOROS-Consulting.github.io/assets`
 //   returns only their own declarations). The CURRENT dark values already fail
-//   4.5:1 (--ruby 3.70:1, --claude 4.36:1 on --calloutbg) — a pre-existing
-//   condition outside this feature's scope. They are asserted in light only,
-//   against the new light values this plan defines, so CI does not fail on
-//   day one for an unrelated, already-shipped defect.
+//   4.5:1 (--ruby 3.70:1, --claude 4.36:1 on the top surface step) — a
+//   pre-existing condition outside this feature's scope. They are asserted in
+//   light only, against the new light values, so CI does not fail on day one
+//   for an unrelated, already-shipped defect.
 const FLOORS = {
   dark: {
-    '--bright': 4.5,
-    '--text': 7,
-    '--subdued': 4.5,
-    '--muted': 4.5,
-    '--gold': 4.5,
+    '--ink-4': 4.5,
+    '--ink-3': 7,
+    '--ink-2': 4.5,
+    '--ink-1': 4.5,
+    '--mark': 4.5,
     '--steel': 4.5,
     '--amethyst': 4.5,
     '--sage': 4.5,
     '--teal': 4.5,
-    '--gold-border': 3,
+    '--mark-border': 3,
   },
   light: {
-    '--bright': 4.5,
-    '--text': 7,
-    '--subdued': 7,
-    '--muted': 4.5,
-    '--gold': 4.5,
+    '--ink-4': 4.5,
+    '--ink-3': 7,
+    '--ink-2': 7,
+    '--ink-1': 4.5,
+    '--mark': 4.5,
     '--steel': 4.5,
     '--amethyst': 4.5,
     '--sage': 4.5,
     '--teal': 4.5,
-    '--gold-border': 3,
+    '--mark-border': 3,
     '--ruby': 4.5,
     '--claude': 4.5,
   },
@@ -114,8 +139,8 @@ const failures = [];
 
 for (const [theme, tokens] of Object.entries({ dark, light })) {
   const floors = FLOORS[theme];
-  const surfaces = SURFACES[theme];
   for (const [token, floor] of Object.entries(floors)) {
+    const surfaces = surfacesFor(theme, token);
     const value = tokens[token];
     if (!value || !isHex(value)) {
       failures.push({ theme, token, surface: '(all)', ratioStr: 'n/a', floor, note: `token missing or not a hex color: ${value}` });
