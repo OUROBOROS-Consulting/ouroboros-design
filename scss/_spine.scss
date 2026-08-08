@@ -1,0 +1,205 @@
+@use "base" as *;
+
+// ── Golden thread ────────────────────────────────────────────────────────────
+// One continuous gold sinusoid running the full height of each edge panel,
+// generated at runtime by the consuming site's assets/js/spine.js.
+//
+// The wave crests exactly once per [data-spine-node], so its wavelength IS the
+// entry spacing: a run of short rows tightens it, a run of tall rows opens it
+// out. Above the first node and below the last the script keeps extrapolating
+// at the same period, so the thread reaches both edges of the panel rather than
+// stopping where the list stops. That is the whole point of the treatment — it
+// reads as a thread running down the side of the page that happens to ripple
+// where there is content, not as a decoration bolted onto a list.
+//
+// The node stack itself is centred vertically inside the panel (auto block
+// margins in _sidebar.scss / _sidebar-rail.scss), so the ticks sit in the middle
+// of the run and the thread runs clean above and below them.
+//
+// THE HOST MUST ALREADY BE POSITIONED. [data-spine] goes on the panel root, and
+// both panels are position: fixed, so this partial deliberately does NOT set
+// position: relative — doing so would clobber the fixed positioning and drop
+// both panels back into the flow.
+//
+// Geometry is declared in CSS and read back by the script from the computed
+// style, so CSS is the single source of truth and the markup carries no
+// numbers. Each panel declares all four on its ROOT, which is also the host, so
+// chrome outside the list (a heading ornament, say) lines up on the same axis.
+// --spine-crest cannot be derived once on :root and inherited: a custom
+// property substitutes its var()s against the element it is declared on, so a
+// panel that overrides --spine-cx must restate the derivation too.
+//
+// Declare the lengths in PIXELS. getComputedStyle returns an unregistered
+// custom property as its specified token rather than a resolved length, so
+// "0.7rem" would reach the script as the number 0.7.
+//
+//   --spine-cx     distance from the panel's OUTER edge to the wave's axis
+//   --spine-amp    peak deflection to either side of that axis
+//   --spine-dir    which way crests point: `right` for a left-edge rail,
+//                    `left` for a right-edge panel
+//   --spine-crest  calc(cx + amp). Where the ticks sit, and the inner bound of
+//                    every label's padding. Never hardcode this number.
+
+// No margin here. The SVG's leading edge and the ticks' --spine-crest are both
+// measured from the panel edge, so insetting one and not the other slides the
+// wave off its own ticks. To move the whole thread inboard, raise --spine-cx.
+.spine {
+  position: absolute;
+  top: 0;
+  overflow: visible;
+  pointer-events: none;
+}
+
+// ── Refined Single Stroke ─────────────────────────────────────────────────────
+// The transition from three layers to one single elegant stroke removes the
+// "underneath" layering and creates a cleaner, more delicate aesthetic.
+.spine stop {
+  stop-color: var(--mark);
+}
+
+
+// At rest this is a THREAD. 1.25px, held back to just over half opacity, so it
+// reads as a drawn line down the edge of the page and not as a gold bar. It was
+// 15.5px, and spine.js was stacking three identical copies of it, which is how
+// a hairline became a ribbon roughly as wide as the strip it lived in. Both
+// halves of that are fixed — one path now (see TIERS in spine.js), and this
+// width. If you raise it past ~5px, raise STROKE_PAD in spine.js to match or
+// the outer half of the stroke gets clipped at the viewBox.
+.spine-wave {
+  fill: none;
+  stroke-width: 1.25px;
+  stroke-opacity: 0.55;
+  stroke-linecap: round;
+  transition:
+    stroke-opacity 0.8s ease,
+    stroke-width 0.8s ease;
+}
+
+// One-time draw-in. The script sets pathLength="1" so the dash length is
+// resolution-independent and this works for a three-tick rail and a
+// twenty-tick outline alike.
+.spine.is-drawing .spine-wave {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: spine-draw 12s cubic-bezier(0.4, 0, 0.2, 1) 0.5s forwards;
+}
+
+@keyframes spine-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+// Cursor on the strip: the thread lights. It gains a little weight and goes to
+// full opacity — it does NOT lose weight, which is what the old 15.5 → 2.5
+// pairing did. Lighting something should read as more of it, not less.
+@mixin spine-lit {
+  .spine-wave {
+    stroke-opacity: 1;
+    stroke-width: 2px;
+  }
+
+  .spine-tick {
+    opacity: 0.9;
+  }
+}
+
+// ── Label plaque ─────────────────────────────────────────────────────────────
+// One label, belonging to one node, hinged on the strip's inner edge. Shared by
+// the left rail and the right outline: neither panel opens any more, so this is
+// the only way a label ever appears, and putting it here is what stops the two
+// edges of the page drifting apart. $dir is the direction the plaque travels —
+// `right` for the left-edge rail, `left` for the right-edge outline.
+//
+// It hides with clip-path, not with a collapsed box. A width or max-width
+// animation has to fight the plaque's own horizontal padding, which cannot go
+// to zero without the text lurching as it opens; clip-path wipes the rendered
+// pixels and leaves the geometry alone, so the letters are already in their
+// final positions before the first frame. The cost is that the box is still
+// there when shut, hence pointer-events: none — an invisible plaque must not
+// eat clicks on the prose it is lying over.
+//
+// dark-island because the scrim is a permanently dark surface: without it the
+// text inherits the page's ink and goes dark-on-dark under a light theme.
+//
+// THE HOST ROW MUST BE POSITIONED, and the strip must not clip. Both panels are
+// overflow: visible for exactly this reason.
+@mixin spine-plaque($dir) {
+  @include dark-island;
+
+  // $out is +1 when the plaque travels right, -1 when it travels left: it
+  // drives the shadow's throw and the direction the plaque eases in from.
+  // $near is the edge facing the thread. $wipe is the clip it hides behind,
+  // always collapsed toward that same edge.
+  $out: -1;
+  $near: right;
+  $wipe: inset(0 0 0 100%);
+
+  @if $dir == right {
+    $out: 1;
+    $near: left;
+    $wipe: inset(0 100% 0 0);
+  }
+
+  position: absolute;
+  top: 50%;
+  #{$near}: 100%;
+  z-index: 1;
+  padding: var(--space-3) var(--space-5);
+  color: var(--mark);
+  background: rgba(20, 20, 20, 0.92);
+  backdrop-filter: blur(12px);
+  // One rule, on the edge nearest the thread. The plaque reads as something the
+  // thread pushed out of the strip, not as a tooltip that arrived from
+  // somewhere else.
+  border-#{$near}: 2px solid var(--mark-border);
+  box-shadow: #{12px * $out} 0 32px -14px var(--shadow);
+  pointer-events: none;
+
+  // Shut: wiped back toward the strip, and set half a step behind it so the
+  // reveal has somewhere to travel from.
+  clip-path: $wipe;
+  opacity: 0;
+  transform: translate(#{-0.5rem * $out}, -50%);
+  transition:
+    clip-path 0.34s cubic-bezier(0.22, 0.61, 0.36, 1),
+    transform 0.34s cubic-bezier(0.22, 0.61, 0.36, 1),
+    opacity 0.18s ease;
+}
+
+@mixin spine-plaque-open {
+  clip-path: inset(0 0 0 0);
+  opacity: 1;
+  transform: translate(0, -50%);
+}
+
+// The tick is the site's ◇ prose ornament shrunk to a lozenge and sat on the
+// crest. Positioning is per-host, because it depends on which edge the spine
+// hugs — see _sidebar.scss and _sidebar-rail.scss.
+.spine-tick {
+  position: absolute;
+  top: 50%;
+  width: 0.38rem;
+  height: 0.38rem;
+  background: var(--mark);
+  opacity: 0.55;
+  pointer-events: none;
+  transition:
+    opacity 1s ease,
+    background 1s ease,
+    box-shadow 1s ease,
+    width 1s ease,
+    height 1s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spine.is-drawing .spine-wave {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+
+  .spine-wave,
+  .spine-tick {
+    transition: none;
+  }
+}

@@ -3,7 +3,8 @@
 // ── Footer ───────────────────────────────────────────────────────────────────
 footer {
   @include dark-island;
-  padding: var(--space-4) var(--space-10);
+  width: 100%;
+  padding: var(--space-4) var(--space-7);
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
@@ -28,8 +29,8 @@ footer {
 }
 
 .footer-logo-mark {
-  width: 28.56px;
-  height: 28.56px;
+  width: 70px;
+  height: 70px;
   opacity: 0.7;
   flex-shrink: 0;
 }

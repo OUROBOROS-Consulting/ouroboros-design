@@ -6,7 +6,7 @@
 .cards {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 1px; // border-collapse effect
+  gap: clamp(2rem, 5vw, 4.5rem);
   background: var(--line-3);
 }
 

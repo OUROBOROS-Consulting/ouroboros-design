@@ -5,13 +5,21 @@
 #hero {
   @include dark-island;
   min-height: 100vh;
-  padding: var(--nav-h) 10vw 6rem;
+  padding: var(--nav-h) var(--space-10);
   display: grid;
   grid-template-rows: auto 1fr auto;
   align-content: center;
   gap: var(--space-band-lg) 0;
   position: relative;
   z-index: 0;
+  // Sizing container for .hero-name. The wordmark used to scale off the
+  // viewport (--fs-11 is 10vw), which ignores the hero's own gutter — so every
+  // time the consuming site widened that gutter the identity row got closer to
+  // bursting, and past 1025px it burst. See the note on .hero-name. Safe here:
+  // the hero is an auto-width block in normal flow, so containing its inline
+  // size changes nothing, and it was already a stacking context and a
+  // containing block via position/z-index. It holds no fixed descendants.
+  container-type: inline-size;
   background-color: #0C0E20; // matches page-hero deep-navy scrim end; homepage hero only
   background-image:
     radial-gradient(ellipse 80% 65% at 50% 45%, transparent 30%, rgba(8, 8, 8, 0.55) 100%),
@@ -38,9 +46,18 @@
   @include label-caps(var(--fs-1));
 }
 
+// "OUROBOROS" is a single unbreakable word, so its min-content width is the
+// whole wordmark and flex can never shrink it — if it does not fit beside the
+// emblem, it pushes the hero past the viewport instead of wrapping. Sized in
+// cqi (percent of #hero's CONTENT box) rather than --fs-11's 10vw, so the
+// wordmark tracks the room it actually has and stays in register with whatever
+// gutter the consuming site sets. 8cqi leaves the emblem and the 4rem gap clear
+// at every width from 1025px up, and still reaches the 8rem ceiling on a wide
+// display. The tablet band below stacks the row, so this only has to fit the
+// side-by-side case. Do not put --fs-11 back without re-checking that sum.
 .hero-name {
   font-family: $font-serif;
-  font-size: var(--fs-11);
+  font-size: clamp(2.5rem, 8cqi, 8rem);
   font-weight: 500;
   line-height: 0.95;
   letter-spacing: -0.01em;

@@ -173,10 +173,14 @@
 }
 
 // ── Service Body ──────────────────────────────────────────────────────────────
+// Was `max-width: 1600px; margin: 0 auto; padding: var(--pad)`, which is how
+// every /resources/-style landing page ended up 96px right of the homepage's
+// bands: --pad is a flat 2.5rem that predates the rail, and the auto margins
+// centred it on body's already-offset content box. See the page-band mixin.
 .page-body {
-  max-width: 1600px;
-  margin: 0 auto;
-  padding: var(--pad) var(--pad);
+  @include page-band(var(--measure-page));
+
+  padding-block: var(--pad);
 
   // When foundation layout renders prose body ({{ content }}) via .post-body,
   // the essay's 680px cap is too narrow — override it here.
@@ -536,8 +540,11 @@
     width: clamp(150px, 45vw, 240px);
   }
 
+  // Block only. The inline padding is --gutter's job at every breakpoint, and
+  // it already steps down to 6vw here; a shorthand would beat the page-band
+  // mixin and put this page's measure back out of register with the homepage.
   .page-body {
-    padding: 0 6vw var(--space-12);
+    padding-block: 0 var(--space-12);
   }
 
   .page-section {

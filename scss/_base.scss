@@ -73,6 +73,32 @@
   --space-card: 1.4rem;
   --space-band-lg: 3.5rem;
 
+  /* ── Measure scale ──────────────────────────────────────────────────────────
+     The scale the system was missing. Type and spacing were tokenised; page
+     geometry never was, so ten containers each invented their own cap and
+     gutter (1600/2.5rem, 1600/5vw, 1060/10vw, 680/10vw, 1152/1.5rem, 1200/
+     2.5rem, 760/0 …) and drifted apart. .page-body ended up sitting 96px right
+     of the homepage's bands, which is what a reader actually sees when they go
+     from / to /resources/.
+
+     --gutter-min is the floor: the rail's own footprint plus a step, so no band
+     can ever put text under the golden thread. --gutter adds a proportional
+     term on top for content bands, so wide displays get real margin rather
+     than a 3000px line length. Chrome that is not a content band (the footer's
+     three-column grid, the disclaimer strip) takes --gutter-min directly.
+
+     --rail-total comes from _sidebar-rail.scss. Custom properties resolve at
+     computed-value time, so the forward reference is fine; the 0px fallback is
+     for a consumer that ships without the rail. */
+  --gutter-min: calc(var(--rail-total, 0px) + var(--space-10));
+  --gutter: max(10vw, var(--gutter-min));
+
+  /* Content caps, used with the page-band mixin below. These bound the TEXT,
+     not the element — the mixin keeps the gutter outside the cap. */
+  --measure-prose: 680px; // single-column reading
+  --measure-doc: 72rem; // documents and specs
+  --measure-page: 1600px; // wide index and grid pages
+
   /* ── Radius scale ───────────────────────────────────────────────────────────
      Ascending, in px on purpose: a corner radius is a fixed optical detail, not
      rhythm, so it should not scale with the root font the way --space-* does.
@@ -190,6 +216,16 @@
   --f-5: 2.441;
 
   @include dark-tokens;
+}
+
+/* Phones drop the proportional term to 6vw and tighten the floor. --rail-x
+   goes to 0 down here (see _sidebar-rail.scss), so the floor is the strip
+   alone; 10vw on top of it would eat a quarter of a 390px reading measure. */
+@media (max-width: 768px) {
+  :root {
+    --gutter-min: calc(var(--rail-total, 0px) + var(--space-4));
+    --gutter: max(6vw, var(--gutter-min));
+  }
 }
 
 @media (prefers-color-scheme: light) {
@@ -423,6 +459,43 @@ a {
     box-shadow:
       var(--elev-4),
       0 -1px 0 rgba(28, 32, 41, 0.14) inset;
+  }
+}
+
+// ── Page band ────────────────────────────────────────────────────────────────
+// The one way a top-level container should claim page width. Use it for
+// anything that spans the page: the homepage's section bands, .page-body, the
+// TOC wrapper. Do NOT use it for something nested inside one of those.
+//
+// Two things it does that a plain `max-width + margin: 0 auto` cannot:
+//
+//   1. It escapes body's rail reservation. The consuming site sets
+//      `body { padding-left: var(--rail-total) }` so flow content clears the
+//      golden thread. Any auto-margin container inside that is centred on
+//      body's content box, which is 96px narrower than the viewport and offset
+//      to the right — so it lands 96px right of anything that IS full-bleed.
+//      That was the whole .page-body vs. homepage discrepancy. Pull back out,
+//      then re-pad, and both are measured from the same origin.
+//
+//   2. It keeps the gutter OUTSIDE the cap. box-sizing is border-box globally,
+//      so `max-width: 1600px; padding: 0 10vw` is a 1600px BOX with a 1280px
+//      line inside it on a wide display — the gutter eats the measure instead
+//      of framing it. Here $cap bounds the content and the padding grows past
+//      --gutter to hold it, so the cap means what it says.
+//
+// The percentage inside that max() resolves against the CONTAINING BLOCK, which
+// is still body's content box, so --rail-total has to be added back in there.
+//
+// Vertical padding is deliberately not set — callers own their own rhythm.
+@mixin page-band($cap: none) {
+  width: calc(100% + var(--rail-total, 0px));
+  margin-left: calc(var(--rail-total, 0px) * -1);
+  margin-right: 0;
+
+  @if $cap == none {
+    padding-inline: var(--gutter);
+  } @else {
+    padding-inline: max(var(--gutter), calc((100% + var(--rail-total, 0px) - #{$cap}) / 2));
   }
 }
 

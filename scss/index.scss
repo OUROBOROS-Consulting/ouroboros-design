@@ -34,6 +34,8 @@
 @forward "service";
 @forward "essay";
 @forward "feed";
+// Shared geometry for the two collapsible edge panels. Must precede both.
+@forward "spine";
 @forward "sidebar";
 @forward "cv";
 @forward "framework";
