@@ -82,7 +82,7 @@ nav {
 
 .nav-links {
   display: flex;
-  gap: var(--space-5);
+  gap: var(--space-9);
   margin-left: auto;
   font-family: $font-sans;
 
@@ -135,7 +135,7 @@ nav {
   // offset the search card relative to the other three; flex-start aligns
   // all card tops since each card is the first child of its flex item.
   align-items: flex-start;
-  gap: var(--space-4);
+  gap: var(--space-2);
 }
 
 // ── Dropdowns ─────────────────────────────────────────────────────────────────

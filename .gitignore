@@ -1,7 +1,7 @@
 .claude
 .github
-dist/
-docs/
+dist/*
+docs/superpowers/
 node_modules/
 npm-debug.log
 .DS_Store
