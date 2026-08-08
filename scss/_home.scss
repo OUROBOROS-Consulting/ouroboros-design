@@ -106,18 +106,6 @@
 }
 
 
-// ── Hero portrait ─────────────────────────────────────────────────────────────
-.hero-portrait {
-  align-self: center;
-
-  img {
-    display: block;
-    width: clamp(220px, 22vw, 380px);
-    aspect-ratio: 3 / 4;
-    object-fit: cover;
-  }
-}
-
 // ──|| STATS ||─────────────────────────────────────────────────────────────
 .stats-grid {
   display: grid;
@@ -295,72 +283,9 @@
   }
 }
 
-// ── Shared section chrome ─────────────────────────────────────────────────────
-// Used by #values, #services, #work, #testimonials
-.work-header,
-.testimonials-header,
-.about-header {
-  @include dark-island;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  background-color: #0D0D0D; // fallback under the black-marble raster (site main.scss)
-  margin: -6rem -10vw var(--space-10);
-  padding: 4.5rem 10vw var(--space-9);
-  border-top: 1px solid rgba(177, 147, 93, 0.22);
-  border-bottom: 1px solid rgba(177, 147, 93, 0.22);
-
-  &::after {
-    content: '';
-    display: block;
-    margin-top: var(--space-9);
-    @include accent-rule;
-  }
-}
-
-// About / audience headers carry only a label + heading (no right-hand count or
-// link), so stack them vertically — heading below the label, left-aligned —
-// matching the left column of the work / testimonials headers instead of
-// splitting the two across the strip.
-.about-header {
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-.work-heading,
-.testimonials-heading {
-  font-family: $font-serif;
-  font-size: var(--fs-9);
-  font-weight: 400;
-  line-height: 1.15;
-  margin-top: var(--space-3);
-}
-
-.work-count,
-.testimonials-count {
-  @include label-caps(var(--fs-1), 0.2em);
-  padding-bottom: var(--space-2);
-}
-
-.work-header-right {
-  display: flex;
-  flex-direction: row; // count + View All inline so the link lands at the strip's end
-  align-items: baseline;
-  gap: var(--space-6);
-}
-
-.work-viewall {
-  @include label-caps(var(--fs-1), 0.15em);
-  color: var(--mark);
-  text-decoration: none;
-  padding-bottom: var(--space-2);
-  transition: opacity 0.2s;
-
-  &:hover {
-    opacity: 0.7;
-    text-decoration: underline;
-  }
-}
+// The section band header lived here as .work-header / .testimonials-header /
+// .about-header until 2026-08-08. It is one component used on five layouts, so
+// it moved to _band.scss — see the note there.
 
 // ── Services cards: icon stacked above copy ──────────────────────────────────
 .card-icon {
@@ -400,7 +325,7 @@
 #cta {
   text-align: center;
 
-  .about-header {
+  .band-header {
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -411,12 +336,6 @@
       margin-right: auto;
       max-width: 200px;
     }
-  }
-
-  .about-heading {
-    max-width: 640px;
-    margin-left: auto;
-    margin-right: auto;
   }
 
   .hero-cta {
@@ -491,8 +410,12 @@
   }
 }
 
-// Left column drops the full-bleed banner treatment so it fits inside a column
-#cta .cta-split .about-header {
+// Left column drops the full-bleed banner treatment so it fits inside a column.
+// ⚠ This is a band header used as a plain copy block: everything the component
+// does — the bleed, the stone fill, the border — is undone right here. It keeps
+// the class only for the accent rule and the column stack. Worth its own class
+// eventually; left alone in the 2026-08-08 rename so the pass stayed a rename.
+#cta .cta-split .band-header {
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
@@ -506,12 +429,6 @@
     margin-left: 0;
     margin-right: auto;
   }
-}
-
-#cta .cta-split .about-heading {
-  margin-left: 0;
-  margin-right: 0;
-  font-size: var(--fs-8);
 }
 
 #cta .cta-split .hero-cta {
@@ -589,23 +506,13 @@
     padding: var(--space-11) 6vw;
   }
 
-  .work-header,
-  .testimonials-header,
-  .about-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: var(--space-3);
-    margin: -4rem -6vw var(--space-9);
-    padding: var(--space-10) 6vw var(--space-8);
-  }
-
   // Closing CTA stacks: primary block re-centers, newsletter card below
   #cta .cta-split {
     grid-template-columns: 1fr;
     text-align: center;
   }
 
-  #cta .cta-split .about-header {
+  #cta .cta-split .band-header {
     align-items: center;
     text-align: center;
     margin: 0;

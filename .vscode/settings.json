@@ -1,0 +1,6 @@
+{
+    "editor.defaultFormatter": "vscode.css-language-features",
+    "editor.fontSize": 19,
+    "terminal.integrated.tabs.defaultColor": "terminal.ansiMagenta",
+    "terminal.integrated.tabs.defaultIcon": "checklist-compact"
+}

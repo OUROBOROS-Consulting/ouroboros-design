@@ -24,8 +24,10 @@
 @forward "buttons";
 @forward "safety-exit";
 @forward "cards";
+// Section band headers. Must precede "home" and "service": both carry #cta and
+// .psa-section overrides that tie on specificity and win only on source order.
+@forward "band";
 @forward "nav-primary";
-@forward "nav-secondary";
 @forward "footer";
 @forward "hours";
 
@@ -37,9 +39,7 @@
 // Shared geometry for the two collapsible edge panels. Must precede both.
 @forward "spine";
 @forward "sidebar";
-@forward "cv";
 @forward "framework";
-@forward "announcements";
 @forward "team";
 @forward "sidebar-rail";
 

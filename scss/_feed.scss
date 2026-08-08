@@ -6,10 +6,11 @@
 // .post-body, because the page runs through the article layout and inherits
 // prose styling it has to opt out of in a few places.
 //
-// Prefixed feed-, not news-: _announcements.scss already owns a news-* set
-// (.news-card, .news-date, .news-source, .news-category) for the announcement
-// cards. Reusing those names silently inherited a bordered chip on every
-// outlet label.
+// Prefixed feed-, not news-: _announcements.scss used to own a news-* set
+// (.news-card, .news-date, .news-source, .news-category), and reusing those
+// names silently inherited a bordered chip on every outlet label. That file was
+// deleted 2026-08-08, so news-* is free again — but keep feed-, because the
+// prefix names what these rows are rather than which page first showed them.
 //
 // The visual model is a ledger, not a card grid. Rows share one hairline, the
 // date sits in a fixed gutter so the eye can scan down it, and the only colour

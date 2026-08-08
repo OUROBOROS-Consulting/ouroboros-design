@@ -316,8 +316,7 @@
 
 // ── Responsive ────────────────────────────────────────────────────────────────
 @media (max-width: 1100px) {
-  .page-toc-wrap--svc,
-  .page-toc-wrap--essay {
+  .page-toc-wrap--svc {
     grid-template-columns: 1fr;
   }
 
@@ -332,10 +331,6 @@
   // one container that sets page geometry on four layouts went back to an
   // ad hoc gutter on phones while the homepage's bands used --gutter. --gutter
   // carries its own 6vw step (see _base.scss), so there is nothing to restate.
-
-  .page-toc-wrap--essay {
-    padding: 0 6vw;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {

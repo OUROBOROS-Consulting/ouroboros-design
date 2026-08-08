@@ -217,37 +217,6 @@
   }
 }
 
-// ── Child links (not currently used by any rail item; kept for markup that
-//    may add sub-items later — hidden until the rail is opened)
-.rail-sub {
-  display: flex;
-  flex-direction: column;
-  max-height: 0;
-  overflow: hidden;
-  padding-left: calc(var(--rail-w) - 0.35rem);
-}
-
-.rail-subitem {
-  font-family: $font-garamond;
-  font-size: var(--fs-1);
-  letter-spacing: 0.1em;
-  line-height: 1.35;
-  text-transform: uppercase;
-  color: var(--ink-1);
-  text-decoration: none;
-  white-space: normal; // long labels (e.g. "Investigations & Due Diligence") wrap instead of clipping
-  padding: var(--space-2) 0;
-  opacity: 0;
-  transition: color 0.16s ease;
-
-  &:hover {
-    color: var(--mark);
-  }
-
-  &--active {
-    color: var(--mark);
-  }
-}
 
 // ── Mobile: same collapsed strip, repositioned for the shorter bar ───────────
 // The top offset clears --nav-h (3.5rem on mobile) instead of the taller

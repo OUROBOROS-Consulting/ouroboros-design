@@ -85,7 +85,10 @@
 }
 
 .card-tag {
-  @include label-caps(var(--fs-1), 0.2em);
+  // --label-size, not the mixin's --fs-1 default. The size used to be applied
+  // from a trailing selector list in _cv.scss, which won on source order; that
+  // file was deleted 2026-08-08 and the value moved here where it belongs.
+  @include label-caps(var(--label-size), 0.2em);
 
   // Strip margins from markdownify
   p {
@@ -343,16 +346,6 @@
 }
 
 .values-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1.5px;
-
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-  }
-}
-
-.specialties-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1.5px;

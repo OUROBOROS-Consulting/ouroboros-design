@@ -67,7 +67,7 @@
 // the outer half of the stroke gets clipped at the viewBox.
 .spine-wave {
   fill: none;
-  stroke-width: 1.25px;
+  stroke-width: 5.25px;
   stroke-opacity: 0.55;
   stroke-linecap: round;
   transition:
@@ -96,7 +96,7 @@
 @mixin spine-lit {
   .spine-wave {
     stroke-opacity: 1;
-    stroke-width: 2px;
+    stroke-width: 7px;
   }
 
   .spine-tick {
@@ -179,8 +179,8 @@
 .spine-tick {
   position: absolute;
   top: 50%;
-  width: 0.38rem;
-  height: 0.38rem;
+  width: 1.38rem;
+  height: 1.38rem;
   background: var(--mark);
   opacity: 0.55;
   pointer-events: none;

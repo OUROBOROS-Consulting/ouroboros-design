@@ -252,7 +252,7 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: var(--nav-h);
-  // Clip full-bleed section bleeds (e.g. .about-header's -10vw margins) to the
+  // Clip full-bleed section bleeds (e.g. .band-header's -10vw margins) to the
   // viewport so they never create a horizontal scrollbar in the tablet band.
   // `clip` (not `hidden`) keeps overflow-y visible without making html a scroll
   // container, so body remains the scroller and sticky/fixed elements are safe.
@@ -637,34 +637,6 @@ body::after {
   max-width: 560px;
 }
 
-.error-body {
-  font-size: var(--fs-2);
-  color: var(--ink-2);
-  margin-top: var(--space-3);
-}
-
-.error-list {
-  list-style: none;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
-
-  li {
-    font-size: var(--fs-2);
-    color: var(--ink-2);
-    padding-left: var(--space-6);
-    position: relative;
-
-    &::before {
-      content: '–';
-      position: absolute;
-      left: 0;
-      color: var(--mark);
-    }
-  }
-}
-
 .error-nav {
   display: flex;
   flex-wrap: wrap;
@@ -712,23 +684,6 @@ body::after {
   50% {
     opacity: 1;
   }
-}
-
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-// ── Spinner ───────────────────────────────────────────────────────────────────
-.spinner {
-  width: 20px;
-  height: 20px;
-  border: 5px solid var(--line-3);
-  border-top-color: var(--mark);
-  border-radius: var(--radius-round);
-  animation: spin 0.7s linear infinite;
-  display: inline-block;
 }
 
 @media (prefers-reduced-motion: reduce) {
