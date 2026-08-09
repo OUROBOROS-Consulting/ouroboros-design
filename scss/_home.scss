@@ -10,7 +10,7 @@
   display: grid;
   grid-template-rows: auto 1fr auto;
   align-content: center;
-  gap: var(--space-band-lg) 0;
+  gap: var(--space-5) 0;
   position: relative;
   z-index: 0;
   // Sizing container for .hero-name. The wordmark used to scale off the
@@ -23,7 +23,7 @@
   container-type: inline-size;
   background-color: #0C0E20; // matches page-hero deep-navy scrim end; homepage hero only
   background-image:
-    radial-gradient(ellipse 80% 65% at 50% 45%, transparent 70%, rgba(8, 8, 8, 0.55) 100%),
+    radial-gradient(ellipse 80% 65% at 50% 50%, transparent 0%, rgba(8, 8, 8, 0.55) 100%),
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='48'%3E%3Cpolygon points='28,2 52,15 52,41 28,54 4,41 4,15' fill='none' stroke='%23C9A84C' stroke-width='0.4' stroke-opacity='0.066'/%3E%3Cpolygon points='0,15 0,41 -24,28' fill='none' stroke='%23C9A84C' stroke-width='0.4' stroke-opacity='0.066'/%3E%3Cpolygon points='56,15 56,41 80,28' fill='none' stroke='%23C9A84C' stroke-width='0.4' stroke-opacity='0.066'/%3E%3C/svg%3E");
   background-size: 100% 100%, 50px 43px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.04);
@@ -160,15 +160,26 @@
     transition: transform 0.55s cubic-bezier(0.4, 0.2, 0.2, 1);
   }
 
+  // Hover is the extra affordance on pointer devices, not the mechanism.
   @media (hover: hover) {
     &:hover &__inner {
       transform: rotateY(180deg);
     }
   }
 
-  @media (hover: none) {
-    &.is-flipped &__inner {
-      transform: rotateY(180deg);
+  // .is-flipped is what the click and Enter/Space handlers set, and it must be
+  // honoured at every breakpoint. Scoping it to (hover: none) meant a sighted
+  // keyboard user on a desktop pressed Enter, aria-expanded flipped for
+  // assistive tech, and nothing on screen moved.
+  &.is-flipped &__inner {
+    transform: rotateY(180deg);
+  }
+
+  // The flip is a 3D rotation across the full card. Under a reduced-motion
+  // preference the faces swap instantly rather than turning.
+  @media (prefers-reduced-motion: reduce) {
+    &__inner {
+      transition: none;
     }
   }
 
@@ -252,7 +263,7 @@
   flex-direction: column;
   align-items: center;
   gap: var(--space-3);
-  padding-top: var(--space-10);
+  padding-top: var(--space-3);
   align-self: end;
 
   span {
@@ -679,7 +690,7 @@
   }
 }
 
-body.has-banner nav {
+body.has-banner .nav-menu {
   top: 36px;
 }
 
@@ -697,9 +708,10 @@ body.has-banner nav {
   text-transform: uppercase;
 }
 
-#hero .hero-text {
-  text-align: right;
-}
+// .hero-text used to carry text-align: right, which put the eyebrow and the
+// tagline on a ragged-left edge inside a left-anchored box while the wordmark
+// above and every band below stayed left-aligned. Three alignments in the first
+// screen, none of them earning it. The hero now reads down one left edge.
 
 // ── Testimonials context label ────────────────────────────────────────────────
 .testimonials-context {

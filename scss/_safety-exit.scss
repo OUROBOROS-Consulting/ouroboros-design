@@ -45,6 +45,14 @@
     border-color: var(--mark);
   }
 
+  // WCAG 2.5.5 Target Size (Enhanced). The label alone renders 33px tall, which
+  // clears the 24px minimum but not the 44px enhanced target. This is the
+  // safety control, so it takes the enhanced target wherever the pointer is a
+  // fingertip rather than a cursor.
+  @media (pointer: coarse) {
+    min-height: 44px;
+  }
+
   @media print {
     display: none;
   }

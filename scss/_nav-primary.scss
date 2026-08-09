@@ -13,7 +13,15 @@
 }
 
 // ── Nav ──────────────────────────────────────────────────────────────────────
-nav {
+// Scoped to .nav-menu, NOT bare `nav`. This block is the primary bar's chrome —
+// opaque slab, scallop, gold hairline, blur, and a marble strip bled 12px below
+// the bar via ::after. As a bare element selector it landed on every other <nav>
+// on the site: .rail-nav (left rail), .sidebar (del-cmd-ctrl outline), and
+// .footer-links in the sections layout. Each of those either fought it with a
+// reset block or wore chrome it never asked for, and the ::after was the one
+// nobody caught — a 16px marble band painting under the rail's last item, which
+// read as a clipped grey word fragment floating on the page. Keep it scoped.
+.nav-menu {
   position: relative;
   width: 100%;
   padding: 0.5rem var(--pad);
@@ -62,7 +70,7 @@ nav {
 .nav-links {
   display: flex;
   gap: var(--space-9);
-  margin-left: auto;
+  margin: auto;
   font-family: $font-sans;
 
   > .nav-dropdown {
@@ -327,7 +335,7 @@ nav {
 
 // ── Responsive ───────────────────────────────────────────────────────────────
 @media (max-width: 768px) {
-  nav {
+  .nav-menu {
     padding: var(--space-3) var(--space-5);
     flex-wrap: wrap;
     align-items: center;
@@ -645,4 +653,3 @@ nav {
 nav.nav-menu .nav-dropdown.nav-button .nav-card {
   border: 1px solid var(--mark) !important;
 }
-

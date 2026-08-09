@@ -82,9 +82,11 @@
 // Stacked bands put the title under the label instead of opposite a count, so
 // the space moves from above it to below it.
 .band-heading--stacked {
-  line-height: 1.2;
-  margin-top: 0;
-  margin-bottom: var(--space-7);
+  line-height: 1.0;
+  // Vertical only. The one-value shorthand also put --space-7 on the left,
+  // which pushed the title 24px inboard of the eyebrow label directly above it
+  // and broke the band's single left edge.
+  margin: var(--space-7) 0;
 }
 
 // Compact bands sit inside prose, so the title steps down one size and carries

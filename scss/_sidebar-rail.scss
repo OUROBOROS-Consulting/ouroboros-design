@@ -93,20 +93,17 @@
 .rail-nav {
   display: flex;
   flex-direction: column;
-  align-items: stretch; // override any global bare `nav { align-items:center }`
+  align-items: stretch;
   flex-shrink: 0;
   margin: auto 0; // centres the group stack in the full-height rail
   padding: var(--space-4) 0;
-  // The bare `nav` selector in _nav-primary.scss hands every <nav> on the site
-  // an opaque background-color, a scallop pattern, a border AND a backdrop
-  // filter. Harmless while this element filled the rail; now that the thread is
-  // painted behind it as a sibling, all four punched a hole in the thread
-  // exactly where the items sit — the blur in particular smeared the stroke into
-  // a grey rectangle. Reset every one of them. Do not "fix" this by moving the
-  // thread in front instead: the ticks would then have to sit above the icons.
-  background: none;
-  border: none;
-  backdrop-filter: none;
+  // This used to carry background/border/backdrop-filter resets, because the
+  // primary bar's chrome was written as a bare `nav {}` selector and landed
+  // here. It also carried a ::after marble strip that the resets missed, which
+  // painted a grey band under the last rail item. The chrome is scoped to
+  // .nav-menu now (see _nav-primary.scss), so there is nothing to undo. If a
+  // slab or a blur ever reappears behind the rail icons, look for a new bare
+  // element selector rather than adding resets back here.
 }
 
 .rail-group {
@@ -114,8 +111,17 @@
 
   // Sits on the crest. translate(-50%) centres the lozenge on the crest rather
   // than hanging it off the leading edge.
+  //
+  // The size is the rail's own, not the shared default. .spine-tick ships at
+  // 1.38rem, which is right beside the outline's text column but is 31px point
+  // to point once rotated — on a 3.5rem strip that put the diamond's right
+  // corner underneath the icon, and the two read as colliding sprites rather
+  // than a bead on a thread. Keep it under the icon's left edge; the active
+  // state below is what grows and lights it.
   .spine-tick {
     left: var(--spine-crest);
+    width: 0.5rem;
+    height: 0.5rem;
     transform: translate(-50%, -50%) rotate(45deg);
   }
 }
