@@ -60,6 +60,7 @@
   font-family: $font-serif;
   font-size: clamp(2.5rem, 8cqi, 8rem);
   font-weight: 500;
+  align-self: right;
   line-height: 0.95;
   letter-spacing: -0.01em;
   color: var(--ink-3);
@@ -628,7 +629,7 @@
 
 .site-banner {
   width: 100%;
-  background: var(--steel);
+  background: linear-gradient(90deg, var(--steel-dim) 0%, var(--steel) 50%, var(--steel-dim) 100%);
   // --steel is an ink accent, so its lightness flips between themes: light
   // blue-grey on dark, dark slate on light. Using it as a surface means the
   // text on it must flip too. --bg1 is the one token guaranteed to sit
@@ -638,13 +639,13 @@
   // Was var(--ink-3): 2.48:1 on dark, 1.61:1 on light. Now 6.06:1 / 5.90:1.
   color: var(--surface-1);
   font-family: var(--font-sans, 'Inter', sans-serif);
-  font-size: var(--fs-1);
+  font-size: var(--fs-3);
   letter-spacing: 0.03em;
   display: flex;
   align-items: center;
   justify-content: center;
   min-height: 36px;
-  padding: var(--space-2) var(--space-7);
+  padding: var(--space-2) var(--space-4);
   position: fixed;
   top: 0;
   left: 0;
@@ -665,11 +666,13 @@
 
     .site-banner__icon {
       opacity: 0.85;
+      font-size: var(--fs-4);
     }
 
     .site-banner__arrow {
       margin-left: var(--space-2);
       opacity: 0.7;
+      font-size: var(--fs-4);
     }
   }
 
@@ -677,7 +680,7 @@
   &--tagline {
     font-style: italic;
     letter-spacing: 0.07em;
-    font-size: var(--fs-1);
+    font-size: var(--fs-5);
     opacity: 0.9;
   }
 

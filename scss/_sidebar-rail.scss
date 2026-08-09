@@ -49,7 +49,7 @@
 
   position: fixed;
   top: var(--rail-top);
-  left: var(--rail-x);
+  left: 0;
   bottom: 0;
   z-index: 90;
   // Column flex exists so .rail-nav's auto block margins can centre the group
@@ -95,8 +95,8 @@
   flex-direction: column;
   align-items: stretch;
   flex-shrink: 0;
-  margin: auto 0; // centres the group stack in the full-height rail
-  padding: var(--space-4) 0;
+  margin: auto auto; // centres the group stack in the full-height rail
+  padding: var(--space-4) var(--space-4);
   // This used to carry background/border/backdrop-filter resets, because the
   // primary bar's chrome was written as a bare `nav {}` selector and landed
   // here. It also carried a ::after marble strip that the resets missed, which

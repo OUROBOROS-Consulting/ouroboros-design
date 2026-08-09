@@ -267,10 +267,7 @@ body {
   // sync. The ramp runs bg1 → bg3 lightest in both palettes, so mixing toward
   // bg2 lifts the top edge in dark mode and in light mode alike.
   background: var(--surface-1) fixed; // fallback where color-mix is unsupported
-  background: linear-gradient(180deg,
-      color-mix(in srgb, var(--surface-2) 55%, var(--surface-1)) 0%,
-      var(--surface-1) 55%,
-      var(--surface-1) 100%) fixed;
+  background: linear-gradient(90deg, var(--surface-1) 0%, var(--surface-2) 50%, var(--surface-1) 100%) fixed;
   color: var(--ink-3);
   font-family: $font-serif;
   font-weight: 400;
