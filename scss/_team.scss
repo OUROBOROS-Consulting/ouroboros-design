@@ -94,11 +94,21 @@
   padding: 0.2em 0.6em;
 }
 
+// A <div>, not a <p>: the bio is markdownified and runs to several paragraphs,
+// so the margins live on the children.
 .team-bio {
   font-size: var(--fs-2);
   line-height: 1.7;
   color: var(--ink-2);
   margin: 0 0 var(--space-7);
+
+  p {
+    margin: 0 0 var(--space-5);
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
 }
 
 .team-links {
