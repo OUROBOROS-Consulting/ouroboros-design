@@ -22,6 +22,23 @@
   gap: var(--space-8);
 }
 
+// A roster of one is a bio page wearing a card, not one tile in a grid. The
+// 360px track is right for a face and two lines; it is wrong for several
+// paragraphs, which arrive ragged on both edges in a column that narrow.
+// Widen the track and left-align the prose. Portrait, name and credential
+// chips stay centered, because those are still card furniture.
+//
+// Guarded by :has(), so a browser without it renders exactly what this page
+// rendered before: one 360px card, centered.
+.team-grid:has(> :only-child) {
+  grid-template-columns: minmax(280px, 62ch);
+
+  .team-bio {
+    text-align: left;
+    align-self: stretch;
+  }
+}
+
 .team-card {
   position: relative;
   isolation: isolate;
