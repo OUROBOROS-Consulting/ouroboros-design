@@ -301,10 +301,13 @@
 
 // ── Services cards: icon stacked above copy ──────────────────────────────────
 .card-icon {
+  position: relative; // containing block for the light-mode glyph plate
   width: 30%;
   margin-bottom: var(--space-6);
   font-size: 5rem; // Font Awesome fallback glyph when no hero_svg
   color: var(--ink-4);
+
+  @include light-glyph-plate;
 
   // Hand-crafted service SVG reused from the hero fills the icon box.
   img {

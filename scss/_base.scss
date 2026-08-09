@@ -502,6 +502,45 @@ a {
   background: linear-gradient(90deg, transparent 0%, var(--mark) 30%, var(--mark) 70%, transparent 100%);
 }
 
+// ── Glyph plate — light-mode ground for the hand-drawn service marks ─────────
+// The four hero SVGs (advocacy, design, education, technology) fill their inner
+// glyph with literal `fill="white"`. That was drawn for a dark card and it is
+// correct there. In light mode the glyph lands on a pale surface and vanishes,
+// leaving a rope wreath around an empty hole.
+//
+// They are rendered with <img>, so no CSS can reach inside them and no filter
+// recolours only the glyph without also destroying the gold. The ground moves
+// instead: a near-black hexagon sits behind the mark in light mode only, which
+// gives the artwork the dark context it was drawn against and reads as a
+// deliberate medallion rather than a patch.
+//
+// Include inside the icon box. The caller owns `position` — .rc-icon and the
+// corner .card-icon are already absolute, and setting it here would unpin them.
+@mixin light-glyph-plate {
+  @include light-mode {
+    // Only the raster-style hand-drawn marks need it. Cards that fall back to a
+    // Font Awesome glyph draw it in --ink-4, which is already dark in light
+    // mode: a plate behind THAT would hide it.
+    &:has(img)::before {
+      content: '';
+      position: absolute;
+      // Slightly outside the artwork so the rope sits fully on the plate
+      // rather than straddling its edge.
+      inset: -7%;
+      // Fixed, not a token: this is a dark plate inside a light theme, so it
+      // must not follow the active surface ramp. Matches --surface-2 dark.
+      background-color: #1a1d26;
+      // No border. clip-path takes the border box with it, so a hex with an
+      // outline clips its own outline off.
+      clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    }
+
+    img {
+      position: relative; // above the plate
+    }
+  }
+}
+
 // ── Snakeskin scale texture — shared card fill ───────────────────────────────
 // Denser, subtler take on the scallop so every card fill carries the ouroboros
 // scale motif and reads as fine serpent skin. Sets only background-image +

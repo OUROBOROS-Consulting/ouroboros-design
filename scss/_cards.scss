@@ -220,6 +220,9 @@
     width: clamp(51px, 19.8%, 75px);
     color: var(--mark);
 
+    // Already absolute, so it is its own containing block.
+    @include light-glyph-plate;
+
     img {
       display: block;
       width: 100%;
