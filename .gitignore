@@ -1,8 +1,11 @@
-.claude
-.github
+_Claude/Outputs
+.claude/
+.github/
+.vscode/
 dist/*
-docs/superpowers/
+docs/*
 node_modules/
+scripts/
 npm-debug.log
 .DS_Store
 .env

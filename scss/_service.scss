@@ -55,7 +55,13 @@
 
 .page-hero-text {
   flex: 1;
-  min-width: 280px;
+  // min() not a bare 280px: at the narrowest phone widths the rail+gutter
+  // reservation leaves .page-hero-inner less than 280px wide, and a hard
+  // min-width doesn't shrink for a flex item even alone on its own wrapped
+  // row — it pushed this box (and the whole page) past the viewport. min()
+  // keeps 280px as the floor everywhere it fits and only yields when the
+  // container itself is narrower.
+  min-width: min(280px, 100%);
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.07);
   padding: var(--space-9);
