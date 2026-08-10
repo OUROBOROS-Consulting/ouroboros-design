@@ -6,7 +6,7 @@
 #hero {
   @include dark-island;
   min-height: 100vh;
-  padding: var(--nav-h) var(--space-10);
+  padding: var(--nav-h) var(--space-10) var(--space-9);
   display: grid;
   grid-template-rows: auto 1fr auto;
   align-content: center;
@@ -444,10 +444,23 @@
     margin-left: 0;
     margin-right: auto;
   }
+
+  // align-items: flex-start above shrink-wraps every child, which left the YES
+  // answer exactly as wide as the word and gave its trailing hairline no run to
+  // make. The NO card is not in a band-header, stretches by default, and drew
+  // its rule — so the fork rendered lopsided. Stretch the answer back out.
+  .rc-answer {
+    align-self: stretch;
+  }
 }
 
+// Two stacked buttons sized to their own labels are two different widths and
+// read as ragged. A single max-content column sizes both to the longer label.
 #cta .cta-split .hero-cta {
-  justify-content: flex-start;
+  display: grid;
+  grid-template-columns: max-content;
+  justify-content: start;
+  gap: var(--space-4);
   margin-top: 0; // TUNE: aligns the button with the embed's Subscribe row
 }
 
@@ -539,7 +552,7 @@
   }
 
   #cta .cta-split .hero-cta {
-    justify-content: center;
+    justify-content: center; // grid: centres the max-content column
   }
 
   // Stacked and centered, the answer shrink-wraps and the trailing hairline has

@@ -3,7 +3,7 @@
 @use "chamfer" as *;
 // ── Nav shell (fixed container for both nav rows) ────────────────────────────
 .nav-shell {
-  position: relative;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
@@ -22,7 +22,7 @@
 // nobody caught — a 16px marble band painting under the rail's last item, which
 // read as a clipped grey word fragment floating on the page. Keep it scoped.
 .nav-menu {
-  position: relative;
+  position: fixed;
   width: 100%;
   padding: 0.5rem var(--pad);
   display: flex;
