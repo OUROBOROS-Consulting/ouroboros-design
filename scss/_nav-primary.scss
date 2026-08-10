@@ -22,7 +22,7 @@
 // nobody caught — a 16px marble band painting under the rail's last item, which
 // read as a clipped grey word fragment floating on the page. Keep it scoped.
 .nav-menu {
-  position: relative;
+  position: fixed;
   width: 100%;
   padding: 0.5rem var(--pad);
   display: flex;
