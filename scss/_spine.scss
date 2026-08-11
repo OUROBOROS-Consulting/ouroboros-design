@@ -57,42 +57,30 @@
   stop-color: var(--mark);
 }
 
-
-// At rest this is a THREAD. 1.25px, held back to just over half opacity, so it
-// reads as a drawn line down the edge of the page and not as a gold bar. It was
-// 15.5px, and spine.js was stacking three identical copies of it, which is how
-// a hairline became a ribbon roughly as wide as the strip it lived in. Both
+// At rest this reads as a body, not a thread. 3.5px, round-capped, with a short
+// dasharray that breaks the stroke into overlapping bead-like segments — the
+// scale texture. It was 15.5px once, stacked three times by spine.js, which is
+// how a hairline became a ribbon roughly as wide as the strip it lived in. Both
 // halves of that are fixed — one path now (see TIERS in spine.js), and this
 // width. If you raise it past ~5px, raise STROKE_PAD in spine.js to match or
 // the outer half of the stroke gets clipped at the viewBox.
-@keyframes snake-float {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  50% { transform: translateY(-8px) rotate(2deg); }
-}
-
-// ── Refined Single Stroke ─────────────────────────────────────────────────────
-// The transition from three layers to one single elegant stroke removes the
-// "underneath" layering and creates a cleaner, more delicate aesthetic.
+//
+// stroke-dasharray/stroke-dashoffset values are fractions of total path length,
+// not pixels — spine.js sets pathLength="1" on this path specifically so these
+// numbers stay correct regardless of how long the extrapolated run actually is.
 .spine-wave {
-  background-image: url('../images/snake.svg');
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-position: center;
-  width: 100%;
-  height: auto;
-  filter: drop-shadow(0 4px 8px rgba(201, 168, 76, 0.3));
-  animation: snake-float 4s ease-in-out infinite;
-  transition: opacity 0.8s ease, transform 0.8s ease;
+  stroke-width: 3.5px;
+  stroke-linecap: round;
+  stroke-dasharray: 0.02 0.012;
+  animation: spine-slither 3s linear infinite;
 }
 
-// One-time appear for the snake.
-.spine.is-drawing .spine-wave {
-  animation: snake-appear 1.5s cubic-bezier(0.4, 0, 0.2, 1) 0.5s forwards;
-}
-
-@keyframes snake-appear {
-  from { opacity: 0; transform: scale(0.9); }
-  to { opacity: 1; transform: scale(1); }
+// Dash pattern crawls along the body — the slither. Loops forever; a snake at
+// rest is still a snake, so this never turns off outside of reduced-motion.
+@keyframes spine-slither {
+  to {
+    stroke-dashoffset: -0.032;
+  }
 }
 
 // Cursor on the strip: the snake lights up.
@@ -200,6 +188,10 @@
   .spine.is-drawing .spine-wave {
     animation: none;
     stroke-dashoffset: 0;
+  }
+
+  .spine-wave {
+    animation: none;
   }
 
   .spine-wave,
