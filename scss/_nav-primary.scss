@@ -30,7 +30,7 @@
   gap: var(--space-4);
   align-items: center;
   @include dark-island;
-  @include scallop-recessed-dark;
+  //@include scallop-recessed-dark;
   background-color: rgba(20, 20, 20, 0.92);
   backdrop-filter: blur(12px);
   border: 2px solid rgba(177, 147, 93, 0.22);
@@ -74,7 +74,7 @@
   font-family: $font-sans;
 
   > .nav-dropdown {
-    width: 110px;
+    width: 130px;
   }
 
   a {
@@ -90,7 +90,7 @@
     gap: var(--space-3);
 
     i {
-      font-size: var(--fs-5);
+      font-size: var(--fs-7);
       text-align: center;
     }
 

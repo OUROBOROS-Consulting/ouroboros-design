@@ -76,7 +76,7 @@
   // rail's own overflow used to be what cut it off. Now that the rail is
   // overflow: visible, the SVG has to do its own clipping or the wave spills up
   // over the primary bar.
-  > .spine {
+  >.spine {
     left: 0;
     overflow: hidden;
   }
@@ -248,3 +248,5 @@
     transition: none;
   }
 }
+
+

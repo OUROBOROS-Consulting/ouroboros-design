@@ -65,38 +65,42 @@
 // halves of that are fixed — one path now (see TIERS in spine.js), and this
 // width. If you raise it past ~5px, raise STROKE_PAD in spine.js to match or
 // the outer half of the stroke gets clipped at the viewBox.
+@keyframes snake-float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-8px) rotate(2deg); }
+}
+
+// ── Refined Single Stroke ─────────────────────────────────────────────────────
+// The transition from three layers to one single elegant stroke removes the
+// "underneath" layering and creates a cleaner, more delicate aesthetic.
 .spine-wave {
-  fill: none;
-  stroke-width: 5.25px;
-  stroke-opacity: 0.55;
-  stroke-linecap: round;
-  transition:
-    stroke-opacity 0.8s ease,
-    stroke-width 0.8s ease;
+  background-image: url('../images/snake.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 4px 8px rgba(201, 168, 76, 0.3));
+  animation: snake-float 4s ease-in-out infinite;
+  transition: opacity 0.8s ease, transform 0.8s ease;
 }
 
-// One-time draw-in. The script sets pathLength="1" so the dash length is
-// resolution-independent and this works for a three-tick rail and a
-// twenty-tick outline alike.
+// One-time appear for the snake.
 .spine.is-drawing .spine-wave {
-  stroke-dasharray: 1;
-  stroke-dashoffset: 1;
-  animation: spine-draw 12s cubic-bezier(0.4, 0, 0.2, 1) 0.5s forwards;
+  animation: snake-appear 1.5s cubic-bezier(0.4, 0, 0.2, 1) 0.5s forwards;
 }
 
-@keyframes spine-draw {
-  to {
-    stroke-dashoffset: 0;
-  }
+@keyframes snake-appear {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
 }
 
-// Cursor on the strip: the thread lights. It gains a little weight and goes to
-// full opacity — it does NOT lose weight, which is what the old 15.5 → 2.5
-// pairing did. Lighting something should read as more of it, not less.
+// Cursor on the strip: the snake lights up.
 @mixin spine-lit {
   .spine-wave {
-    stroke-opacity: 1;
-    stroke-width: 7px;
+    opacity: 1;
+    filter: drop-shadow(0 6px 14px rgba(201, 168, 76, 0.5));
+    transform: scale(1.05);
   }
 
   .spine-tick {

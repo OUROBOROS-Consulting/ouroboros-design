@@ -5,7 +5,7 @@
 footer {
   @include dark-island;
   width: 100%;
-  padding: var(--space-4) var(--space-6);
+  padding: var(--space-4) var(--space-4);
   // `display: auto` is not a value. It was here briefly and the declaration was
   // simply dropped, which left grid-template-columns and gap inert and the
   // footer in normal block flow: icons, logo and copyright stacked on three
