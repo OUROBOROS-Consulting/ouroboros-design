@@ -43,44 +43,40 @@
 // No margin here. The SVG's leading edge and the ticks' --spine-crest are both
 // measured from the panel edge, so insetting one and not the other slides the
 // wave off its own ticks. To move the whole thread inboard, raise --spine-cx.
+//
+// display: none — the procedural gold sinusoid (spine.js) is superseded here
+// by a single static snake image, per direct user decision 2026-08-11: "I
+// literally want the same snake used in the scroll line to be used in the
+// sidebar." spine.js still runs and still builds this SVG (untouched, both
+// repos), it just never paints. Re-enable by removing this line if the
+// procedural thread comes back.
 .spine {
+  display: none;
   position: absolute;
   top: 0;
   overflow: visible;
   pointer-events: none;
 }
 
-// ── Refined Single Stroke ─────────────────────────────────────────────────────
-// The transition from three layers to one single elegant stroke removes the
-// "underneath" layering and creates a cleaner, more delicate aesthetic.
-.spine stop {
-  stop-color: var(--mark);
-}
-
-// At rest this reads as a body, not a thread. 3.5px, round-capped, with a short
-// dasharray that breaks the stroke into overlapping bead-like segments — the
-// scale texture. It was 15.5px once, stacked three times by spine.js, which is
-// how a hairline became a ribbon roughly as wide as the strip it lived in. Both
-// halves of that are fixed — one path now (see TIERS in spine.js), and this
-// width. If you raise it past ~5px, raise STROKE_PAD in spine.js to match or
-// the outer half of the stroke gets clipped at the viewBox.
-//
-// stroke-dasharray/stroke-dashoffset values are fractions of total path length,
-// not pixels — spine.js sets pathLength="1" on this path specifically so these
-// numbers stay correct regardless of how long the extrapolated run actually is.
-.spine-wave {
-  stroke-width: 3.5px;
-  stroke-linecap: round;
-  stroke-dasharray: 0.02 0.012;
-  animation: spine-slither 3s linear infinite;
-}
-
-// Dash pattern crawls along the body — the slither. Loops forever; a snake at
-// rest is still a snake, so this never turns off outside of reduced-motion.
-@keyframes spine-slither {
-  to {
-    stroke-dashoffset: -0.032;
-  }
+// ── Single snake ─────────────────────────────────────────────────────────────
+// One static copy of the same illustration .scroll-line uses (see _home.scss),
+// same animation, centred on each panel. This is a starting point, not a
+// finished placement — deliberately unrefined per that same decision.
+[data-spine]::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 45px;
+  height: 75px;
+  background-image: url('../images/snake.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  opacity: 0.4;
+  animation: scrollPulse 2s ease-in-out infinite;
+  pointer-events: none;
 }
 
 // Cursor on the strip: the snake lights up.
@@ -185,15 +181,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .spine.is-drawing .spine-wave {
-    animation: none;
-    stroke-dashoffset: 0;
-  }
-
-  .spine-wave {
-    animation: none;
-  }
-
   .spine-wave,
   .spine-tick {
     transition: none;
